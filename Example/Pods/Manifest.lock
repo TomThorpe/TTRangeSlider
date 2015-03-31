@@ -1,0 +1,14 @@
+PODS:
+  - TTRangeSlider (1.0.0)
+
+DEPENDENCIES:
+  - TTRangeSlider (from `../`)
+
+EXTERNAL SOURCES:
+  TTRangeSlider:
+    :path: ../
+
+SPEC CHECKSUMS:
+  TTRangeSlider: 69c1114c2fb86b8c6cd51a05978e880b530916d5
+
+COCOAPODS: 0.36.1
