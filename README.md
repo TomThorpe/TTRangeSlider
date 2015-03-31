@@ -1,7 +1,7 @@
 # TTRangeSlider
 A slider, similar in style to UISlider, but which allows you to pick a minimum and maximum range.
 
-![Screenshot](Example/screenshot.png)
+![Screenshot](Example/TTRangeSlider.gif)
 ## Installation
 
 TTRangeSlider is available through [CocoaPods](http://cocoapods.org). To install
