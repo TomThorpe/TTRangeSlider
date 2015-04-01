@@ -18,11 +18,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DwD-4K-U87" customClass="TTRangeSlider">
-                                <rect key="frame" x="16" y="159.5" width="568" height="50"/>
+                                <rect key="frame" x="16" y="159.5" width="568" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.95926036010000004" green="0.14687572130000001" blue="0.021226121880000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Cdi-WJ-VRf"/>
+                                    <constraint firstAttribute="height" constant="60" id="Cdi-WJ-VRf"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Standard Range:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uv3-Bw-dbz">
@@ -38,33 +38,33 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency Range:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auG-6C-UUJ">
-                                <rect key="frame" x="16" y="234.5" width="129" height="20.5"/>
+                                <rect key="frame" x="16" y="244.5" width="129" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RTp-xv-6Dx" customClass="TTRangeSlider">
-                                <rect key="frame" x="16" y="280" width="568" height="50"/>
+                                <rect key="frame" x="16" y="290" width="568" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="EYa-1H-cea"/>
-                                    <constraint firstAttribute="height" constant="50" id="Nk9-gu-lme"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="EYa-1H-cea"/>
+                                    <constraint firstAttribute="height" constant="60" id="Nk9-gu-lme"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WF3-K2-d12">
-                                <rect key="frame" x="16" y="355" width="65.5" height="20.5"/>
+                                <rect key="frame" x="16" y="375" width="65.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4yD-aN-v9q" customClass="TTRangeSlider">
-                                <rect key="frame" x="16" y="400.5" width="568" height="50"/>
+                                <rect key="frame" x="16" y="420.5" width="568" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="3pr-97-QUE"/>
-                                    <constraint firstAttribute="height" constant="50" id="GFz-Lm-buz"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="ygD-0b-zU7"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="3pr-97-QUE"/>
+                                    <constraint firstAttribute="height" constant="60" id="GFz-Lm-buz"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="ygD-0b-zU7"/>
                                 </constraints>
                             </view>
                         </subviews>

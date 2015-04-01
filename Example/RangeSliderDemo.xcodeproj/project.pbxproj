@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		598326BE72E253EBE7E602FC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FCA7EDA0FEB6E7300B32E5 /* libPods.a */; };
 		64495A441ACAD93700482D73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 64495A431ACAD93700482D73 /* main.m */; };
 		64495A471ACAD93700482D73 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 64495A461ACAD93700482D73 /* AppDelegate.m */; };
 		64495A4A1ACAD93700482D73 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64495A491ACAD93700482D73 /* ViewController.m */; };
@@ -15,6 +14,7 @@
 		64495A4F1ACAD93700482D73 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64495A4E1ACAD93700482D73 /* Images.xcassets */; };
 		64495A521ACAD93700482D73 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64495A501ACAD93700482D73 /* LaunchScreen.xib */; };
 		64495A5E1ACAD93700482D73 /* RangeSliderDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 64495A5D1ACAD93700482D73 /* RangeSliderDemoTests.m */; };
+		E06CDBE58BA42330DDAA7756 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B160588054A1ABBEE2B53C /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,8 +42,8 @@
 		64495A571ACAD93700482D73 /* RangeSliderDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RangeSliderDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		64495A5C1ACAD93700482D73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64495A5D1ACAD93700482D73 /* RangeSliderDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RangeSliderDemoTests.m; sourceTree = "<group>"; };
-		98FCA7EDA0FEB6E7300B32E5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03B9800BFD96602A5FB30A7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		F3B160588054A1ABBEE2B53C /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				598326BE72E253EBE7E602FC /* libPods.a in Frameworks */,
+				E06CDBE58BA42330DDAA7756 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,7 +68,7 @@
 		14ACF65C76FC4FFB4BB6625D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				98FCA7EDA0FEB6E7300B32E5 /* libPods.a */,
+				F3B160588054A1ABBEE2B53C /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -155,6 +155,7 @@
 				64495A3B1ACAD93700482D73 /* Frameworks */,
 				64495A3C1ACAD93700482D73 /* Resources */,
 				DE9C2C55B2ECBE6D272551DB /* Copy Pods Resources */,
+				535947C51E2BAB645D940AAE /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -241,6 +242,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		535947C51E2BAB645D940AAE /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C00C0A5A2102F7AE46FE79FE /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
