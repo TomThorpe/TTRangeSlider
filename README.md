@@ -13,10 +13,22 @@ it, simply add the following line to your Podfile:
 pod "TTRangeSlider"
 ```
 
+Note that this control uses IB_DESIGNABLE, so for it to work well and not get warnings in Interface Builder, you should use the latest version of cocoa pods, and add the `use_frameworks!` line. So your podfile may look something like
+
+```ruby
+source ‘https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+pod “TTRangeSlider”
+```
+
 ## Usage
 
 Add the TTRangeSlider like you would with any other UIControl. Either:
-* Add a view in your storyboard/class and change it’s type to `TTRangeSlider`. Then create an outlet to this in your code and use that to modify properties.
+* Add a view in your storyboard/class and change it’s type to `TTRangeSlider`. As long as you’re using >= XCode6 you can now use this control like any other, you can set all the properties in the Attributes Inspector and see a live preview:
+
+![Interface Builder Screenshot](Example/interfacebuilder.png)
+
 or
 * Create the `TTRangeSlider` in code using `[TTRangeSlider alloc] init]` then add it as a subview to your code and set the relevant autolayout properties or frame.
 

@@ -7,7 +7,7 @@
 #import <UIKit/UIKit.h>
 #import "TTRangeSliderDelegate.h"
 
-
+IB_DESIGNABLE
 @interface TTRangeSlider : UIControl <UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) id<TTRangeSliderDelegate> delegate;
@@ -15,24 +15,24 @@
 /**
  * The minimum possible value to select in the range
  */
-@property (nonatomic, assign) float minValue;
+@property (nonatomic, assign) IBInspectable float minValue;
 
 /*
  * The maximum possible value to select in the range
  */
-@property (nonatomic, assign) float maxValue;
+@property (nonatomic, assign) IBInspectable float maxValue;
 
 /*
  * The preselected minumum value
  * (note: This should be less than the selectedMaximum)
  */
-@property (nonatomic, assign) float selectedMinimum;
+@property (nonatomic, assign) IBInspectable float selectedMinimum;
 
 /*
  * The preselected maximum value
  * (note: This should be greater than the selectedMinimum)
  */
-@property (nonatomic, assign) float selectedMaximum;
+@property (nonatomic, assign) IBInspectable float selectedMaximum;
 
 /*
  * Each handle in the slider has a label above it showing the current selected value. By default, this is displayed as a decimal format.
@@ -44,17 +44,17 @@
 /*
  * The color of the minimum value text label. If not set, the default is the tintColor.
  */
-@property (nonatomic, strong) UIColor *minLabelColour;
+@property (nonatomic, strong) IBInspectable UIColor *minLabelColour;
 
 /*
  * The color of the maximum value text label. If not set, the default is the tintColor.
  */
-@property (nonatomic, strong) UIColor *maxLabelColour;
+@property (nonatomic, strong) IBInspectable UIColor *maxLabelColour;
 
 /**
  * If true, the control will mimic a normal slider and have only one handle rather than a range.
  * In this case, the selectedMinValue will be not functional anymore. Use selectedMaxValue instead to determine the value the user has selected.
  */
-@property (nonatomic, assign) BOOL disableRange;
+@property (nonatomic, assign) IBInspectable BOOL disableRange;
 
 @end
