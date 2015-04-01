@@ -38,6 +38,7 @@
     self.rangeSliderCurrency.numberFormatterOverride = formatter;
     
     //custom number formatter range slider
+    self.rangeSliderCustom.delegate = self;
     self.rangeSliderCustom.minValue = 0;
     self.rangeSliderCustom.maxValue = 100;
     self.rangeSliderCustom.selectedMinimum = 40;
@@ -57,8 +58,11 @@
     if (sender == self.rangeSlider){
         NSLog(@"Standard slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
     }
-    else {
+    else if (sender == self.rangeSliderCurrency) {
         NSLog(@"Currency slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
+    }
+    else if (sender == self.rangeSliderCustom){
+        NSLog(@"Custom slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
     }
 }
 
