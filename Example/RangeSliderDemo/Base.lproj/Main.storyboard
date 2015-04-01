@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zoN-NS-23h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zoN-NS-23h">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -25,51 +25,53 @@
                                     <constraint firstAttribute="height" constant="50" id="Cdi-WJ-VRf"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Range:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uv3-Bw-dbz">
-                                <rect key="frame" x="16" y="114" width="54.5" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Standard Range:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uv3-Bw-dbz">
+                                <rect key="frame" x="16" y="114" width="129.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRl-jU-AAM">
-                                <rect key="frame" x="542" y="518" width="42" height="23"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By Tom Thorpe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4E-DD-9aC">
-                                <rect key="frame" x="486.5" y="562.5" width="97.5" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="By Tom Thorpe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4E-DD-9aC">
+                                <rect key="frame" x="486" y="562" width="97.5" height="17"/>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmI-8T-TLu">
-                                <rect key="frame" x="16" y="518" width="36.5" height="23"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency Range:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auG-6C-UUJ">
+                                <rect key="frame" x="16" y="231" width="129" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RTp-xv-6Dx" customClass="TTRangeSlider">
+                                <rect key="frame" x="16" y="275" width="568" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="EYa-1H-cea"/>
+                                    <constraint firstAttribute="height" constant="50" id="Nk9-gu-lme"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="RTp-xv-6Dx" secondAttribute="trailing" id="0mN-Qi-A7A"/>
                             <constraint firstItem="DwD-4K-U87" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="39D-6N-RK3"/>
                             <constraint firstItem="uv3-Bw-dbz" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="7Ab-px-Ai2"/>
                             <constraint firstItem="l4E-DD-9aC" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="9IQ-AF-edf"/>
                             <constraint firstItem="DwD-4K-U87" firstAttribute="top" secondItem="uv3-Bw-dbz" secondAttribute="bottom" constant="21.5" id="CT6-wz-VZc"/>
                             <constraint firstItem="uv3-Bw-dbz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="E0R-vS-9GI"/>
+                            <constraint firstItem="auG-6C-UUJ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="FtY-yK-Wsq"/>
+                            <constraint firstItem="RTp-xv-6Dx" firstAttribute="top" secondItem="auG-6C-UUJ" secondAttribute="bottom" constant="23" id="T2o-O2-VyS"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="l4E-DD-9aC" secondAttribute="bottom" constant="20" id="T6D-l2-N9s"/>
-                            <constraint firstItem="SRl-jU-AAM" firstAttribute="centerY" secondItem="fmI-8T-TLu" secondAttribute="centerY" id="WHh-zW-Azh"/>
                             <constraint firstItem="DwD-4K-U87" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Yqm-gV-gyy"/>
-                            <constraint firstItem="fmI-8T-TLu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="gpX-KI-vgH"/>
-                            <constraint firstItem="SRl-jU-AAM" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="jko-wm-SLa"/>
-                            <constraint firstItem="l4E-DD-9aC" firstAttribute="top" secondItem="SRl-jU-AAM" secondAttribute="bottom" constant="21.5" id="ydm-N5-b2U"/>
+                            <constraint firstItem="auG-6C-UUJ" firstAttribute="top" secondItem="DwD-4K-U87" secondAttribute="bottom" constant="25" id="caL-iA-Pnx"/>
+                            <constraint firstItem="RTp-xv-6Dx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="fLy-Gk-xeG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TTRangeSlider" id="iHr-ZZ-EbV"/>
                     <connections>
-                        <outlet property="maxLabel" destination="SRl-jU-AAM" id="wmW-N1-OX9"/>
-                        <outlet property="minLabel" destination="fmI-8T-TLu" id="MTf-d4-dxh"/>
                         <outlet property="rangeSlider" destination="DwD-4K-U87" id="TTd-zV-CUe"/>
+                        <outlet property="rangeSliderCurrency" destination="RTp-xv-6Dx" id="04q-Is-YTC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

@@ -11,7 +11,5 @@
 
 @interface ViewController : UIViewController<TTRangeSliderDelegate>
 
-@property (weak, nonatomic) IBOutlet TTRangeSlider *rangeSlider;
-
 @end
 

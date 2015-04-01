@@ -9,8 +9,8 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *maxLabel;
-@property (weak, nonatomic) IBOutlet UILabel *minLabel;
+@property (weak, nonatomic) IBOutlet TTRangeSlider *rangeSlider;
+@property (weak, nonatomic) IBOutlet TTRangeSlider *rangeSliderCurrency;
 @end
 
 @implementation ViewController
@@ -19,12 +19,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    //standard rsnge slider
     self.rangeSlider.delegate = self;
-    
     self.rangeSlider.minValue = 0;
     self.rangeSlider.maxValue = 200;
     self.rangeSlider.selectedMinimum = 50;
     self.rangeSlider.selectedMaximum = 150;
+    
+    //currency range slider
+    self.rangeSliderCurrency.delegate = self;
+    self.rangeSliderCurrency.minValue = 50;
+    self.rangeSliderCurrency.maxValue = 150;
+    self.rangeSliderCurrency.selectedMinimum = 50;
+    self.rangeSliderCurrency.selectedMaximum = 150;
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    self.rangeSliderCurrency.numberFormatterOverride = formatter;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,8 +44,12 @@
 
 #pragma mark TTRangeSliderViewDelegate
 -(void)rangeSlider:(TTRangeSlider *)sender didChangeSelectedMinimumValue:(float)selectedMinimum andMaximumValue:(float)selectedMaximum{
-    self.minLabel.text = [NSString stringWithFormat:@"Min: %.0f", selectedMinimum];
-    self.maxLabel.text = [NSString stringWithFormat:@"Max: %.0f", selectedMaximum];
+    if (sender == self.rangeSlider){
+        NSLog(@"Standard slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
+    }
+    else {
+        NSLog(@"Currency slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
+    }
 }
 
 @end
