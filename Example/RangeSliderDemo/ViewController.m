@@ -11,6 +11,7 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet TTRangeSlider *rangeSlider;
 @property (weak, nonatomic) IBOutlet TTRangeSlider *rangeSliderCurrency;
+@property (weak, nonatomic) IBOutlet TTRangeSlider *rangeSliderCustom;
 @end
 
 @implementation ViewController
@@ -35,6 +36,15 @@
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterCurrencyStyle;
     self.rangeSliderCurrency.numberFormatterOverride = formatter;
+    
+    //custom number formatter range slider
+    self.rangeSliderCustom.minValue = 0;
+    self.rangeSliderCustom.maxValue = 100;
+    self.rangeSliderCustom.selectedMinimum = 40;
+    self.rangeSliderCustom.selectedMaximum = 60;
+    NSNumberFormatter *customFormatter = [[NSNumberFormatter alloc] init];
+    customFormatter.positiveSuffix = @"B";
+    self.rangeSliderCustom.numberFormatterOverride = customFormatter;
 }
 
 - (void)didReceiveMemoryWarning {
