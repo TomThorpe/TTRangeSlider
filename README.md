@@ -1,11 +1,12 @@
 # TTRangeSlider
-[![Build Status](https://travis-ci.org/TomThorpe/TTRangeSlider.svg?branch=master)](https://travis-ci.org/TomThorpe/TTRangeSlider)
+[![Build Status](https://travis-ci.org/TomThorpe/TTRangeSlider.svg?branch=master)](https://travis-ci.org/TomThorpe/TTRangeSlider) [![Version](https://img.shields.io/cocoapods/v/TTRangeSlider.svg?style=flat)](http://cocoadocs.org/docsets/TTRangeSlider)
+[![License](https://img.shields.io/cocoapods/l/TTRangeSlider.svg?style=flat)](http://cocoadocs.org/docsets/TTRangeSlider)
+[![Platform](https://img.shields.io/cocoapods/p/TTRangeSlider.svg?style=flat)](http://cocoadocs.org/docsets/TTRangeSlider)
 
 A slider, similar in style to UISlider, but which allows you to pick a minimum and maximum range.
 
 ![Screenshot](Example/TTRangeSlider.gif)
 ## Installation
-
 TTRangeSlider is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
