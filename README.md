@@ -18,7 +18,11 @@ Add the TTRangeSlider like you would with any other UIControl. Either:
 or
 * Create the `TTRangeSlider` in code using `[TTRangeSlider alloc] init]` then add it as a subview to your code and set the relevant autolayout properties or frame.
 
-Then, customisation of the control is done using the following properties:
+The default slider ranges from 0->100 and has 10 preselected as the minimum, and 90 as the maximum. 
+
+Values that the user has selected are exposed using the `selectedMinimum` and `selectedMaximum` properties. You can also use these properties to change the selected values programatically if you wish.
+
+Other customisation of the control is done using the following properties:
 #### `tintColor`
 The tintColor property (which you can also set in Interface Builder) sets the overall colour of the control, including the colour of the line, the two handles, and the labels.
 
