@@ -243,6 +243,14 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)refresh {
+    //ensure the minimum and maximum selected values are within range. Access the values directly so we don't cause this refresh method to be called again (otherwise changing the properties causes a refresh)
+    if (self.selectedMinimum < self.minValue){
+        _selectedMinimum = self.minValue;
+    }
+    if (self.selectedMaximum > self.maxValue){
+        _selectedMaximum = self.maxValue;
+    }
+    
     //update the frames in a transaction so that the tracking doesn't continue until the frame has moved.
     [CATransaction begin];
     [CATransaction setDisableActions:YES] ;
