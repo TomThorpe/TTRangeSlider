@@ -1,4 +1,6 @@
 # TTRangeSlider
+[![Build Status](https://travis-ci.org/TomThorpe/TTRangeSlider.svg?branch=master)](https://travis-ci.org/TomThorpe/TTRangeSlider)
+
 A slider, similar in style to UISlider, but which allows you to pick a minimum and maximum range.
 
 ![Screenshot](Example/TTRangeSlider.gif)
