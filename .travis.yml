@@ -1,5 +1,2 @@
 language: objective-c
-before_install:
-    - brew update
-    - brew install xctool
 script: xctool -workspace Example/RangeSliderDemo.xcworkspace -scheme RangeSliderDemo build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator
