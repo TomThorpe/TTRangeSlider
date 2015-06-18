@@ -7,6 +7,7 @@
 
 const int HANDLE_TOUCH_AREA_EXPANSION = -30; //expand the touch area of the handle by this much (negative values increase size) so that you don't have to touch right on the handle to activate it.
 const float HANDLE_DIAMETER = 16;
+const float TEXT_HEIGHT = 14;
 
 @interface TTRangeSlider ()
 
@@ -60,7 +61,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.minLabel = [[CATextLayer alloc] init];
     self.minLabel.alignmentMode = kCAAlignmentCenter;
     self.minLabel.fontSize = kLabelsFontSize;
-    self.minLabel.frame = CGRectMake(0, 0, 75, 14);
+    self.minLabel.frame = CGRectMake(0, 0, 75, TEXT_HEIGHT);
     self.minLabel.contentsScale = [UIScreen mainScreen].scale;
     self.minLabel.contentsScale = [UIScreen mainScreen].scale;
     if (self.minLabelColour == nil){
@@ -73,7 +74,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.maxLabel = [[CATextLayer alloc] init];
     self.maxLabel.alignmentMode = kCAAlignmentCenter;
     self.maxLabel.fontSize = kLabelsFontSize;
-    self.maxLabel.frame = CGRectMake(0, 0, 75, 14);
+    self.maxLabel.frame = CGRectMake(0, 0, 75, TEXT_HEIGHT);
     self.maxLabel.contentsScale = [UIScreen mainScreen].scale;
     if (self.maxLabelColour == nil){
         self.maxLabel.foregroundColor = self.tintColor.CGColor;
@@ -121,6 +122,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
     }
     
     return self;
+}
+
+- (CGSize)intrinsicContentSize{
+    return CGSizeMake(UIViewNoIntrinsicMetric, 65);
 }
 
 
