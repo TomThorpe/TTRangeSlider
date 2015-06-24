@@ -69,4 +69,8 @@ IB_DESIGNABLE
 @property (nonatomic, strong) CALayer *leftHandle;
 @property (nonatomic, strong) CALayer *rightHandle;
 
+@property (nonatomic, strong) CATextLayer *minLabel;
+@property (nonatomic, strong) CATextLayer *maxLabel;
+
+
 @end
