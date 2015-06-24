@@ -13,9 +13,6 @@ const float TEXT_HEIGHT = 14;
 
 @property (nonatomic, strong) CALayer *sliderLine;
 
-@property (nonatomic, strong) CATextLayer *minLabel;
-@property (nonatomic, strong) CATextLayer *maxLabel;
-
 @property (nonatomic, strong) NSNumberFormatter *decimalNumberFormatter; // Used to format values if formatType is YLRangeSliderFormatTypeDecimal
 
 @end
