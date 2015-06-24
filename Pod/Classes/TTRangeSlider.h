@@ -57,4 +57,9 @@ IB_DESIGNABLE
  */
 @property (nonatomic, assign) IBInspectable BOOL disableRange;
 
+
+@property (nonatomic, assign) BOOL leftHandleSelected;
+@property (nonatomic, assign) BOOL rightHandleSelected;
+
+
 @end
