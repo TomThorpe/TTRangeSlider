@@ -13,9 +13,6 @@ const float TEXT_HEIGHT = 14;
 
 @property (nonatomic, strong) CALayer *sliderLine;
 
-@property (nonatomic, strong) CALayer *leftHandle;
-@property (nonatomic, strong) CALayer *rightHandle;
-
 @property (nonatomic, strong) CATextLayer *minLabel;
 @property (nonatomic, strong) CATextLayer *maxLabel;
 
@@ -34,6 +31,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _selectedMinimum = 10;
     _maxValue = 100;
     _selectedMaximum  = 90;
+    
+    _minDistance = -1;
+    _maxDistance = -1;
 
     //draw the slider line
     self.sliderLine = [CALayer layer];
@@ -266,6 +266,64 @@ static const CGFloat kLabelsFontSize = 12.0f;
     if (self.delegate){
         [self.delegate rangeSlider:self didChangeSelectedMinimumValue:self.selectedMinimum andMaximumValue:self.selectedMaximum];
     }
+    
+    if (self.minDistance != -1) {
+        
+        float offset = 0;
+        
+        float diff = self.selectedMaximum - self.selectedMinimum;
+
+        if(diff < self.minDistance){
+            
+            if((self.minDistance - diff) < 0.001)
+                offset = 0.001;
+            else
+                offset = self.minDistance - diff;
+            
+            
+            if(self.leftHandleSelected){
+                
+                self.selectedMaximum = self.selectedMaximum + offset;
+                
+            }else if(self.rightHandleSelected){
+                
+                self.selectedMinimum = self.selectedMinimum - offset;
+                
+            }
+            
+        }
+        
+    }
+    
+    if(self.maxDistance != -1){
+    
+        float offset = 0;
+        
+        float diff = self.selectedMaximum - self.selectedMinimum;
+        
+        if(diff > self.maxDistance){
+            
+            if((diff - self.maxDistance) < 0.001)
+                offset = 0.001;
+            else
+                offset = diff - self.maxDistance;
+            
+            
+            if(self.leftHandleSelected){
+                
+                self.selectedMaximum = self.selectedMaximum - offset;
+                
+            }else if(self.rightHandleSelected){
+                
+                self.selectedMinimum = self.selectedMinimum + offset;
+                
+            }
+            
+        }
+        
+    }
+    
+    
 }
 
 - (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
