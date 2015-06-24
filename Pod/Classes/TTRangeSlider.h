@@ -12,6 +12,11 @@ IB_DESIGNABLE
 
 @property (nonatomic, weak) id<TTRangeSliderDelegate> delegate;
 
+
+@property (nonatomic, assign) IBInspectable float minDistance;
+
+@property (nonatomic, assign) IBInspectable float maxDistance;
+
 /**
  * The minimum possible value to select in the range
  */
@@ -61,5 +66,7 @@ IB_DESIGNABLE
 @property (nonatomic, assign) BOOL leftHandleSelected;
 @property (nonatomic, assign) BOOL rightHandleSelected;
 
+@property (nonatomic, strong) CALayer *leftHandle;
+@property (nonatomic, strong) CALayer *rightHandle;
 
 @end
