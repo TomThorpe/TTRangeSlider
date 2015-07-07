@@ -66,11 +66,33 @@ IB_DESIGNABLE
 @property (nonatomic, assign) BOOL leftHandleSelected;
 @property (nonatomic, assign) BOOL rightHandleSelected;
 
-@property (nonatomic, strong) CALayer *leftHandle;
-@property (nonatomic, strong) CALayer *rightHandle;
 
-@property (nonatomic, strong) CATextLayer *minLabel;
-@property (nonatomic, strong) CATextLayer *maxLabel;
+/**
+ * The font of the minimum value text label
+ */
+@property (nonatomic, strong) IBInspectable UIFont *minLabelFont;
 
+
+/**
+ * The font of the maximum value text label
+ */
+@property (nonatomic, strong) IBInspectable UIFont *maxLabelFont;
+
+
+
+/**
+ * The text content of the minimum value text label
+ */
+@property (nonatomic, strong) NSString *minLabelText;
+
+
+/**
+ * The text content of the maximum value text label
+ */
+@property (nonatomic, strong) NSString *maxLabelText;
+
+
+@property (nonatomic) CGRect leftHandleFrame;
+@property (nonatomic) CGRect rightHandleFrame;
 
 @end
