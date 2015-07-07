@@ -15,13 +15,16 @@ const float TEXT_HEIGHT = 14;
 
 @property (nonatomic, strong) NSNumberFormatter *decimalNumberFormatter; // Used to format values if formatType is YLRangeSliderFormatTypeDecimal
 
+
 @property (nonatomic, strong) CALayer *leftHandle;
 @property (nonatomic, strong) CALayer *rightHandle;
 
 @property (nonatomic, strong) CATextLayer *minLabel;
 @property (nonatomic, strong) CATextLayer *maxLabel;
 
+
 @end
+
 
 static const CGFloat kLabelsFontSize = 12.0f;
 
@@ -37,7 +40,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     
     _minDistance = -1;
     _maxDistance = -1;
-
+    
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
@@ -54,10 +57,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.rightHandle.cornerRadius = 8.0f;
     self.rightHandle.backgroundColor = self.tintColor.CGColor;
     [self.layer addSublayer:self.rightHandle];
-
+    
     self.leftHandle.frame = CGRectMake(0, 0, HANDLE_DIAMETER, HANDLE_DIAMETER);
     self.rightHandle.frame = CGRectMake(0, 0, HANDLE_DIAMETER, HANDLE_DIAMETER);
-
+    
     //draw the text labels
     self.minLabel = [[CATextLayer alloc] init];
     self.minLabel.alignmentMode = kCAAlignmentCenter;
@@ -97,7 +100,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    
     //positioning for the slider line
     float barSidePadding = 16.0f;
     CGRect currentFrame = self.frame;
@@ -105,7 +108,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     CGPoint lineLeftSide = CGPointMake(barSidePadding, yMiddle);
     CGPoint lineRightSide = CGPointMake(currentFrame.size.width-barSidePadding, yMiddle);
     self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, 1);
-
+    
     [self updateHandlePositions];
     [self updateLabelPositions];
 }
@@ -148,7 +151,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     
     //now subtract value from the minValue (e.g if value is 75, then 75-50 = 25)
     float valueSubtracted = value - self.minValue;
-
+    
     //now divide valueSubtracted by maxMinDif to get the percentage (e.g 25/50 = 0.5)
     return valueSubtracted / maxMinDif;
 }
@@ -183,7 +186,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 - (void)updateHandlePositions {
     CGPoint leftHandleCenter = CGPointMake([self getXPositionAlongLineForValue:self.selectedMinimum], CGRectGetMidY(self.sliderLine.frame));
     self.leftHandle.position = leftHandleCenter;
-
+    
     CGPoint rightHandleCenter = CGPointMake([self getXPositionAlongLineForValue:self.selectedMaximum], CGRectGetMidY(self.sliderLine.frame));
     self.rightHandle.position= rightHandleCenter;
 }
@@ -229,7 +232,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint gesturePressLocation = [touch locationInView:self];
-
+    
     if (CGRectContainsPoint(CGRectInset(self.leftHandle.frame, HANDLE_TOUCH_AREA_EXPANSION, HANDLE_TOUCH_AREA_EXPANSION), gesturePressLocation) || CGRectContainsPoint(CGRectInset(self.rightHandle.frame, HANDLE_TOUCH_AREA_EXPANSION, HANDLE_TOUCH_AREA_EXPANSION), gesturePressLocation))
     {
         //the touch was inside one of the handles so we're definitely going to start movign one of them. But the handles might be quite close to each other, so now we need to find out which handle the touch was closest too, and activate that one.
@@ -239,30 +242,14 @@ static const CGFloat kLabelsFontSize = 12.0f;
         if (distanceFromLeftHandle < distanceFromRightHandle && self.disableRange == NO){
             self.leftHandleSelected = YES;
             [self animateHandle:self.leftHandle withSelection:YES];
-            
-            if (self.delegate){
-                [self.delegate rangeSlider:self leftHandleTouchStart:nil];
-            }
-
-            
         } else {
             if (self.selectedMaximum == self.maxValue && [self getCentreOfRect:self.leftHandle.frame].x == [self getCentreOfRect:self.rightHandle.frame].x) {
-                
                 self.leftHandleSelected = YES;
                 [self animateHandle:self.leftHandle withSelection:YES];
-                
-                if (self.delegate){
-                [self.delegate rangeSlider:self leftHandleTouchStart:nil];                }
-
             }
             else {
                 self.rightHandleSelected = YES;
                 [self animateHandle:self.rightHandle withSelection:YES];
-                
-                if (self.delegate){
-                    [self.delegate rangeSlider:self rightHandleTouchStart:nil];
-                }
-
             }
         }
         
@@ -273,6 +260,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)refresh {
+    
     
     if (self.minDistance != -1) {
         
@@ -319,6 +307,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     }
     
     
+    
     //ensure the minimum and maximum selected values are within range. Access the values directly so we don't cause this refresh method to be called again (otherwise changing the properties causes a refresh)
     if (self.selectedMinimum < self.minValue){
         _selectedMinimum = self.minValue;
@@ -341,6 +330,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     }
     
     
+    
 }
 
 - (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -361,7 +351,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
         else {
             self.selectedMinimum = self.selectedMaximum;
         }
-
+        
     }
     else if (self.rightHandleSelected)
     {
@@ -374,29 +364,17 @@ static const CGFloat kLabelsFontSize = 12.0f;
     }
     
     //no need to refresh the view because it is done as a sideeffect of setting the property
-
+    
     return YES;
 }
 
 - (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     if (self.leftHandleSelected){
-
         self.leftHandleSelected = NO;
         [self animateHandle:self.leftHandle withSelection:NO];
-        
-        if (self.delegate){
-            [self.delegate rangeSlider:self leftHandleTouchEnd:nil];
-        }
-        
     } else {
-        
         self.rightHandleSelected = NO;
         [self animateHandle:self.rightHandle withSelection:NO];
-        
-        if (self.delegate){
-            [self.delegate rangeSlider:self rightHandleTouchEnd:nil];
-        }
-
     }
 }
 
@@ -414,7 +392,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
         [CATransaction setCompletionBlock:^{
         }];
         [CATransaction commit];
-
+        
     } else {
         [CATransaction begin];
         [CATransaction setAnimationDuration:0.3];
@@ -528,16 +506,17 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 
 
+
 -(void)setMinLabelFont:(UIFont *)minLabelFont{
     _minLabelFont = minLabelFont;
-
+    
     self.minLabel.font = (__bridge CFTypeRef)(self.minLabelFont.fontName);
     self.minLabel.fontSize = self.minLabelFont.pointSize;
 }
 
 -(void)setMaxLabelFont:(UIFont *)maxLabelFont{
     _maxLabelFont = maxLabelFont;
-
+    
     self.maxLabel.font = (__bridge CFTypeRef)(self.maxLabelFont.fontName);
     self.maxLabel.fontSize = self.maxLabelFont.pointSize;
 }
@@ -565,6 +544,5 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(CGRect)rightHandleFrame{
     return self.rightHandle.frame;
 }
-
 
 @end

@@ -95,4 +95,5 @@ IB_DESIGNABLE
 @property (nonatomic) CGRect leftHandleFrame;
 @property (nonatomic) CGRect rightHandleFrame;
 
+
 @end
