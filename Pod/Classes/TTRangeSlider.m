@@ -13,18 +13,17 @@ const float TEXT_HEIGHT = 14;
 
 @property (nonatomic, strong) CALayer *sliderLine;
 
-@property (nonatomic, strong) NSNumberFormatter *decimalNumberFormatter; // Used to format values if formatType is YLRangeSliderFormatTypeDecimal
-
-
 @property (nonatomic, strong) CALayer *leftHandle;
+@property (nonatomic, assign) BOOL leftHandleSelected;
 @property (nonatomic, strong) CALayer *rightHandle;
+@property (nonatomic, assign) BOOL rightHandleSelected;
 
 @property (nonatomic, strong) CATextLayer *minLabel;
 @property (nonatomic, strong) CATextLayer *maxLabel;
 
+@property (nonatomic, strong) NSNumberFormatter *decimalNumberFormatter; // Used to format values if formatType is YLRangeSliderFormatTypeDecimal
 
 @end
-
 
 static const CGFloat kLabelsFontSize = 12.0f;
 
@@ -73,10 +72,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
     } else {
         self.minLabel.foregroundColor = self.minLabelColour.CGColor;
     }
-    if (self.minLabelFont != nil) {
-        self.minLabel.font = (__bridge CFTypeRef)(self.minLabelFont.fontName);
-        self.minLabel.fontSize = self.minLabelFont.pointSize;
-    }
     [self.layer addSublayer:self.minLabel];
     
     self.maxLabel = [[CATextLayer alloc] init];
@@ -88,10 +83,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
         self.maxLabel.foregroundColor = self.tintColor.CGColor;
     } else {
         self.maxLabel.foregroundColor = self.maxLabelColour.CGColor;
-    }
-    if (self.maxLabelFont != nil) {
-        self.maxLabel.font = (__bridge CFTypeRef)(self.maxLabelFont.fontName);
-        self.maxLabel.fontSize = self.maxLabelFont.pointSize;
     }
     [self.layer addSublayer:self.maxLabel];
     
@@ -260,53 +251,23 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)refresh {
+
+    float diff = self.selectedMaximum - self.selectedMinimum;
     
-    
-    if (self.minDistance != -1) {
-        
-        float diff = self.selectedMaximum - self.selectedMinimum;
-        
-        if(diff < self.minDistance){
-            
-            float offset = self.minDistance - diff;
-            
-            if(self.leftHandleSelected){
-                
-                _selectedMaximum = self.selectedMaximum + offset;
-                
-            }else if(self.rightHandleSelected){
-                
-                _selectedMinimum = self.selectedMinimum - offset;
-                
-            }
-            
+    if (self.minDistance != -1 && diff < self.minDistance) {
+        if(self.leftHandleSelected){
+            _selectedMinimum = self.selectedMaximum - self.minDistance;
+        }else{
+            _selectedMaximum = self.selectedMinimum + self.minDistance;
         }
+    }else if(self.maxDistance != -1 && diff > self.maxDistance){
         
-    }
-    
-    if(self.maxDistance != -1){
-        
-        float diff = self.selectedMaximum - self.selectedMinimum;
-        
-        if(diff > self.maxDistance){
-            
-            float offset = diff - self.maxDistance;
-            
-            if(self.leftHandleSelected){
-                
-                _selectedMaximum = self.selectedMaximum - offset;
-                
-            }else if(self.rightHandleSelected){
-                
-                _selectedMinimum = self.selectedMinimum + offset;
-                
-            }
-            
+        if(self.leftHandleSelected){
+            _selectedMinimum = self.selectedMaximum - self.maxDistance;
+        }else if(self.rightHandleSelected){
+            _selectedMaximum = self.selectedMinimum + self.maxDistance;
         }
-        
     }
-    
-    
     
     //ensure the minimum and maximum selected values are within range. Access the values directly so we don't cause this refresh method to be called again (otherwise changing the properties causes a refresh)
     if (self.selectedMinimum < self.minValue){
@@ -328,9 +289,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
     if (self.delegate){
         [self.delegate rangeSlider:self didChangeSelectedMinimumValue:self.selectedMinimum andMaximumValue:self.selectedMaximum];
     }
-    
-    
-    
 }
 
 - (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -502,47 +460,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(void)setNumberFormatterOverride:(NSNumberFormatter *)numberFormatterOverride{
     _numberFormatterOverride = numberFormatterOverride;
     [self updateLabelValues];
-}
-
-
-
-
--(void)setMinLabelFont:(UIFont *)minLabelFont{
-    _minLabelFont = minLabelFont;
-    
-    self.minLabel.font = (__bridge CFTypeRef)(self.minLabelFont.fontName);
-    self.minLabel.fontSize = self.minLabelFont.pointSize;
-}
-
--(void)setMaxLabelFont:(UIFont *)maxLabelFont{
-    _maxLabelFont = maxLabelFont;
-    
-    self.maxLabel.font = (__bridge CFTypeRef)(self.maxLabelFont.fontName);
-    self.maxLabel.fontSize = self.maxLabelFont.pointSize;
-}
-
--(NSString*)minLabelText{
-    return self.minLabel.string;
-}
-
--(void)setMinLabelText:(NSString *)minLabelText{
-    self.minLabel.string = minLabelText;
-}
-
--(NSString*)maxLabelText{
-    return self.maxLabel.string;
-}
-
--(void)setMaxLabelText:(NSString *)maxLabelText{
-    self.maxLabel.string = maxLabelText;
-}
-
--(CGRect)leftHandleFrame{
-    return self.leftHandle.frame;
-}
-
--(CGRect)rightHandleFrame{
-    return self.rightHandle.frame;
 }
 
 @end

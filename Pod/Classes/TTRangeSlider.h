@@ -12,11 +12,6 @@ IB_DESIGNABLE
 
 @property (nonatomic, weak) id<TTRangeSliderDelegate> delegate;
 
-
-@property (nonatomic, assign) IBInspectable float minDistance;
-
-@property (nonatomic, assign) IBInspectable float maxDistance;
-
 /**
  * The minimum possible value to select in the range
  */
@@ -62,38 +57,8 @@ IB_DESIGNABLE
  */
 @property (nonatomic, assign) IBInspectable BOOL disableRange;
 
+@property (nonatomic, assign) IBInspectable float minDistance;
 
-@property (nonatomic, assign) BOOL leftHandleSelected;
-@property (nonatomic, assign) BOOL rightHandleSelected;
-
-
-/**
- * The font of the minimum value text label
- */
-@property (nonatomic, strong) IBInspectable UIFont *minLabelFont;
-
-
-/**
- * The font of the maximum value text label
- */
-@property (nonatomic, strong) IBInspectable UIFont *maxLabelFont;
-
-
-
-/**
- * The text content of the minimum value text label
- */
-@property (nonatomic, strong) NSString *minLabelText;
-
-
-/**
- * The text content of the maximum value text label
- */
-@property (nonatomic, strong) NSString *maxLabelText;
-
-
-@property (nonatomic) CGRect leftHandleFrame;
-@property (nonatomic) CGRect rightHandleFrame;
-
+@property (nonatomic, assign) IBInspectable float maxDistance;
 
 @end
