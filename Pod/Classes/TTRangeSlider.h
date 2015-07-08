@@ -57,4 +57,8 @@ IB_DESIGNABLE
  */
 @property (nonatomic, assign) IBInspectable BOOL disableRange;
 
+@property (nonatomic, assign) IBInspectable float minDistance;
+
+@property (nonatomic, assign) IBInspectable float maxDistance;
+
 @end
