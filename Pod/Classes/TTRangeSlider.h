@@ -61,4 +61,15 @@ IB_DESIGNABLE
 
 @property (nonatomic, assign) IBInspectable float maxDistance;
 
+/**
+ * If true the control will snap to point at each step between minValue and maxValue
+ */
+@property (nonatomic, assign) IBInspectable BOOL enableStep;
+
+/**
+ * The step value, this control the value of each step. If not set the default is 0.1.
+ * (note: this is ignored if <= 0.0)
+ */
+@property (nonatomic, assign) IBInspectable float step;
+
 @end
