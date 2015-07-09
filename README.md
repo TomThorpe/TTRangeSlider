@@ -68,6 +68,10 @@ The colour of the maximum value text label. If not set, the default is the tintC
 If true, the control will mimic a normal slider and have only one handle rather than a range.
 
 In this case, the selectedMinValue will be not functional anymore. Use selectedMaxValue instead to determine the value the user has selected.
+#### `enableStep`
+If true the control will snap to point at each `step` (property) between minValue and maxValue. Default value is disabled.
+#### `step`
+If `enableStep` is true, this controls the value of each step. E.g. if this value is 20, the control will snap to values 20,40,60...etc. Set this is you enable the `enableStep` property.
 
 ## Author
 
