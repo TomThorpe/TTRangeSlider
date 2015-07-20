@@ -294,7 +294,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [self updateLabelValues];
 
     //update the delegate
-    if (self.delegate){
+    if (self.delegate && (self.leftHandleSelected || self.rightHandleSelected)){
         [self.delegate rangeSlider:self didChangeSelectedMinimumValue:self.selectedMinimum andMaximumValue:self.selectedMaximum];
     }
 }
