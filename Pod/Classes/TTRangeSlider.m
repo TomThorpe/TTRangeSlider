@@ -203,7 +203,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     float newRightMostXInMinLabel = newMinLabelCenter.x + minLabelTextSize.width/2;
     float newSpacingBetweenTextLabels = newLeftMostXInMaxLabel - newRightMostXInMinLabel;
 
-    if (newSpacingBetweenTextLabels > minSpacingBetweenLabels) {
+    if (self.disableRange == YES || newSpacingBetweenTextLabels > minSpacingBetweenLabels) {
         self.minLabel.position = newMinLabelCenter;
         self.maxLabel.position = newMaxLabelCenter;
     }
