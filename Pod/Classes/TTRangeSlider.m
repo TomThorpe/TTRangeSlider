@@ -396,8 +396,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [CATransaction setAnimationDuration:0.5];
     [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
     self.sliderLine.backgroundColor = color;
-    self.leftHandle.backgroundColor = color;
-    self.rightHandle.backgroundColor = color;
 
     if (self.minLabelColour == nil){
         self.minLabel.foregroundColor = color;
@@ -468,6 +466,25 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(void)setNumberFormatterOverride:(NSNumberFormatter *)numberFormatterOverride{
     _numberFormatterOverride = numberFormatterOverride;
     [self updateLabelValues];
+}
+
+-(void)setHandleWithImage:(UIImage *)handleWithImage{
+    
+    CGRect startFrame = CGRectMake(0.0, 0.0, 31, 32);
+    self.leftHandle.contents = (id)handleWithImage.CGImage;
+    self.leftHandle.frame = startFrame;
+    
+    self.rightHandle.contents = (id)handleWithImage.CGImage;
+    self.rightHandle.frame = startFrame;
+    
+    //Force layer background to transparant
+    self.leftHandle.backgroundColor = [[UIColor clearColor] CGColor];
+    self.rightHandle.backgroundColor = [[UIColor clearColor] CGColor];
+}
+
+-(void)setHandleWithColor:(UIColor *)handleWithColor{
+    self.leftHandle.backgroundColor = [handleWithColor CGColor];
+    self.rightHandle.backgroundColor = [handleWithColor CGColor];
 }
 
 @end

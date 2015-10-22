@@ -33,6 +33,7 @@
     self.rangeSliderCurrency.maxValue = 150;
     self.rangeSliderCurrency.selectedMinimum = 50;
     self.rangeSliderCurrency.selectedMaximum = 150;
+    self.rangeSliderCurrency.handleWithColor = [UIColor greenColor];
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterCurrencyStyle;
     self.rangeSliderCurrency.numberFormatterOverride = formatter;
@@ -43,6 +44,7 @@
     self.rangeSliderCustom.maxValue = 100;
     self.rangeSliderCustom.selectedMinimum = 40;
     self.rangeSliderCustom.selectedMaximum = 60;
+    self.rangeSliderCustom.handleWithImage = [UIImage imageNamed:@"custom-handle"];
     NSNumberFormatter *customFormatter = [[NSNumberFormatter alloc] init];
     customFormatter.positiveSuffix = @"B";
     self.rangeSliderCustom.numberFormatterOverride = customFormatter;

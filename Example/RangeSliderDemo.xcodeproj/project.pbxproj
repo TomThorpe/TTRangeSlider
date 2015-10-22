@@ -14,6 +14,7 @@
 		64495A4F1ACAD93700482D73 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64495A4E1ACAD93700482D73 /* Images.xcassets */; };
 		64495A521ACAD93700482D73 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64495A501ACAD93700482D73 /* LaunchScreen.xib */; };
 		64495A5E1ACAD93700482D73 /* RangeSliderDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 64495A5D1ACAD93700482D73 /* RangeSliderDemoTests.m */; };
+		6BA46D091BD8E1CF0049740C /* custom-handle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BA46D081BD8E1CF0049740C /* custom-handle.png */; settings = {ASSET_TAGS = (); }; };
 		E06CDBE58BA42330DDAA7756 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B160588054A1ABBEE2B53C /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		64495A571ACAD93700482D73 /* RangeSliderDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RangeSliderDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		64495A5C1ACAD93700482D73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64495A5D1ACAD93700482D73 /* RangeSliderDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RangeSliderDemoTests.m; sourceTree = "<group>"; };
+		6BA46D081BD8E1CF0049740C /* custom-handle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom-handle.png"; sourceTree = "<group>"; };
 		E03B9800BFD96602A5FB30A7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F3B160588054A1ABBEE2B53C /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -105,6 +107,7 @@
 		64495A401ACAD93700482D73 /* RangeSliderDemo */ = {
 			isa = PBXGroup;
 			children = (
+				6BA46D051BD8DCC60049740C /* images */,
 				64495A451ACAD93700482D73 /* AppDelegate.h */,
 				64495A461ACAD93700482D73 /* AppDelegate.m */,
 				64495A481ACAD93700482D73 /* ViewController.h */,
@@ -141,6 +144,14 @@
 				64495A5C1ACAD93700482D73 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6BA46D051BD8DCC60049740C /* images */ = {
+			isa = PBXGroup;
+			children = (
+				6BA46D081BD8E1CF0049740C /* custom-handle.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +239,7 @@
 			files = (
 				64495A4D1ACAD93700482D73 /* Main.storyboard in Resources */,
 				64495A521ACAD93700482D73 /* LaunchScreen.xib in Resources */,
+				6BA46D091BD8E1CF0049740C /* custom-handle.png in Resources */,
 				64495A4F1ACAD93700482D73 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -72,4 +72,14 @@ IB_DESIGNABLE
  */
 @property (nonatomic, assign) IBInspectable float step;
 
+/**
+ *Hendle slider with custom image, you can set custom image for your hendle
+ */
+@property (nonatomic, strong) UIImage *handleWithImage;
+
+/**
+ *Hendle slider with custom color, you can set custom color for your hendle
+ */
+@property (nonatomic, strong) UIColor *handleWithColor;
+
 @end
