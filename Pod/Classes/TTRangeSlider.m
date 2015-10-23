@@ -12,6 +12,7 @@ const float TEXT_HEIGHT = 14;
 @interface TTRangeSlider ()
 
 @property (nonatomic, strong) CALayer *sliderLine;
+@property (nonatomic, strong) CALayer *sliderDistLine;
 
 @property (nonatomic, strong) CALayer *leftHandle;
 @property (nonatomic, assign) BOOL leftHandleSelected;
@@ -47,6 +48,11 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
     [self.layer addSublayer:self.sliderLine];
+    
+    //draw the track distline
+    self.sliderDistLine = [CALayer layer];
+    self.sliderDistLine.backgroundColor = self.tintColor.CGColor;
+    [self.layer addSublayer:self.sliderDistLine];
 
     //draw the minimum slider handle
     self.leftHandle = [CALayer layer];
@@ -183,6 +189,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     CGPoint rightHandleCenter = CGPointMake([self getXPositionAlongLineForValue:self.selectedMaximum], CGRectGetMidY(self.sliderLine.frame));
     self.rightHandle.position= rightHandleCenter;
+    
+    //positioning for the dist slider line
+    self.sliderDistLine.frame = CGRectMake(self.leftHandle.position.x, self.sliderLine.frame.origin.y, self.rightHandle.position.x-self.leftHandle.position.x, 1);
 }
 
 - (void)updateLabelPositions {
@@ -485,6 +494,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(void)setHandleWithColor:(UIColor *)handleWithColor{
     self.leftHandle.backgroundColor = [handleWithColor CGColor];
     self.rightHandle.backgroundColor = [handleWithColor CGColor];
+}
+
+-(void)setSliderDistLineWithColor:(UIColor *)sliderDistLineWithColor{
+    self.sliderDistLine.backgroundColor = [sliderDistLineWithColor CGColor];
 }
 
 @end

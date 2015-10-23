@@ -82,4 +82,9 @@ IB_DESIGNABLE
  */
 @property (nonatomic, strong) UIColor *handleWithColor;
 
+/**
+ *Set distLine with custom color (distline is slider line between min and max)
+ */
+@property (nonatomic, strong) UIColor *sliderDistLineWithColor;
+
 @end

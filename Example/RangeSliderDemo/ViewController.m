@@ -45,6 +45,7 @@
     self.rangeSliderCustom.selectedMinimum = 40;
     self.rangeSliderCustom.selectedMaximum = 60;
     self.rangeSliderCustom.handleWithImage = [UIImage imageNamed:@"custom-handle"];
+    self.rangeSliderCustom.sliderDistLineWithColor = [UIColor redColor];
     NSNumberFormatter *customFormatter = [[NSNumberFormatter alloc] init];
     customFormatter.positiveSuffix = @"B";
     self.rangeSliderCustom.numberFormatterOverride = customFormatter;
