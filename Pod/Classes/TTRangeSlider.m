@@ -342,6 +342,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
         self.rightHandleSelected = NO;
         [self animateHandle:self.rightHandle withSelection:NO];
     }
+    if ([self.delegate respondsToSelector:@selector(didEndTouchesInRangeSlider:)]) {
+        [self.delegate didEndTouchesInRangeSlider:self];
+    }
 }
 
 #pragma mark - Animation
