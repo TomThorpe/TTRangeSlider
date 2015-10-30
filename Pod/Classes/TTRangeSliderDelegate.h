@@ -11,10 +11,16 @@
 
 @protocol TTRangeSliderDelegate <NSObject>
 
+/**
+ * Called when the RangeSlider values are changed
+ */
 -(void)rangeSlider:(TTRangeSlider *)sender didChangeSelectedMinimumValue:(float)selectedMinimum andMaximumValue:(float)selectedMaximum;
 
 @optional
 
+/**
+ * Called when the user has finished interacting with the RangeSlider
+ */
 - (void)didEndTouchesInRangeSlider:(TTRangeSlider *)sender;
 
 @end
