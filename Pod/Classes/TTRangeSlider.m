@@ -247,6 +247,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
             }
         }
 
+        if ([self.delegate respondsToSelector:@selector(didStartTouchesInRangeSlider:)]){
+            [self.delegate didStartTouchesInRangeSlider:self];
+        }
+
         return YES;
     } else {
         return NO;
