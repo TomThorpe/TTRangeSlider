@@ -13,4 +13,8 @@
 
 -(void)rangeSlider:(TTRangeSlider *)sender didChangeSelectedMinimumValue:(float)selectedMinimum andMaximumValue:(float)selectedMaximum;
 
+@optional
+
+- (void)didEndTouchesInRangeSlider:(TTRangeSlider *)sender;
+
 @end
