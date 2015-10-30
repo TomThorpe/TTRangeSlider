@@ -23,4 +23,9 @@
  */
 - (void)didEndTouchesInRangeSlider:(TTRangeSlider *)sender;
 
+/**
+ * Called when the user has started interacting with the RangeSlider
+ */
+- (void)didStartTouchesInRangeSlider:(TTRangeSlider *)sender;
+
 @end
