@@ -10,7 +10,7 @@
 IB_DESIGNABLE
 @interface TTRangeSlider : UIControl <UIGestureRecognizerDelegate>
 
-@property (nonatomic, weak) id<TTRangeSliderDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<TTRangeSliderDelegate> delegate;
 
 /**
  * The minimum possible value to select in the range
