@@ -43,6 +43,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _enableStep = NO;
     _step = 0.1f;
 
+    _hideLabels = NO;
+    
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
@@ -103,6 +105,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     CGPoint lineRightSide = CGPointMake(currentFrame.size.width-barSidePadding, yMiddle);
     self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, 1);
 
+    [self updateLabelValues];
     [self updateHandlePositions];
     [self updateLabelPositions];
 }
@@ -164,7 +167,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)updateLabelValues {
-    if ([self.numberFormatterOverride isEqual:[NSNull null]]){
+    if (self.hideLabels || [self.numberFormatterOverride isEqual:[NSNull null]]){
         self.minLabel.string = @"";
         self.maxLabel.string = @"";
         return;
