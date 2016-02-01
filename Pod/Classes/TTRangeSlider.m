@@ -138,6 +138,25 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 
+- (void)tintColorDidChange {
+    CGColorRef color = self.tintColor.CGColor;
+
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0.5];
+    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
+    self.sliderLine.backgroundColor = color;
+    self.leftHandle.backgroundColor = color;
+    self.rightHandle.backgroundColor = color;
+
+    if (self.minLabelColour == nil){
+        self.minLabel.foregroundColor = color;
+    }
+    if (self.maxLabelColour == nil){
+        self.maxLabel.foregroundColor = color;
+    }
+    [CATransaction commit];
+}
+
 - (float)getPercentageAlongLineForValue:(float) value {
     if (self.minValue == self.maxValue){
         return 0; //stops divide by zero errors where maxMinDif would be zero. If the min and max are the same the percentage has no point.
@@ -398,27 +417,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 
 #pragma mark - Properties
--(void)setTintColor:(UIColor *)tintColor{
-    [super setTintColor:tintColor];
-
-    struct CGColor *color = self.tintColor.CGColor;
-
-    [CATransaction begin];
-    [CATransaction setAnimationDuration:0.5];
-    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
-    self.sliderLine.backgroundColor = color;
-    self.leftHandle.backgroundColor = color;
-    self.rightHandle.backgroundColor = color;
-
-    if (self.minLabelColour == nil){
-        self.minLabel.foregroundColor = color;
-    }
-    if (self.maxLabelColour == nil){
-        self.maxLabel.foregroundColor = color;
-    }
-    [CATransaction commit];
-}
-
 - (void)setDisableRange:(BOOL)disableRange {
     _disableRange = disableRange;
     if (_disableRange){
