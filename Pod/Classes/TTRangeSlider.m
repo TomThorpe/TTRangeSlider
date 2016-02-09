@@ -477,13 +477,13 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [self updateLabelValues];
 }
 
--(void)setHandleWithImage:(UIImage *)handleWithImage{
+-(void)setHandleImage:(UIImage *)handleImage{
     
     CGRect startFrame = CGRectMake(0.0, 0.0, 31, 32);
-    self.leftHandle.contents = (id)handleWithImage.CGImage;
+    self.leftHandle.contents = (id)handleImage.CGImage;
     self.leftHandle.frame = startFrame;
     
-    self.rightHandle.contents = (id)handleWithImage.CGImage;
+    self.rightHandle.contents = (id)handleImage.CGImage;
     self.rightHandle.frame = startFrame;
     
     //Force layer background to transparant
@@ -491,13 +491,13 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.rightHandle.backgroundColor = [[UIColor clearColor] CGColor];
 }
 
--(void)setHandleWithColor:(UIColor *)handleWithColor{
-    self.leftHandle.backgroundColor = [handleWithColor CGColor];
-    self.rightHandle.backgroundColor = [handleWithColor CGColor];
+-(void)setHandleColor:(UIColor *)handleColor{
+    self.leftHandle.backgroundColor = [handleColor CGColor];
+    self.rightHandle.backgroundColor = [handleColor CGColor];
 }
 
--(void)setSliderDistLineWithColor:(UIColor *)sliderDistLineWithColor{
-    self.sliderDistLine.backgroundColor = [sliderDistLineWithColor CGColor];
+-(void)setSliderColorBetweenHandles:(UIColor *)sliderColorBetweenHandles{
+    self.sliderDistLine.backgroundColor = [sliderColorBetweenHandles CGColor];
 }
 
 @end

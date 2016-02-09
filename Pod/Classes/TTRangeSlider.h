@@ -73,18 +73,18 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable float step;
 
 /**
- *Hendle slider with custom image, you can set custom image for your hendle
+ *Hendle slider with custom image, you can set custom image for your handle
  */
-@property (nonatomic, strong) UIImage *handleWithImage;
+@property (nonatomic, strong) UIImage *handleImage;
 
 /**
- *Hendle slider with custom color, you can set custom color for your hendle
+ *Hendle slider with custom color, you can set custom color for your handle
  */
-@property (nonatomic, strong) UIColor *handleWithColor;
+@property (nonatomic, strong) UIColor *handleColor;
 
 /**
  *Set distLine with custom color (distline is slider line between min and max)
  */
-@property (nonatomic, strong) UIColor *sliderDistLineWithColor;
+@property (nonatomic, strong) UIColor *sliderColorBetweenHandles;
 
 @end
