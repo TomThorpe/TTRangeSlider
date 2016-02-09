@@ -44,6 +44,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _enableStep = NO;
     _step = 0.1f;
 
+    _hideLabels = NO;
+    
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
@@ -109,6 +111,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     CGPoint lineRightSide = CGPointMake(currentFrame.size.width-barSidePadding, yMiddle);
     self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, 1);
 
+    [self updateLabelValues];
     [self updateHandlePositions];
     [self updateLabelPositions];
 }
@@ -141,6 +144,25 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 
+- (void)tintColorDidChange {
+    CGColorRef color = self.tintColor.CGColor;
+
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0.5];
+    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
+    self.sliderLine.backgroundColor = color;
+    self.leftHandle.backgroundColor = color;
+    self.rightHandle.backgroundColor = color;
+
+    if (self.minLabelColour == nil){
+        self.minLabel.foregroundColor = color;
+    }
+    if (self.maxLabelColour == nil){
+        self.maxLabel.foregroundColor = color;
+    }
+    [CATransaction commit];
+}
+
 - (float)getPercentageAlongLineForValue:(float) value {
     if (self.minValue == self.maxValue){
         return 0; //stops divide by zero errors where maxMinDif would be zero. If the min and max are the same the percentage has no point.
@@ -170,7 +192,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)updateLabelValues {
-    if ([self.numberFormatterOverride isEqual:[NSNull null]]){
+    if (self.hideLabels || [self.numberFormatterOverride isEqual:[NSNull null]]){
         self.minLabel.string = @"";
         self.maxLabel.string = @"";
         return;
@@ -217,8 +239,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
         self.maxLabel.position = newMaxLabelCenter;
     }
     else {
-        newMinLabelCenter = CGPointMake(self.minLabel.position.x, self.leftHandle.frame.origin.y - (self.minLabel.frame.size.height/2) - padding);
-        newMaxLabelCenter = CGPointMake(self.maxLabel.position.x, self.rightHandle.frame.origin.y - (self.maxLabel.frame.size.height/2) - padding);
+        float increaseAmount = minSpacingBetweenLabels - newSpacingBetweenTextLabels;
+        newMinLabelCenter = CGPointMake(newMinLabelCenter.x - increaseAmount/2, newMinLabelCenter.y);
+        newMaxLabelCenter = CGPointMake(newMaxLabelCenter.x + increaseAmount/2, newMaxLabelCenter.y);
         self.minLabel.position = newMinLabelCenter;
         self.maxLabel.position = newMaxLabelCenter;
 
@@ -254,6 +277,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
                 self.rightHandleSelected = YES;
                 [self animateHandle:self.rightHandle withSelection:YES];
             }
+        }
+
+        if ([self.delegate respondsToSelector:@selector(didStartTouchesInRangeSlider:)]){
+            [self.delegate didStartTouchesInRangeSlider:self];
         }
 
         return YES;
@@ -350,6 +377,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
     } else {
         self.rightHandleSelected = NO;
         [self animateHandle:self.rightHandle withSelection:NO];
+    }
+    if ([self.delegate respondsToSelector:@selector(didEndTouchesInRangeSlider:)]) {
+        [self.delegate didEndTouchesInRangeSlider:self];
     }
 }
 

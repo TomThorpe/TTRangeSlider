@@ -10,7 +10,7 @@
 IB_DESIGNABLE
 @interface TTRangeSlider : UIControl <UIGestureRecognizerDelegate>
 
-@property (nonatomic, weak) id<TTRangeSliderDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<TTRangeSliderDelegate> delegate;
 
 /**
  * The minimum possible value to select in the range
@@ -37,9 +37,13 @@ IB_DESIGNABLE
 /**
  * Each handle in the slider has a label above it showing the current selected value. By default, this is displayed as a decimal format.
  * You can override this default here by supplying your own NSNumberFormatter. For example, you could supply an NSNumberFormatter that has a currency style, or a prefix or suffix.
- * If this property is nil, the default decimal format will be used. Note: If you want no labels at all, set this value to be `(NSNumberFormatter *)[NSNull null]` (as opposed to nil), to specifically mark that you want no labels
- */
+ * If this property is nil, the default decimal format will be used. Note: If you want no labels at all, please use the hideLabels flag. */
 @property (nonatomic, strong) NSNumberFormatter *numberFormatterOverride;
+
+/**
+ * Hides the labels above the slider controls. YES = labels will be hidden. NO = labels will be shown. Default is NO.
+ */
+@property (nonatomic, assign) IBInspectable BOOL hideLabels;
 
 /**
  * The color of the minimum value text label. If not set, the default is the tintColor.
