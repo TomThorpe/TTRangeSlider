@@ -42,6 +42,8 @@ Other customisation of the control is done using the following properties:
 The tintColor property (which you can also set in Interface Builder) sets the overall colour of the control, including the colour of the line, the two handles, and the labels.
 
 It is safe to change the `tintColor` at any time, if the control is currently visible the colour change will be animated into the new colour.
+#### `tintColorBetweenHandles`
+The tintColorBetweenHandles property sets the color of the line between the two handles.
 #### `minValue`
 The minimum possible value to select in the range
 #### `maxValue`
@@ -74,6 +76,8 @@ In this case, the selectedMinValue will be not functional anymore. Use selectedM
 If true the control will snap to point at each `step` (property) between minValue and maxValue. Default value is disabled.
 #### `step`
 If `enableStep` is true, this controls the value of each step. E.g. if this value is 20, the control will snap to values 20,40,60...etc. Set this is you enable the `enableStep` property.
+#### `lineHeight`
+Set the height of the line. It will automatically round the corners. If not specified, the default value will be `1.0`.
 
 ## Author
 

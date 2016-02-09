@@ -87,9 +87,9 @@ IB_DESIGNABLE
 @property (nonatomic, strong) UIColor *handleColor;
 
 /**
- *Set slider line color between handles
+ *Set slider line tint color between handles
  */
-@property (nonatomic, strong) UIColor *colorBetweenHandles;
+@property (nonatomic, strong) UIColor *tintColorBetweenHandles;
 
 /**
  *Set the slider line height (default 1.0)

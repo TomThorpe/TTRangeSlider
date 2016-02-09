@@ -530,8 +530,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.rightHandle.backgroundColor = [handleColor CGColor];
 }
 
--(void)setColorBetweenHandles:(UIColor *)colorBetweenHandles{
-    self.sliderLineBetweenHandles.backgroundColor = [colorBetweenHandles CGColor];
+-(void)setTintColorBetweenHandles:(UIColor *)tintColorBetweenHandles{
+    self.sliderLineBetweenHandles.backgroundColor = [tintColorBetweenHandles CGColor];
 }
 
 @end
