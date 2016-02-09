@@ -76,6 +76,10 @@ In this case, the selectedMinValue will be not functional anymore. Use selectedM
 If true the control will snap to point at each `step` (property) between minValue and maxValue. Default value is disabled.
 #### `step`
 If `enableStep` is true, this controls the value of each step. E.g. if this value is 20, the control will snap to values 20,40,60...etc. Set this is you enable the `enableStep` property.
+#### `handleImage`
+If set the image passed will be used for the handles.
+#### `handleColor`
+If set it will update the color of the handles.
 #### `lineHeight`
 Set the height of the line. It will automatically round the corners. If not specified, the default value will be `1.0`.
 
