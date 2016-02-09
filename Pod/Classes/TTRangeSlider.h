@@ -87,8 +87,13 @@ IB_DESIGNABLE
 @property (nonatomic, strong) UIColor *handleColor;
 
 /**
- *Set distLine with custom color (distline is slider line between min and max)
+ *Set slider line color between handles
  */
-@property (nonatomic, strong) UIColor *sliderColorBetweenHandles;
+@property (nonatomic, strong) UIColor *colorBetweenHandles;
+
+/**
+ *Set the slider line height (default 1.0)
+ */
+@property (nonatomic, assign) CGFloat lineHeight;
 
 @end
