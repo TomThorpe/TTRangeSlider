@@ -46,6 +46,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _hideLabels = NO;
     
     _handleDiameter = 16.0;
+    _selectedHandleDiameterMultiplier = 1.7;
+    
     _lineHeight = 1.0;
     
     //draw the slider line
@@ -393,7 +395,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
         [CATransaction begin];
         [CATransaction setAnimationDuration:0.3];
         [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
-        handle.transform = CATransform3DMakeScale(1.7, 1.7, 1);
+        handle.transform = CATransform3DMakeScale(self.selectedHandleDiameterMultiplier, self.selectedHandleDiameterMultiplier, 1);
 
         //the label above the handle will need to move too if the handle changes size
         [self updateLabelPositions];

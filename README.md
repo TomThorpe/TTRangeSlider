@@ -79,9 +79,11 @@ If `enableStep` is true, this controls the value of each step. E.g. if this valu
 #### `handleImage`
 If set the image passed will be used for the handles.
 #### `handleColor`
-If set it will update the color of the handles.
+If set it will update the color of the handles. Default is `tintColor`.
 #### `handleDiameter`
-If set it will update the size of the handles.
+If set it will update the size of the handles. Default is `16.0`.
+#### `selectedHandleDiameterMultiplier`
+If set it update the scaling factor of the handle when selected. Default is `1.7`. If you don't want any scaling, set it to `1.0`.
 #### `lineHeight`
 Set the height of the line. It will automatically round the corners. If not specified, the default value will be `1.0`.
 

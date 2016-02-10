@@ -92,6 +92,11 @@ IB_DESIGNABLE
 @property (nonatomic, assign) CGFloat handleDiameter;
 
 /**
+ *Selected handle diameter multiplier (default 1.7)
+ */
+@property (nonatomic, assign) CGFloat selectedHandleDiameterMultiplier;
+
+/**
  *Set slider line tint color between handles
  */
 @property (nonatomic, strong) UIColor *tintColorBetweenHandles;

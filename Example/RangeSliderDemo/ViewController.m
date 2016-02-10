@@ -35,6 +35,7 @@
     self.rangeSliderCurrency.selectedMaximum = 150;
     self.rangeSliderCurrency.handleColor = [UIColor greenColor];
     self.rangeSliderCurrency.handleDiameter = 30;
+    self.rangeSliderCurrency.selectedHandleDiameterMultiplier = 1.3;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterCurrencyStyle;
     self.rangeSliderCurrency.numberFormatterOverride = formatter;
@@ -46,6 +47,7 @@
     self.rangeSliderCustom.selectedMinimum = 40;
     self.rangeSliderCustom.selectedMaximum = 60;
     self.rangeSliderCustom.handleImage = [UIImage imageNamed:@"custom-handle"];
+    self.rangeSliderCustom.selectedHandleDiameterMultiplier = 1;
     self.rangeSliderCustom.tintColorBetweenHandles = [UIColor redColor];
     self.rangeSliderCustom.lineHeight = 10;
     NSNumberFormatter *customFormatter = [[NSNumberFormatter alloc] init];
