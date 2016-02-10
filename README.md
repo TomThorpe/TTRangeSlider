@@ -80,6 +80,8 @@ If `enableStep` is true, this controls the value of each step. E.g. if this valu
 If set the image passed will be used for the handles.
 #### `handleColor`
 If set it will update the color of the handles.
+#### `handleDiameter`
+If set it will update the size of the handles.
 #### `lineHeight`
 Set the height of the line. It will automatically round the corners. If not specified, the default value will be `1.0`.
 

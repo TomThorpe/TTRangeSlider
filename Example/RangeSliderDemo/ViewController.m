@@ -34,6 +34,7 @@
     self.rangeSliderCurrency.selectedMinimum = 50;
     self.rangeSliderCurrency.selectedMaximum = 150;
     self.rangeSliderCurrency.handleColor = [UIColor greenColor];
+    self.rangeSliderCurrency.handleDiameter = 30;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterCurrencyStyle;
     self.rangeSliderCurrency.numberFormatterOverride = formatter;
