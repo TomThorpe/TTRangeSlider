@@ -6,12 +6,12 @@
 #import "TTRangeSlider.h"
 
 const int HANDLE_TOUCH_AREA_EXPANSION = -30; //expand the touch area of the handle by this much (negative values increase size) so that you don't have to touch right on the handle to activate it.
-const float HANDLE_DIAMETER = 16;
 const float TEXT_HEIGHT = 14;
 
 @interface TTRangeSlider ()
 
 @property (nonatomic, strong) CALayer *sliderLine;
+@property (nonatomic, strong) CALayer *sliderLineBetweenHandles;
 
 @property (nonatomic, strong) CALayer *leftHandle;
 @property (nonatomic, assign) BOOL leftHandleSelected;
@@ -45,25 +45,35 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     _hideLabels = NO;
     
+    _handleDiameter = 16.0;
+    _selectedHandleDiameterMultiplier = 1.7;
+    
+    _lineHeight = 1.0;
+    
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
     [self.layer addSublayer:self.sliderLine];
+    
+    //draw the track distline
+    self.sliderLineBetweenHandles = [CALayer layer];
+    self.sliderLineBetweenHandles.backgroundColor = self.tintColor.CGColor;
+    [self.layer addSublayer:self.sliderLineBetweenHandles];
 
     //draw the minimum slider handle
     self.leftHandle = [CALayer layer];
-    self.leftHandle.cornerRadius = 8.0f;
+    self.leftHandle.cornerRadius = self.handleDiameter / 2;
     self.leftHandle.backgroundColor = self.tintColor.CGColor;
     [self.layer addSublayer:self.leftHandle];
 
     //draw the maximum slider handle
     self.rightHandle = [CALayer layer];
-    self.rightHandle.cornerRadius = 8.0f;
+    self.rightHandle.cornerRadius = self.handleDiameter / 2;
     self.rightHandle.backgroundColor = self.tintColor.CGColor;
     [self.layer addSublayer:self.rightHandle];
 
-    self.leftHandle.frame = CGRectMake(0, 0, HANDLE_DIAMETER, HANDLE_DIAMETER);
-    self.rightHandle.frame = CGRectMake(0, 0, HANDLE_DIAMETER, HANDLE_DIAMETER);
+    self.leftHandle.frame = CGRectMake(0, 0, self.handleDiameter, self.handleDiameter);
+    self.rightHandle.frame = CGRectMake(0, 0, self.handleDiameter, self.handleDiameter);
 
     //draw the text labels
     self.minLabel = [[CATextLayer alloc] init];
@@ -103,7 +113,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
     float yMiddle = currentFrame.size.height/2.0;
     CGPoint lineLeftSide = CGPointMake(barSidePadding, yMiddle);
     CGPoint lineRightSide = CGPointMake(currentFrame.size.width-barSidePadding, yMiddle);
-    self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, 1);
+    self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, self.lineHeight);
+    
+    self.sliderLine.cornerRadius = self.lineHeight / 2.0;
 
     [self updateLabelValues];
     [self updateHandlePositions];
@@ -205,6 +217,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     CGPoint rightHandleCenter = CGPointMake([self getXPositionAlongLineForValue:self.selectedMaximum], CGRectGetMidY(self.sliderLine.frame));
     self.rightHandle.position= rightHandleCenter;
+    
+    //positioning for the dist slider line
+    self.sliderLineBetweenHandles.frame = CGRectMake(self.leftHandle.position.x, self.sliderLine.frame.origin.y, self.rightHandle.position.x-self.leftHandle.position.x, self.lineHeight);
 }
 
 - (void)updateLabelPositions {
@@ -331,7 +346,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     CGPoint location = [touch locationInView:self];
 
     //find out the percentage along the line we are in x coordinate terms (subtracting half the frames width to account for moving the middle of the handle, not the left hand side)
-    float percentage = ((location.x-CGRectGetMinX(self.sliderLine.frame)) - HANDLE_DIAMETER/2) / (CGRectGetMaxX(self.sliderLine.frame) - CGRectGetMinX(self.sliderLine.frame));
+    float percentage = ((location.x-CGRectGetMinX(self.sliderLine.frame)) - self.handleDiameter/2) / (CGRectGetMaxX(self.sliderLine.frame) - CGRectGetMinX(self.sliderLine.frame));
 
     //multiply that percentage by self.maxValue to get the new selected minimum value
     float selectedValue = percentage * (self.maxValue - self.minValue) + self.minValue;
@@ -380,7 +395,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
         [CATransaction begin];
         [CATransaction setAnimationDuration:0.3];
         [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
-        handle.transform = CATransform3DMakeScale(1.7, 1.7, 1);
+        handle.transform = CATransform3DMakeScale(self.selectedHandleDiameterMultiplier, self.selectedHandleDiameterMultiplier, 1);
 
         //the label above the handle will need to move too if the handle changes size
         [self updateLabelPositions];
@@ -417,6 +432,25 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 
 #pragma mark - Properties
+-(void)setTintColor:(UIColor *)tintColor{
+    [super setTintColor:tintColor];
+
+    struct CGColor *color = self.tintColor.CGColor;
+
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0.5];
+    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
+    self.sliderLine.backgroundColor = color;
+
+    if (self.minLabelColour == nil){
+        self.minLabel.foregroundColor = color;
+    }
+    if (self.maxLabelColour == nil){
+        self.maxLabel.foregroundColor = color;
+    }
+    [CATransaction commit];
+}
+
 - (void)setDisableRange:(BOOL)disableRange {
     _disableRange = disableRange;
     if (_disableRange){
@@ -477,6 +511,48 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(void)setNumberFormatterOverride:(NSNumberFormatter *)numberFormatterOverride{
     _numberFormatterOverride = numberFormatterOverride;
     [self updateLabelValues];
+}
+
+-(void)setHandleImage:(UIImage *)handleImage{
+    _handleImage = handleImage;
+    
+    CGRect startFrame = CGRectMake(0.0, 0.0, 31, 32);
+    self.leftHandle.contents = (id)handleImage.CGImage;
+    self.leftHandle.frame = startFrame;
+    
+    self.rightHandle.contents = (id)handleImage.CGImage;
+    self.rightHandle.frame = startFrame;
+    
+    //Force layer background to transparant
+    self.leftHandle.backgroundColor = [[UIColor clearColor] CGColor];
+    self.rightHandle.backgroundColor = [[UIColor clearColor] CGColor];
+}
+
+-(void)setHandleColor:(UIColor *)handleColor{
+    _handleColor = handleColor;
+    self.leftHandle.backgroundColor = [handleColor CGColor];
+    self.rightHandle.backgroundColor = [handleColor CGColor];
+}
+
+-(void)setHandleDiameter:(CGFloat)handleDiameter{
+    _handleDiameter = handleDiameter;
+    
+    self.leftHandle.cornerRadius = self.handleDiameter / 2;
+    self.rightHandle.cornerRadius = self.handleDiameter / 2;
+    
+    self.leftHandle.frame = CGRectMake(0, 0, self.handleDiameter, self.handleDiameter);
+    self.rightHandle.frame = CGRectMake(0, 0, self.handleDiameter, self.handleDiameter);
+
+}
+
+-(void)setTintColorBetweenHandles:(UIColor *)tintColorBetweenHandles{
+    _tintColorBetweenHandles = tintColorBetweenHandles;
+    self.sliderLineBetweenHandles.backgroundColor = [tintColorBetweenHandles CGColor];
+}
+
+-(void)setLineHeight:(CGFloat)lineHeight{
+    _lineHeight = lineHeight;
+    [self setNeedsLayout];
 }
 
 @end

@@ -76,4 +76,34 @@ IB_DESIGNABLE
  */
 @property (nonatomic, assign) IBInspectable float step;
 
+/**
+ *Handle slider with custom image, you can set custom image for your handle
+ */
+@property (nonatomic, strong) UIImage *handleImage;
+
+/**
+ *Handle slider with custom color, you can set custom color for your handle
+ */
+@property (nonatomic, strong) UIColor *handleColor;
+
+/**
+ *Handle diameter (default 16.0)
+ */
+@property (nonatomic, assign) CGFloat handleDiameter;
+
+/**
+ *Selected handle diameter multiplier (default 1.7)
+ */
+@property (nonatomic, assign) CGFloat selectedHandleDiameterMultiplier;
+
+/**
+ *Set slider line tint color between handles
+ */
+@property (nonatomic, strong) UIColor *tintColorBetweenHandles;
+
+/**
+ *Set the slider line height (default 1.0)
+ */
+@property (nonatomic, assign) CGFloat lineHeight;
+
 @end
