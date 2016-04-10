@@ -21,6 +21,9 @@ const float TEXT_HEIGHT = 14;
 @property (nonatomic, strong) CATextLayer *minLabel;
 @property (nonatomic, strong) CATextLayer *maxLabel;
 
+@property (nonatomic, assign) CGSize minLabelTextSize;
+@property (nonatomic, assign) CGSize maxLabelTextSize;
+
 @property (nonatomic, strong) NSNumberFormatter *decimalNumberFormatter; // Used to format values if formatType is YLRangeSliderFormatTypeDecimal
 
 @end
@@ -87,6 +90,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     } else {
         self.minLabel.foregroundColor = self.minLabelColour.CGColor;
     }
+    self.minLabelFont = [UIFont systemFontOfSize:kLabelsFontSize];
     [self.layer addSublayer:self.minLabel];
 
     self.maxLabel = [[CATextLayer alloc] init];
@@ -99,6 +103,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     } else {
         self.maxLabel.foregroundColor = self.maxLabelColour.CGColor;
     }
+    self.maxLabelFont = [UIFont systemFontOfSize:kLabelsFontSize];
     [self.layer addSublayer:self.maxLabel];
 
     [self refresh];
@@ -208,6 +213,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     self.minLabel.string = [formatter stringFromNumber:@(self.selectedMinimum)];
     self.maxLabel.string = [formatter stringFromNumber:@(self.selectedMaximum)];
+    
+    self.minLabelTextSize = [self.minLabel.string sizeWithAttributes:@{NSFontAttributeName:self.minLabelFont}];
+    self.maxLabelTextSize = [self.maxLabel.string sizeWithAttributes:@{NSFontAttributeName:self.maxLabelFont}];
 }
 
 #pragma mark - Set Positions
@@ -233,8 +241,12 @@ static const CGFloat kLabelsFontSize = 12.0f;
     CGPoint rightHandleCentre = [self getCentreOfRect:self.rightHandle.frame];
     CGPoint newMaxLabelCenter = CGPointMake(rightHandleCentre.x, self.rightHandle.frame.origin.y - (self.maxLabel.frame.size.height/2) - padding);
 
-    CGSize minLabelTextSize = [self.minLabel.string sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:kLabelsFontSize]}];
-    CGSize maxLabelTextSize = [self.maxLabel.string sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:kLabelsFontSize]}];
+    CGSize minLabelTextSize = self.minLabelTextSize;
+    CGSize maxLabelTextSize = self.maxLabelTextSize;
+    
+    
+    self.minLabel.frame = CGRectMake(0, 0, minLabelTextSize.width, minLabelTextSize.height);
+    self.maxLabel.frame = CGRectMake(0, 0, maxLabelTextSize.width, maxLabelTextSize.height);
 
     float newLeftMostXInMaxLabel = newMaxLabelCenter.x - maxLabelTextSize.width/2;
     float newRightMostXInMinLabel = newMinLabelCenter.x + minLabelTextSize.width/2;
@@ -506,6 +518,18 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(void)setMaxLabelColour:(UIColor *)maxLabelColour{
     _maxLabelColour = maxLabelColour;
     self.maxLabel.foregroundColor = _maxLabelColour.CGColor;
+}
+
+-(void)setMinLabelFont:(UIFont *)minLabelFont{
+    _minLabelFont = minLabelFont;
+    self.minLabel.font = (__bridge CFTypeRef)_minLabelFont.fontName;
+    self.minLabel.fontSize = _minLabelFont.pointSize;
+}
+
+-(void)setMaxLabelFont:(UIFont *)maxLabelFont{
+    _maxLabelFont = maxLabelFont;
+    self.maxLabel.font = (__bridge CFTypeRef)_maxLabelFont.fontName;
+    self.maxLabel.fontSize = _maxLabelFont.pointSize;
 }
 
 -(void)setNumberFormatterOverride:(NSNumberFormatter *)numberFormatterOverride{
