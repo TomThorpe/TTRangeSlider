@@ -56,6 +56,16 @@ IB_DESIGNABLE
 @property (nonatomic, strong) IBInspectable UIColor *maxLabelColour;
 
 /**
+ * The font of the minimum value text label. If not set, the default is system font size 12.
+ */
+@property (nonatomic, strong) IBInspectable UIFont *minLabelFont;
+
+/**
+ * The font of the maximum value text label. If not set, the default is system font size 12.
+ */
+@property (nonatomic, strong) IBInspectable UIFont *maxLabelFont;
+
+/**
  * If true, the control will mimic a normal slider and have only one handle rather than a range.
  * In this case, the selectedMinValue will be not functional anymore. Use selectedMaxValue instead to determine the value the user has selected.
  */
