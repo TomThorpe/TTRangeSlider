@@ -162,8 +162,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [CATransaction setAnimationDuration:0.5];
     [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
     self.sliderLine.backgroundColor = color;
-    self.leftHandle.backgroundColor = color;
-    self.rightHandle.backgroundColor = color;
+    if (self.handleColor == nil) {
+        self.leftHandle.backgroundColor = color;
+        self.rightHandle.backgroundColor = color;
+    }
 
     if (self.minLabelColour == nil){
         self.minLabel.foregroundColor = color;
