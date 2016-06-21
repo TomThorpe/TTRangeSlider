@@ -55,6 +55,7 @@ IB_DESIGNABLE
  */
 @property (nonatomic, strong) IBInspectable UIColor *maxLabelColour;
 
+
 /**
  * The font of the minimum value text label. If not set, the default is system font size 12.
  */
@@ -95,6 +96,16 @@ IB_DESIGNABLE
  *Handle slider with custom color, you can set custom color for your handle
  */
 @property (nonatomic, strong) UIColor *handleColor;
+
+/**
+ *Handle slider with custom border color, you can set custom border color for your handle
+ */
+@property (nonatomic, strong) UIColor *handleBorderColor;
+
+/**
+ *Handle border width (default 0.0)
+ */
+@property (nonatomic, assign) CGFloat handleBorderWidth;
 
 /**
  *Handle diameter (default 16.0)
