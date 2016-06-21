@@ -88,6 +88,11 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable float step;
 
 /**
+ *Set padding between label and handle (default 8.0)
+ */
+@property (nonatomic, assign) IBInspectable CGFloat labelPadding;
+
+/**
  *Handle slider with custom image, you can set custom image for your handle
  */
 @property (nonatomic, strong) UIImage *handleImage;

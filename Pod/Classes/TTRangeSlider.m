@@ -56,6 +56,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _handleBorderWidth = 0.0;
     _handleBorderColor = self.tintColor;
     
+    _labelPadding = 8.0;
+    
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
@@ -241,7 +243,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (void)updateLabelPositions {
     //the centre points for the labels are X = the same x position as the relevant handle. Y = the y position of the handle minus half the height of the text label, minus some padding.
-    int padding = 8;
+    float padding = self.labelPadding;
     float minSpacingBetweenLabels = 8.0f;
 
     CGPoint leftHandleCentre = [self getCentreOfRect:self.leftHandle.frame];
@@ -598,6 +600,11 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(void)setLineHeight:(CGFloat)lineHeight{
     _lineHeight = lineHeight;
     [self setNeedsLayout];
+}
+
+-(void)setLabelPadding:(CGFloat)labelPadding {
+    _labelPadding = labelPadding;
+    [self updateLabelPositions];
 }
 
 @end

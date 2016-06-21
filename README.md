@@ -90,6 +90,8 @@ Set the height of the line. It will automatically round the corners. If not spec
 If set it will update the color of the handle borders. Default is `tintColor`.
 #### `handleBorderWidth`
 If set it will update the size of the handle borders. Default is `0.0`
+#### `labelPadding`
+If set it will update the size of the padding between label and handle. Default is `8.0`
 
 ## Author
 
