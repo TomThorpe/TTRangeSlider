@@ -116,4 +116,9 @@ IB_DESIGNABLE
  */
 @property (nonatomic, assign) CGFloat lineHeight;
 
+/**
+ *Set the slider line betweehn handles' height (default 1.0).
+ */
+@property (nonatomic, assign) CGFloat lineBetweenHandlesHeight;
+
 @end
