@@ -52,6 +52,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _selectedHandleDiameterMultiplier = 1.7;
     
     _lineHeight = 1.0;
+	_lineBetweenHandlesHeight = 1.0;
     
     //draw the slider line
     self.sliderLine = [CALayer layer];
@@ -121,7 +122,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, self.lineHeight);
     
     self.sliderLine.cornerRadius = self.lineHeight / 2.0;
-
+	self.sliderLineBetweenHandles.cornerRadius = self.lineBetweenHandlesHeight / 2.0;
+	
     [self updateLabelValues];
     [self updateHandlePositions];
     [self updateLabelPositions];
@@ -222,14 +224,24 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 #pragma mark - Set Positions
 - (void)updateHandlePositions {
-    CGPoint leftHandleCenter = CGPointMake([self getXPositionAlongLineForValue:self.selectedMinimum], CGRectGetMidY(self.sliderLine.frame));
-    self.leftHandle.position = leftHandleCenter;
+	
+	CGFloat linePositionY = self.sliderLine.frame.origin.y;
+	
+	linePositionY += (self.sliderLine.frame.size.height - self.lineBetweenHandlesHeight) / 2;
+	
+	CGFloat handleCenterY = linePositionY + (self.lineBetweenHandlesHeight / 2);
+	
+    CGPoint leftHandleCenter = CGPointMake([self getXPositionAlongLineForValue:self.selectedMinimum], handleCenterY);
 
-    CGPoint rightHandleCenter = CGPointMake([self getXPositionAlongLineForValue:self.selectedMaximum], CGRectGetMidY(self.sliderLine.frame));
-    self.rightHandle.position= rightHandleCenter;
-    
-    //positioning for the dist slider line
-    self.sliderLineBetweenHandles.frame = CGRectMake(self.leftHandle.position.x, self.sliderLine.frame.origin.y, self.rightHandle.position.x-self.leftHandle.position.x, self.lineHeight);
+    CGPoint rightHandleCenter = CGPointMake([self getXPositionAlongLineForValue:self.selectedMaximum], handleCenterY);
+	
+	//update the handle first to prevent strange animations
+	
+	self.leftHandle.position = leftHandleCenter;
+	
+    self.rightHandle.position = rightHandleCenter;
+	
+	self.sliderLineBetweenHandles.frame = CGRectMake(self.leftHandle.position.x, linePositionY, self.rightHandle.position.x-self.leftHandle.position.x, self.lineBetweenHandlesHeight);
 }
 
 - (void)updateLabelPositions {
@@ -550,8 +562,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.rightHandle.frame = startFrame;
     
     //Force layer background to transparant
-    self.leftHandle.backgroundColor = [[UIColor clearColor] CGColor];
-    self.rightHandle.backgroundColor = [[UIColor clearColor] CGColor];
+	self.handleColor = [UIColor clearColor];
 }
 
 -(void)setHandleColor:(UIColor *)handleColor{
@@ -578,7 +589,13 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 -(void)setLineHeight:(CGFloat)lineHeight{
     _lineHeight = lineHeight;
+	_lineBetweenHandlesHeight = lineHeight;
     [self setNeedsLayout];
+}
+
+-(void)setLineBetweenHandlesHeight:(CGFloat)lineBetweenHandlesHeight{
+	_lineBetweenHandlesHeight = lineBetweenHandlesHeight;
+	[self setNeedsLayout];
 }
 
 @end

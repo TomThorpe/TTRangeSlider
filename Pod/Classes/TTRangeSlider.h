@@ -112,8 +112,13 @@ IB_DESIGNABLE
 @property (nonatomic, strong) UIColor *tintColorBetweenHandles;
 
 /**
- *Set the slider line height (default 1.0)
+ *Set the slider line height (default 1.0). Will reset @p lineBetweenHandlesHeight on assignment.
  */
 @property (nonatomic, assign) CGFloat lineHeight;
+
+/**
+ *Set the slider line between handles' height (default 1.0). Will be reset each time @p lineHeight is reset.
+ */
+@property (nonatomic, assign) CGFloat lineBetweenHandlesHeight;
 
 @end

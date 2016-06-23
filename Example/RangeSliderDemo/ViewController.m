@@ -44,12 +44,17 @@
     self.rangeSliderCustom.delegate = self;
     self.rangeSliderCustom.minValue = 0;
     self.rangeSliderCustom.maxValue = 100;
-    self.rangeSliderCustom.selectedMinimum = 40;
-    self.rangeSliderCustom.selectedMaximum = 60;
+	
+	self.rangeSliderCustom.selectedMinimum = 40;
+	self.rangeSliderCustom.selectedMaximum = 60;
+	
     self.rangeSliderCustom.handleImage = [UIImage imageNamed:@"custom-handle"];
     self.rangeSliderCustom.selectedHandleDiameterMultiplier = 1;
     self.rangeSliderCustom.tintColorBetweenHandles = [UIColor redColor];
-    self.rangeSliderCustom.lineHeight = 10;
+	
+	self.rangeSliderCustom.lineHeight = 7;
+	self.rangeSliderCustom.lineBetweenHandlesHeight = 10;
+	
     NSNumberFormatter *customFormatter = [[NSNumberFormatter alloc] init];
     customFormatter.positiveSuffix = @"B";
     self.rangeSliderCustom.numberFormatterOverride = customFormatter;
