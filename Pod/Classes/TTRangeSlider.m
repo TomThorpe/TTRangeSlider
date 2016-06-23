@@ -562,8 +562,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.rightHandle.frame = startFrame;
     
     //Force layer background to transparant
-    self.leftHandle.backgroundColor = [[UIColor clearColor] CGColor];
-    self.rightHandle.backgroundColor = [[UIColor clearColor] CGColor];
+	self.handleColor = [UIColor clearColor];
 }
 
 -(void)setHandleColor:(UIColor *)handleColor{
