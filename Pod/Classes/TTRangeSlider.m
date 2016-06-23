@@ -225,7 +225,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 #pragma mark - Set Positions
 - (void)updateHandlePositions {
 	
-	CGFloat linePositionY = self.sliderLine.frame.origin.y;
+	CGFloat linePositionY = self.sliderLine.frame.origin.y;		
 	
 	linePositionY += (self.sliderLine.frame.size.height - self.lineBetweenHandlesHeight) / 2;
 	
@@ -241,7 +241,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 	
     self.rightHandle.position = rightHandleCenter;
 	
-	self.sliderLineBetweenHandles.frame = CGRectMake(self.leftHandle.position.x, handleCenterY, self.rightHandle.position.x-self.leftHandle.position.x, self.lineBetweenHandlesHeight);
+	self.sliderLineBetweenHandles.frame = CGRectMake(self.leftHandle.position.x, linePositionY, self.rightHandle.position.x-self.leftHandle.position.x, self.lineBetweenHandlesHeight);
 }
 
 - (void)updateLabelPositions {
