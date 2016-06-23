@@ -225,7 +225,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 #pragma mark - Set Positions
 - (void)updateHandlePositions {
 	
-	CGFloat linePositionY = self.sliderLine.frame.origin.y;		
+	CGFloat linePositionY = self.sliderLine.frame.origin.y;
 	
 	linePositionY += (self.sliderLine.frame.size.height - self.lineBetweenHandlesHeight) / 2;
 	
@@ -590,6 +590,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 -(void)setLineHeight:(CGFloat)lineHeight{
     _lineHeight = lineHeight;
+	_lineBetweenHandlesHeight = lineHeight;
     [self setNeedsLayout];
 }
 
