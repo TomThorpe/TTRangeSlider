@@ -86,6 +86,12 @@ If set it will update the size of the handles. Default is `16.0`.
 If set it update the scaling factor of the handle when selected. Default is `1.7`. If you don't want any scaling, set it to `1.0`.
 #### `lineHeight`
 Set the height of the line. It will automatically round the corners. If not specified, the default value will be `1.0`.
+#### `handleBorderColor`
+If set it will update the color of the handle borders. Default is `tintColor`.
+#### `handleBorderWidth`
+If set it will update the size of the handle borders. Default is `0.0`
+#### `labelPadding`
+If set it will update the size of the padding between label and handle. Default is `8.0`
 
 ## Author
 

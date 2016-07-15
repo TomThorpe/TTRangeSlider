@@ -53,6 +53,11 @@ static const CGFloat kLabelsFontSize = 12.0f;
     
     _lineHeight = 1.0;
     
+    _handleBorderWidth = 0.0;
+    _handleBorderColor = self.tintColor;
+    
+    _labelPadding = 8.0;
+    
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
@@ -67,12 +72,16 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.leftHandle = [CALayer layer];
     self.leftHandle.cornerRadius = self.handleDiameter / 2;
     self.leftHandle.backgroundColor = self.tintColor.CGColor;
+    self.leftHandle.borderWidth = self.handleBorderWidth;
+    self.leftHandle.borderColor = self.handleBorderColor.CGColor;
     [self.layer addSublayer:self.leftHandle];
 
     //draw the maximum slider handle
     self.rightHandle = [CALayer layer];
     self.rightHandle.cornerRadius = self.handleDiameter / 2;
     self.rightHandle.backgroundColor = self.tintColor.CGColor;
+    self.rightHandle.borderWidth = self.handleBorderWidth;
+    self.rightHandle.borderColor = self.handleBorderColor.CGColor;
     [self.layer addSublayer:self.rightHandle];
 
     self.leftHandle.frame = CGRectMake(0, 0, self.handleDiameter, self.handleDiameter);
@@ -234,7 +243,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (void)updateLabelPositions {
     //the centre points for the labels are X = the same x position as the relevant handle. Y = the y position of the handle minus half the height of the text label, minus some padding.
-    int padding = 8;
+    float padding = self.labelPadding;
     float minSpacingBetweenLabels = 8.0f;
 
     CGPoint leftHandleCentre = [self getCentreOfRect:self.leftHandle.frame];
@@ -560,6 +569,18 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.rightHandle.backgroundColor = [handleColor CGColor];
 }
 
+-(void)setHandleBorderColor:(UIColor *)handleBorderColor{
+    _handleBorderColor = handleBorderColor;
+    self.leftHandle.borderColor = [handleBorderColor CGColor];
+    self.rightHandle.borderColor = [handleBorderColor CGColor];
+}
+
+-(void)setHandleBorderWidth:(CGFloat)handleBorderWidth{
+    _handleBorderWidth = handleBorderWidth;
+    self.leftHandle.borderWidth = handleBorderWidth;
+    self.rightHandle.borderWidth = handleBorderWidth;
+}
+
 -(void)setHandleDiameter:(CGFloat)handleDiameter{
     _handleDiameter = handleDiameter;
     
@@ -579,6 +600,11 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(void)setLineHeight:(CGFloat)lineHeight{
     _lineHeight = lineHeight;
     [self setNeedsLayout];
+}
+
+-(void)setLabelPadding:(CGFloat)labelPadding {
+    _labelPadding = labelPadding;
+    [self updateLabelPositions];
 }
 
 @end
