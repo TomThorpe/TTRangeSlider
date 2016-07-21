@@ -119,6 +119,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.maxLabelFont = [UIFont systemFontOfSize:kLabelsFontSize];
     [self.layer addSublayer:self.maxLabel];
 
+    // TODO Create a bundle that allows localization of default accessibility labels and hints
     if (!self.minLabelAccessibilityLabel || self.minLabelAccessibilityLabel.length == 0) {
       self.minLabelAccessibilityLabel = @"Left Handle";
     }
