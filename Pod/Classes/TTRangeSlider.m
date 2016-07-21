@@ -119,6 +119,22 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.maxLabelFont = [UIFont systemFontOfSize:kLabelsFontSize];
     [self.layer addSublayer:self.maxLabel];
 
+    if (!self.minLabelAccessibilityLabel || self.minLabelAccessibilityLabel.length == 0) {
+      self.minLabelAccessibilityLabel = @"Left Handle";
+    }
+  
+    if (!self.minLabelAccessibilityHint || self.minLabelAccessibilityHint.length == 0) {
+      self.minLabelAccessibilityHint = @"Minimum value in slider";
+    }
+  
+    if (!self.maxLabelAccessibilityLabel || self.maxLabelAccessibilityLabel.length == 0) {
+      self.maxLabelAccessibilityLabel = @"Right Handle";
+    }
+  
+    if (!self.maxLabelAccessibilityHint || self.maxLabelAccessibilityHint.length == 0) {
+      self.maxLabelAccessibilityHint = @"Maximum value in slider";
+    }
+  
     [self refresh];
 }
 
@@ -659,8 +675,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
 {
   UIAccessibilityElement *element = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self];
   element.isAccessibilityElement = YES;
-  element.accessibilityLabel = @"Left Handle";
-  element.accessibilityHint = @"Minimum value in slider";
+  element.accessibilityLabel = self.minLabelAccessibilityLabel;
+  element.accessibilityHint = self.minLabelAccessibilityHint;
   element.accessibilityValue = self.minLabel.string;
   element.accessibilityFrame = [self convertRect:self.leftHandle.frame toView:nil];
   element.accessibilityTraits = UIAccessibilityTraitAdjustable;
@@ -671,8 +687,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
 {
   UIAccessibilityElement *element = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self];
   element.isAccessibilityElement = YES;
-  element.accessibilityLabel = @"Right Handle";
-  element.accessibilityHint = @"Maximum value in slider";
+  element.accessibilityLabel = self.maxLabelAccessibilityLabel;
+  element.accessibilityHint = self.maxLabelAccessibilityHint;
   element.accessibilityValue = self.maxLabel.string;
   element.accessibilityFrame = [self convertRect:self.rightHandle.frame toView:nil];
   element.accessibilityTraits = UIAccessibilityTraitAdjustable;
