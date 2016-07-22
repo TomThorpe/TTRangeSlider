@@ -366,8 +366,13 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     //update the delegate
     if (self.delegate && (self.leftHandleSelected || self.rightHandleSelected)){
-        float max = (self.allowInfiniteSelectedMax) ? INFINITY : self.selectedMaximum;
-        [self.delegate rangeSlider:self didChangeSelectedMinimumValue:self.selectedMinimum andMaximumValue:max];
+      if (self.allowInfiniteSelectedMax &&
+          [NSNumber numberWithFloat:self.selectedMaximum] == [NSNumber numberWithFloat:self.maxValue]) {
+        [self.delegate rangeSlider:self didChangeSelectedMinimumValue:self.selectedMinimum andMaximumValue:INFINITY];
+      } else {
+        [self.delegate rangeSlider:self didChangeSelectedMinimumValue:self.selectedMinimum andMaximumValue:self.selectedMaximum];
+      }
+      
     }
 }
 
