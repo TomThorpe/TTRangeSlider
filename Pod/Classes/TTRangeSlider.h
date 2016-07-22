@@ -35,6 +35,11 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable float selectedMaximum;
 
 /**
+ * Appends + to the end of maxLabel and returns infinity. Does not return maxValue and inf, just inf. The default value is NO
+ */
+@property (nonatomic, assign) IBInspectable BOOL allowInfiniteSelectedMax;
+
+/**
  * Each handle in the slider has a label above it showing the current selected value. By default, this is displayed as a decimal format.
  * You can override this default here by supplying your own NSNumberFormatter. For example, you could supply an NSNumberFormatter that has a currency style, or a prefix or suffix.
  * If this property is nil, the default decimal format will be used. Note: If you want no labels at all, please use the hideLabels flag. */
