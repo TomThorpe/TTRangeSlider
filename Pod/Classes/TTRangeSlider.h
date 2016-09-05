@@ -55,7 +55,6 @@ IB_DESIGNABLE
  */
 @property (nonatomic, strong) IBInspectable UIColor *maxLabelColour;
 
-
 /**
  * The font of the minimum value text label. If not set, the default is system font size 12.
  */
@@ -88,11 +87,6 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable float step;
 
 /**
- *Set padding between label and handle (default 8.0)
- */
-@property (nonatomic, assign) IBInspectable CGFloat labelPadding;
-
-/**
  *Handle slider with custom image, you can set custom image for your handle
  */
 @property (nonatomic, strong) UIImage *handleImage;
@@ -101,16 +95,6 @@ IB_DESIGNABLE
  *Handle slider with custom color, you can set custom color for your handle
  */
 @property (nonatomic, strong) UIColor *handleColor;
-
-/**
- *Handle slider with custom border color, you can set custom border color for your handle
- */
-@property (nonatomic, strong) UIColor *handleBorderColor;
-
-/**
- *Handle border width (default 0.0)
- */
-@property (nonatomic, assign) CGFloat handleBorderWidth;
 
 /**
  *Handle diameter (default 16.0)
@@ -131,5 +115,10 @@ IB_DESIGNABLE
  *Set the slider line height (default 1.0)
  */
 @property (nonatomic, assign) CGFloat lineHeight;
+
+/**
+ *Set the slider labels padding (default 8.0)
+ */
+@property (nonatomic, assign) CGFloat labelPadding;
 
 @end
