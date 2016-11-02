@@ -104,6 +104,9 @@ typedef enum {
 @property (nonatomic, assign) IBInspectable BOOL verticalBar;
 
 /**
+ *Set the slider line height (default 1.0)
+ */
+@property (nonatomic, assign) IBInspectable CGFloat lineHeight;
 
 /**
  *Sets the alignment of the bar
