@@ -99,7 +99,7 @@ typedef enum {
 @property (nonatomic, assign) IBInspectable CGFloat labelPadding;
 
 /**
- *Set if the ber should be vertical
+ *Set if the bar should be vertical
  */
 @property (nonatomic, assign) IBInspectable BOOL verticalBar;
 

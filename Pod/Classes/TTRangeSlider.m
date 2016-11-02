@@ -46,7 +46,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     _enableStep = NO;
     _verticalBar = NO;
-    _alignment = 0; //Left
+    _alignment = Left;
+    _lineStyleLeft = None;
+    _lineStyleRight = None;
+    
     _step = 0.1f;
 
     _hideLabels = NO;
