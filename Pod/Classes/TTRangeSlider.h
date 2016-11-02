@@ -116,6 +116,7 @@ typedef enum {
  * 2 = Right / Bottom
  */
 @property (nonatomic, assign) IBInspectable NSInteger alignment;
+/**
  *Handle slider with custom image, you can set custom image for your handle
  */
 @property (nonatomic, strong) UIImage *handleImage;
