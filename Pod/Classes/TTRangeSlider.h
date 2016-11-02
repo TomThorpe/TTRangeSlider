@@ -151,9 +151,5 @@ typedef enum {
  */
 @property (nonatomic, strong) UIColor *tintColorBetweenHandles;
 
-/**
- *Set the slider line height (default 1.0)
- */
-@property (nonatomic, assign) CGFloat lineHeight;
 
 @end
