@@ -13,6 +13,7 @@ const float TEXT_HEIGHT = 14;
 @property (nonatomic, strong) CALayer *sliderLine;
 @property (nonatomic, strong) CALayer *sliderLineBetweenHandles;
 
+//If the Range bar is vertical left = lower
 @property (nonatomic, strong) CALayer *leftHandle;
 @property (nonatomic, assign) BOOL leftHandleSelected;
 @property (nonatomic, strong) CALayer *rightHandle;
@@ -44,6 +45,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _maxDistance = -1;
 
     _enableStep = NO;
+    _verticalBar = NO;
+    _alignment = 0; //Left
     _step = 0.1f;
 
     _hideLabels = NO;
@@ -128,13 +131,41 @@ static const CGFloat kLabelsFontSize = 12.0f;
     CGPoint lineLeftSide = CGPointMake(barSidePadding, yMiddle);
     CGPoint lineRightSide = CGPointMake(currentFrame.size.width-barSidePadding, yMiddle);
     self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, self.lineHeight);
+    if(self.verticalBar) {
+        float alignment = [self findHandleAlignment:currentFrame.size.width usingPadding:barSidePadding];
+        CGPoint lineLeftSide = CGPointMake(alignment, barSidePadding);
+        CGPoint lineRightSide = CGPointMake(alignment, currentFrame.size.height-barSidePadding);
+        self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, self.lineHeight, lineRightSide.y-lineLeftSide.y);
+    } else {
+        float alignment = [self findHandleAlignment:currentFrame.size.height usingPadding:barSidePadding];
+        CGPoint lineLeftSide = CGPointMake(barSidePadding, alignment);
+        CGPoint lineRightSide = CGPointMake(currentFrame.size.width-barSidePadding, alignment);
+        self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, self.lineHeight);
+        self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, self.lineHeight, lineRightSide.y-lineLeftSide.y);
+        self.leftHandleLine.frame = CGRectMake(0, 0, self.lineStyleHeight, currentFrame.size.height);
+        self.rightHandleLine.frame = CGRectMake(0, 0, self.lineStyleHeight, currentFrame.size.height);
+    }
     
     self.sliderLine.cornerRadius = self.lineHeight / 2.0;
-
+    
     [self updateLabelValues];
     [self updateHandlePositions];
     [self updateLabelPositions];
 }
+
+- (float)findHandleAlignment:(CGFloat)lineLength usingPadding:(float)padding {
+    switch (self.alignment) {
+        case Left: //Left / Top
+            return padding;
+        case Center: //Center
+            return lineLength/2.0;
+        case Right: //Right / Bottom
+            return lineLength - padding;
+        default:
+            return lineLength/2.0;
+    }
+}
+
 
 - (id)initWithCoder:(NSCoder *)aCoder
 {
@@ -200,6 +231,22 @@ static const CGFloat kLabelsFontSize = 12.0f;
     return valueSubtracted / maxMinDif;
 }
 
+- (float)getYPositionAlongLineForValue:(float) value {
+    //first get the percentage along the line for the value
+    //get the difference between the maximum and minimum values (e.g if max was 100, and min was 50, difference is 50)
+    float maxMinDif = self.maxValue - self.minValue;
+    float percentage = [self getPercentageAlongLineForValue:maxMinDif - value];
+    
+    //get the difference between the maximum and minimum coordinate position x values (e.g if max was x = 310, and min was x=10, difference is 300)
+    float maxMinDifxy = CGRectGetMaxY(self.sliderLine.frame) - CGRectGetMinY(self.sliderLine.frame);
+    
+    //now multiply the percentage by the minMaxDif to see how far along the line the point should be, and add it onto the minimum x position.
+    float offset = percentage * maxMinDifxy;
+    
+    return CGRectGetMinY(self.sliderLine.frame) + offset;
+}
+
+
 - (float)getXPositionAlongLineForValue:(float) value {
     //first get the percentage along the line for the value
     float percentage = [self getPercentageAlongLineForValue:value];
@@ -230,7 +277,24 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 #pragma mark - Set Positions
+- (void)updateVerticalHandlePositions {
+    CGPoint leftHandleCenter = CGPointMake(CGRectGetMidX(self.sliderLine.frame), [self getYPositionAlongLineForValue:self.selectedMinimum]);
+    self.leftHandle.position = leftHandleCenter;
+    self.leftHandle.zPosition = 1;
+    
+    CGPoint rightHandleCenter = CGPointMake(CGRectGetMidX(self.sliderLine.frame), [self getYPositionAlongLineForValue:self.selectedMaximum]);
+    self.rightHandle.position = rightHandleCenter;
+    self.rightHandle.zPosition = 1;
+    
+    //positioning for the dist slider line
+    self.sliderLineBetweenHandles.frame = CGRectMake(self.sliderLine.frame.origin.x, self.leftHandle.position.y, self.lineHeight, self.rightHandle.position.y-self.leftHandle.position.y);
+}
 - (void)updateHandlePositions {
+    if (_verticalBar) {
+        [self updateVerticalHandlePositions];
+        return;
+    }
+    
     CGPoint leftHandleCenter = CGPointMake([self getXPositionAlongLineForValue:self.selectedMinimum], CGRectGetMidY(self.sliderLine.frame));
     self.leftHandle.position = leftHandleCenter;
 
@@ -290,7 +354,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     if (CGRectContainsPoint(CGRectInset(self.leftHandle.frame, HANDLE_TOUCH_AREA_EXPANSION, HANDLE_TOUCH_AREA_EXPANSION), gesturePressLocation) || CGRectContainsPoint(CGRectInset(self.rightHandle.frame, HANDLE_TOUCH_AREA_EXPANSION, HANDLE_TOUCH_AREA_EXPANSION), gesturePressLocation))
     {
-        //the touch was inside one of the handles so we're definitely going to start movign one of them. But the handles might be quite close to each other, so now we need to find out which handle the touch was closest too, and activate that one.
+        //the touch was inside one of the handles so we're definitely going to start moving one of them. But the handles might be quite close to each other, so now we need to find out which handle the touch was closest too, and activate that one.
         float distanceFromLeftHandle = [self distanceBetweenPoint:gesturePressLocation andPoint:[self getCentreOfRect:self.leftHandle.frame]];
         float distanceFromRightHandle =[self distanceBetweenPoint:gesturePressLocation andPoint:[self getCentreOfRect:self.rightHandle.frame]];
 
@@ -368,32 +432,47 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     CGPoint location = [touch locationInView:self];
 
+    float percentage, handlePercentage;
     //find out the percentage along the line we are in x coordinate terms (subtracting half the frames width to account for moving the middle of the handle, not the left hand side)
-    float percentage = ((location.x-CGRectGetMinX(self.sliderLine.frame)) - self.handleDiameter/2) / (CGRectGetMaxX(self.sliderLine.frame) - CGRectGetMinX(self.sliderLine.frame));
-
+    if(self.verticalBar) {
+        percentage = 1.00 - ((location.y-CGRectGetMinY(self.sliderLine.frame)) - self.handleDiameter/2) / self.sliderLine.frame.size.height;
+        handlePercentage = self.handleDiameter / self.sliderLine.frame.size.height;
+    } else {
+        percentage = ((location.x-CGRectGetMinX(self.sliderLine.frame)) - self.handleDiameter/2) / self.sliderLine.frame.size.width;
+        handlePercentage = self.handleDiameter / self.sliderLine.frame.size.width;
+    }
     //multiply that percentage by self.maxValue to get the new selected minimum value
     float selectedValue = percentage * (self.maxValue - self.minValue) + self.minValue;
+    float handleBuffer = handlePercentage * (self.maxValue - self.minValue) + self.minValue;
 
-    if (self.leftHandleSelected)
-    {
-        if (selectedValue < self.selectedMaximum){
+    if (self.leftHandleSelected) {
+        //Should probably stop the values from going off the end
+        if (selectedValue + handleBuffer > self.maxValue) {
+            self.selectedMinimum = self.selectedMaximum - handleBuffer;
+        } else {
             self.selectedMinimum = selectedValue;
+        
+            if (selectedValue + handleBuffer >= self.selectedMaximum) {
+                self.selectedMaximum = self.selectedMinimum + handleBuffer;
+            }
         }
-        else {
-            self.selectedMinimum = self.selectedMaximum;
-        }
-
-    }
-    else if (self.rightHandleSelected)
-    {
-        if (selectedValue > self.selectedMinimum || (self.disableRange && selectedValue >= self.minValue)){ //don't let the dots cross over, (unless range is disabled, in which case just dont let the dot fall off the end of the screen)
+    } else if (self.rightHandleSelected) {
+        if (self.disableRange && selectedValue >= self.minValue){ //if range is disabled, dont let the dot fall off the end of the screen)
             self.selectedMaximum = selectedValue;
+            return YES;
         }
-        else {
-            self.selectedMaximum = self.selectedMinimum;
+
+        if (selectedValue - handleBuffer < self.minValue) {
+            self.selectedMaximum = self.selectedMinimum + handleBuffer;
+        } else {
+            self.selectedMaximum = selectedValue;
+            
+            if (selectedValue - handleBuffer <= self.selectedMinimum) {
+                self.selectedMinimum = self.selectedMaximum - handleBuffer;
+            }
         }
     }
-
+    
     //no need to refresh the view because it is done as a sideeffect of setting the property
 
     return YES;
@@ -414,30 +493,20 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 #pragma mark - Animation
 - (void)animateHandle:(CALayer*)handle withSelection:(BOOL)selected {
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0.15];
+    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
+    
     if (selected){
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:0.3];
-        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
         handle.transform = CATransform3DMakeScale(self.selectedHandleDiameterMultiplier, self.selectedHandleDiameterMultiplier, 1);
-
-        //the label above the handle will need to move too if the handle changes size
-        [self updateLabelPositions];
-
-        [CATransaction setCompletionBlock:^{
-        }];
-        [CATransaction commit];
-
     } else {
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:0.3];
-        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
         handle.transform = CATransform3DIdentity;
-
-        //the label above the handle will need to move too if the handle changes size
-        [self updateLabelPositions];
-
-        [CATransaction commit];
     }
+    
+    //the label above the handle will need to move too if the handle changes size
+    [self updateLabelPositions];
+    
+    [CATransaction commit];
 }
 
 #pragma mark - Calculating nearest handle to point
@@ -589,7 +658,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
     
     self.leftHandle.frame = CGRectMake(0, 0, self.handleDiameter, self.handleDiameter);
     self.rightHandle.frame = CGRectMake(0, 0, self.handleDiameter, self.handleDiameter);
-
 }
 
 -(void)setTintColorBetweenHandles:(UIColor *)tintColorBetweenHandles{
@@ -605,6 +673,14 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(void)setLabelPadding:(CGFloat)labelPadding {
     _labelPadding = labelPadding;
     [self updateLabelPositions];
+}
+
+-(void)setAlignment:(NSInteger)alignment {
+    _alignment = alignment;
+}
+
+-(void)setVerticalBar:(BOOL)verticalBar {
+    _verticalBar = verticalBar;
 }
 
 @end
