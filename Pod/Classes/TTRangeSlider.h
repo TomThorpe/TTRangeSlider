@@ -10,6 +10,12 @@
 IB_DESIGNABLE
 @interface TTRangeSlider : UIControl <UIGestureRecognizerDelegate>
 
+typedef enum {
+    Left = 0,
+    Center = 1,
+    Right = 2
+} Alignment;
+
 @property (nonatomic, weak) IBOutlet id<TTRangeSliderDelegate> delegate;
 
 /**
@@ -93,6 +99,24 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable CGFloat labelPadding;
 
 /**
+ *Set if the bar should be vertical
+ */
+@property (nonatomic, assign) IBInspectable BOOL verticalBar;
+
+/**
+ *Set the slider line height (default 1.0)
+ */
+@property (nonatomic, assign) IBInspectable CGFloat lineHeight;
+
+/**
+ *Sets the alignment of the bar
+ *Unfortuantely enums can't be used as IBInspectable, so I guess we'll have to use Ints
+ * 0 = Left / Top
+ * 1 = Center (Defualt)
+ * 2 = Right / Bottom
+ */
+@property (nonatomic, assign) IBInspectable NSInteger alignment;
+/**
  *Handle slider with custom image, you can set custom image for your handle
  */
 @property (nonatomic, strong) UIImage *handleImage;
@@ -127,9 +151,5 @@ IB_DESIGNABLE
  */
 @property (nonatomic, strong) UIColor *tintColorBetweenHandles;
 
-/**
- *Set the slider line height (default 1.0)
- */
-@property (nonatomic, assign) CGFloat lineHeight;
 
 @end
