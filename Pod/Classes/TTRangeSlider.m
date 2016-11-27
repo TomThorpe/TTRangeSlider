@@ -26,6 +26,10 @@ const float TEXT_HEIGHT = 14;
 
 @property (nonatomic, strong) NSNumberFormatter *decimalNumberFormatter; // Used to format values if formatType is YLRangeSliderFormatTypeDecimal
 
+// strong reference needed for UIAccessibilityContainer
+// see http://stackoverflow.com/questions/13462046/custom-uiview-not-showing-accessibility-on-voice-over
+@property (nonatomic, strong) NSMutableArray *accessibleElements;
+
 @end
 
 static const CGFloat kLabelsFontSize = 12.0f;
@@ -115,6 +119,23 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.maxLabelFont = [UIFont systemFontOfSize:kLabelsFontSize];
     [self.layer addSublayer:self.maxLabel];
 
+    // TODO Create a bundle that allows localization of default accessibility labels and hints
+    if (!self.minLabelAccessibilityLabel || self.minLabelAccessibilityLabel.length == 0) {
+      self.minLabelAccessibilityLabel = @"Left Handle";
+    }
+  
+    if (!self.minLabelAccessibilityHint || self.minLabelAccessibilityHint.length == 0) {
+      self.minLabelAccessibilityHint = @"Minimum value in slider";
+    }
+  
+    if (!self.maxLabelAccessibilityLabel || self.maxLabelAccessibilityLabel.length == 0) {
+      self.maxLabelAccessibilityLabel = @"Right Handle";
+    }
+  
+    if (!self.maxLabelAccessibilityHint || self.maxLabelAccessibilityHint.length == 0) {
+      self.maxLabelAccessibilityHint = @"Maximum value in slider";
+    }
+  
     [self refresh];
 }
 
@@ -227,6 +248,12 @@ static const CGFloat kLabelsFontSize = 12.0f;
     
     self.minLabelTextSize = [self.minLabel.string sizeWithAttributes:@{NSFontAttributeName:self.minLabelFont}];
     self.maxLabelTextSize = [self.maxLabel.string sizeWithAttributes:@{NSFontAttributeName:self.maxLabelFont}];
+}
+
+- (void)updateAccessibilityElements {
+  [_accessibleElements removeAllObjects];
+  [_accessibleElements addObject:[self leftHandleAccessibilityElement]];
+  [_accessibleElements addObject:[self rightHandleAccessbilityElement]];
 }
 
 #pragma mark - Set Positions
@@ -357,6 +384,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [self updateLabelPositions];
     [CATransaction commit];
     [self updateLabelValues];
+    [self updateAccessibilityElements];
 
     //update the delegate
     if (self.delegate && (self.leftHandleSelected || self.rightHandleSelected)){
@@ -605,6 +633,67 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(void)setLabelPadding:(CGFloat)labelPadding {
     _labelPadding = labelPadding;
     [self updateLabelPositions];
+}
+
+#pragma mark - UIAccessibility
+
+- (BOOL)isAccessibilityElement
+{
+  return NO;
+}
+
+#pragma mark - UIAccessibilityContainer Protocol
+
+- (NSArray *)accessibleElements
+{
+  if(_accessibleElements != nil) {
+    return _accessibleElements;
+  }
+  
+  _accessibleElements = [[NSMutableArray alloc] init];
+  [_accessibleElements addObject:[self leftHandleAccessibilityElement]];
+  [_accessibleElements addObject:[self rightHandleAccessbilityElement]];
+  
+  return _accessibleElements;
+}
+
+- (NSInteger)accessibilityElementCount
+{
+  return [[self accessibleElements] count];
+}
+
+- (id)accessibilityElementAtIndex:(NSInteger)index
+{
+  return [[self accessibleElements] objectAtIndex:index];
+}
+
+- (NSInteger)indexOfAccessibilityElement:(id)element
+{
+  return [[self accessibleElements] indexOfObject:element];
+}
+
+- (UIAccessibilityElement *)leftHandleAccessibilityElement
+{
+  UIAccessibilityElement *element = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self];
+  element.isAccessibilityElement = YES;
+  element.accessibilityLabel = self.minLabelAccessibilityLabel;
+  element.accessibilityHint = self.minLabelAccessibilityHint;
+  element.accessibilityValue = self.minLabel.string;
+  element.accessibilityFrame = [self convertRect:self.leftHandle.frame toView:nil];
+  element.accessibilityTraits = UIAccessibilityTraitAdjustable;
+  return element;
+}
+
+- (UIAccessibilityElement *)rightHandleAccessbilityElement
+{
+  UIAccessibilityElement *element = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self];
+  element.isAccessibilityElement = YES;
+  element.accessibilityLabel = self.maxLabelAccessibilityLabel;
+  element.accessibilityHint = self.maxLabelAccessibilityHint;
+  element.accessibilityValue = self.maxLabel.string;
+  element.accessibilityFrame = [self convertRect:self.rightHandle.frame toView:nil];
+  element.accessibilityTraits = UIAccessibilityTraitAdjustable;
+  return element;
 }
 
 @end
