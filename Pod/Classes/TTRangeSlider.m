@@ -509,6 +509,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
         self.minLabel.hidden = YES;
     } else {
         self.leftHandle.hidden = NO;
+        self.minLabel.hidden = NO;
     }
 }
 
