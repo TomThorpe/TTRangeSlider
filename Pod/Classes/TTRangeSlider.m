@@ -29,7 +29,18 @@ const float TEXT_HEIGHT = 14;
 // strong reference needed for UIAccessibilityContainer
 // see http://stackoverflow.com/questions/13462046/custom-uiview-not-showing-accessibility-on-voice-over
 @property (nonatomic, strong) NSMutableArray *accessibleElements;
+@end
 
+/**
+ An accessibility element that increments and decrements the left slider
+ */
+@interface TTRangeSliderLeftElement : UIAccessibilityElement
+@end
+
+/**
+ An accessibility element that increments and decrements the right slider
+ */
+@interface TTRangeSliderRightElement : UIAccessibilityElement
 @end
 
 static const CGFloat kLabelsFontSize = 12.0f;
@@ -675,7 +686,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (UIAccessibilityElement *)leftHandleAccessibilityElement
 {
-  UIAccessibilityElement *element = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self];
+  TTRangeSliderLeftElement *element = [[TTRangeSliderLeftElement alloc] initWithAccessibilityContainer:self];
   element.isAccessibilityElement = YES;
   element.accessibilityLabel = self.minLabelAccessibilityLabel;
   element.accessibilityHint = self.minLabelAccessibilityHint;
@@ -687,7 +698,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (UIAccessibilityElement *)rightHandleAccessbilityElement
 {
-  UIAccessibilityElement *element = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self];
+  TTRangeSliderRightElement *element = [[TTRangeSliderRightElement alloc] initWithAccessibilityContainer:self];
   element.isAccessibilityElement = YES;
   element.accessibilityLabel = self.maxLabelAccessibilityLabel;
   element.accessibilityHint = self.maxLabelAccessibilityHint;
@@ -698,3 +709,36 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 @end
+
+@implementation TTRangeSliderLeftElement
+
+- (void)accessibilityIncrement {
+  TTRangeSlider* slider = (TTRangeSlider*)self.accessibilityContainer;
+  slider.selectedMinimum += slider.step;
+  self.accessibilityValue = slider.minLabel.string;
+}
+
+- (void)accessibilityDecrement {
+  TTRangeSlider* slider = (TTRangeSlider*)self.accessibilityContainer;
+  slider.selectedMinimum -= slider.step;
+  self.accessibilityValue = slider.minLabel.string;
+}
+
+@end
+
+@implementation TTRangeSliderRightElement
+
+- (void)accessibilityIncrement {
+  TTRangeSlider* slider = (TTRangeSlider*)self.accessibilityContainer;
+  slider.selectedMaximum += slider.step;
+  self.accessibilityValue = slider.maxLabel.string;
+}
+
+- (void)accessibilityDecrement {
+  TTRangeSlider* slider = (TTRangeSlider*)self.accessibilityContainer;
+  slider.selectedMaximum -= slider.step;
+  self.accessibilityValue = slider.maxLabel.string;
+}
+
+@end
+
