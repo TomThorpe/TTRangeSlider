@@ -54,6 +54,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _selectedMinimum = 10;
     _maxValue = 100;
     _selectedMaximum  = 90;
+    _allowInfiniteSelectedMax = NO;
 
     _minDistance = -1;
     _maxDistance = -1;
@@ -245,6 +246,11 @@ static const CGFloat kLabelsFontSize = 12.0f;
     return CGRectGetMinX(self.sliderLine.frame) + offset;
 }
 
+- (BOOL)selectedMaximumShouldBeInfinity
+{
+  return self.allowInfiniteSelectedMax && [NSNumber numberWithFloat:self.selectedMaximum] == [NSNumber numberWithFloat:self.maxValue];
+}
+
 - (void)updateLabelValues {
     if (self.hideLabels || [self.numberFormatterOverride isEqual:[NSNull null]]){
         self.minLabel.string = @"";
@@ -255,8 +261,13 @@ static const CGFloat kLabelsFontSize = 12.0f;
     NSNumberFormatter *formatter = (self.numberFormatterOverride != nil) ? self.numberFormatterOverride : self.decimalNumberFormatter;
 
     self.minLabel.string = [formatter stringFromNumber:@(self.selectedMinimum)];
-    self.maxLabel.string = [formatter stringFromNumber:@(self.selectedMaximum)];
-    
+  
+    if ([self selectedMaximumShouldBeInfinity]) {
+      self.maxLabel.string = [NSString stringWithFormat:@"%@+", [formatter stringFromNumber:@(self.selectedMaximum)]];
+    } else {
+      self.maxLabel.string = [formatter stringFromNumber:@(self.selectedMaximum)];
+    }
+
     self.minLabelTextSize = [self.minLabel.string sizeWithAttributes:@{NSFontAttributeName:self.minLabelFont}];
     self.maxLabelTextSize = [self.maxLabel.string sizeWithAttributes:@{NSFontAttributeName:self.maxLabelFont}];
 }
@@ -399,7 +410,12 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     //update the delegate
     if (self.delegate && (self.leftHandleSelected || self.rightHandleSelected)){
+      if ([self selectedMaximumShouldBeInfinity]) {
+        [self.delegate rangeSlider:self didChangeSelectedMinimumValue:self.selectedMinimum andMaximumValue:INFINITY];
+      } else {
         [self.delegate rangeSlider:self didChangeSelectedMinimumValue:self.selectedMinimum andMaximumValue:self.selectedMaximum];
+      }
+      
     }
 }
 
