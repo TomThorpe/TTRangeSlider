@@ -52,8 +52,10 @@ The maximum possible value to select in the range
 The preselected minumum value (note: This should be less than the selectedMaximum)
 #### `selectedMaximum`
 The preselected maximum value (note: This should be greater than the selectedMinimum)
-#### `numberFormatterOverride`
-Each handle in the slider has a label above it showing the current selected value. By default, this is displayed as a decimal format.
+#### `minLabelNumberFormatterOverride`
+The min handle in the slider has a label above it showing the current selected minimum value. By default, this is displayed as a decimal format.
+#### `maxLabelNumberFormatterOverride`
+The max handle in the slider has a label above it showing the current selected minimum value. By default, this is displayed as a decimal format.
 #### `hideLabels`
 When set to `YES` the labels above the slider controls will be hidden. Default is NO.
 #### `minDistance`
