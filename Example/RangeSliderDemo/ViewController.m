@@ -25,7 +25,6 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     //standard rsnge slider
-    self.rangeSlider.delegate = self;
     self.rangeSlider.minValue = 0;
     self.rangeSlider.maxValue = 200;
     self.rangeSlider.selectedMinimum = 50;
