@@ -37,6 +37,12 @@ The default slider ranges from 0->100 and has 10 preselected as the minimum, and
 
 Values that the user has selected are exposed using the `selectedMinimum` and `selectedMaximum` properties. You can also use these properties to change the selected values programatically if you wish.
 
+## Getting updates
+
+To be notified when the slider’s value changes, register your action method with the `UIControlEventValueChanged` event. At runtime, the slider calls your method in response to the user changing the slider’s value.
+
+Alternatively you can implement the `TTRangeSliderDelegate` protocol and respond to changes in the `rangeSlider:didChangeSelectedMinimumValue:andMaximumValue:` method.
+
 Other customisation of the control is done using the following properties:
 #### `tintColor`
 The tintColor property (which you can also set in Interface Builder) sets the overall colour of the control, including the colour of the line, the two handles, and the labels.

@@ -398,9 +398,13 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [self updateAccessibilityElements];
 
     //update the delegate
-    if (self.delegate && (self.leftHandleSelected || self.rightHandleSelected)){
+    if ([self.delegate respondsToSelector:@selector(rangeSlider:didChangeSelectedMinimumValue:andMaximumValue:)] &&
+        (self.leftHandleSelected || self.rightHandleSelected)){
+
         [self.delegate rangeSlider:self didChangeSelectedMinimumValue:self.selectedMinimum andMaximumValue:self.selectedMaximum];
     }
+
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 - (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
