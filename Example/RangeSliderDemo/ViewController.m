@@ -38,7 +38,8 @@
     self.rangeSliderCurrency.selectedHandleDiameterMultiplier = 1.3;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterCurrencyStyle;
-    self.rangeSliderCurrency.numberFormatterOverride = formatter;
+    self.rangeSliderCurrency.minLabelNumberFormatterOverride = formatter;
+    self.rangeSliderCurrency.maxLabelNumberFormatterOverride = formatter;
     
     //custom number formatter range slider
     self.rangeSliderCustom.delegate = self;
@@ -52,7 +53,8 @@
     self.rangeSliderCustom.lineHeight = 10;
     NSNumberFormatter *customFormatter = [[NSNumberFormatter alloc] init];
     customFormatter.positiveSuffix = @"B";
-    self.rangeSliderCustom.numberFormatterOverride = customFormatter;
+    self.rangeSliderCustom.minLabelNumberFormatterOverride = customFormatter;
+    self.rangeSliderCustom.maxLabelNumberFormatterOverride = customFormatter;
 }
 
 - (void)didReceiveMemoryWarning {

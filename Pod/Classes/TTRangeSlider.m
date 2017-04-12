@@ -246,16 +246,21 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)updateLabelValues {
-    if (self.hideLabels || [self.numberFormatterOverride isEqual:[NSNull null]]){
+    if (self.hideLabels ||
+        [self.minLabelNumberFormatterOverride isEqual:[NSNull null]] ||
+        [self.maxLabelNumberFormatterOverride isEqual:[NSNull null]]) {
+
         self.minLabel.string = @"";
         self.maxLabel.string = @"";
         return;
     }
 
-    NSNumberFormatter *formatter = (self.numberFormatterOverride != nil) ? self.numberFormatterOverride : self.decimalNumberFormatter;
+    NSNumberFormatter *minFormatter = (self.minLabelNumberFormatterOverride != nil) ? self.minLabelNumberFormatterOverride : self.decimalNumberFormatter;
 
-    self.minLabel.string = [formatter stringFromNumber:@(self.selectedMinimum)];
-    self.maxLabel.string = [formatter stringFromNumber:@(self.selectedMaximum)];
+    NSNumberFormatter *maxFormatter = (self.maxLabelNumberFormatterOverride != nil) ? self.maxLabelNumberFormatterOverride : self.decimalNumberFormatter;
+
+    self.minLabel.string = [minFormatter stringFromNumber:@(self.selectedMinimum)];
+    self.maxLabel.string = [maxFormatter stringFromNumber:@(self.selectedMaximum)];
     
     self.minLabelTextSize = [self.minLabel.string sizeWithAttributes:@{NSFontAttributeName:self.minLabelFont}];
     self.maxLabelTextSize = [self.maxLabel.string sizeWithAttributes:@{NSFontAttributeName:self.maxLabelFont}];
@@ -583,8 +588,13 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.maxLabel.fontSize = _maxLabelFont.pointSize;
 }
 
--(void)setNumberFormatterOverride:(NSNumberFormatter *)numberFormatterOverride{
-    _numberFormatterOverride = numberFormatterOverride;
+-(void)setMinLabelNumberFormatterOverride:(NSNumberFormatter *)minLabelNumberFormatterOverride{
+    _minLabelNumberFormatterOverride = minLabelNumberFormatterOverride;
+    [self updateLabelValues];
+}
+
+-(void)setMaxLabelNumberFormatterOverride:(NSNumberFormatter *)maxLabelNumberFormatterOverride{
+    _maxLabelNumberFormatterOverride = maxLabelNumberFormatterOverride;
     [self updateLabelValues];
 }
 
