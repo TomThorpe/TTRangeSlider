@@ -152,4 +152,9 @@ IB_DESIGNABLE
  */
 @property (nonatomic, assign) CGFloat lineHeight;
 
+/**
+ *Enable shadow for slider handlers
+ */
+@property (nonatomic, assign) BOOL enableHandleShadow;
+
 @end
