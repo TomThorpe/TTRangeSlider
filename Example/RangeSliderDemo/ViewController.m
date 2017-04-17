@@ -16,16 +16,20 @@
 
 @implementation ViewController
 
+- (void)logControlEvent:(TTRangeSlider *)sender {
+    NSLog(@"Standard slider updated. Min Value: %.0f Max Value: %.0f", sender.selectedMinimum, sender.selectedMaximum);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
     //standard rsnge slider
-    self.rangeSlider.delegate = self;
     self.rangeSlider.minValue = 0;
     self.rangeSlider.maxValue = 200;
     self.rangeSlider.selectedMinimum = 50;
     self.rangeSlider.selectedMaximum = 150;
+    [self.rangeSlider addTarget:self action:@selector(logControlEvent:) forControlEvents:UIControlEventValueChanged];
     
     //currency range slider
     self.rangeSliderCurrency.delegate = self;
@@ -62,10 +66,7 @@
 
 #pragma mark TTRangeSliderViewDelegate
 -(void)rangeSlider:(TTRangeSlider *)sender didChangeSelectedMinimumValue:(float)selectedMinimum andMaximumValue:(float)selectedMaximum{
-    if (sender == self.rangeSlider){
-        NSLog(@"Standard slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
-    }
-    else if (sender == self.rangeSliderCurrency) {
+    if (sender == self.rangeSliderCurrency) {
         NSLog(@"Currency slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
     }
     else if (sender == self.rangeSliderCustom){

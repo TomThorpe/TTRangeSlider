@@ -10,6 +10,9 @@
 IB_DESIGNABLE
 @interface TTRangeSlider : UIControl <UIGestureRecognizerDelegate>
 
+/**
+ * Optional delegate.
+ */
 @property (nonatomic, weak) IBOutlet id<TTRangeSliderDelegate> delegate;
 
 /**
