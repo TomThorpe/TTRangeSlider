@@ -39,9 +39,10 @@ IB_DESIGNABLE
 
 /**
  * Each handle in the slider has a label above it showing the current selected value. By default, this is displayed as a decimal format.
- * You can override this default here by supplying your own NSNumberFormatter. For example, you could supply an NSNumberFormatter that has a currency style, or a prefix or suffix.
+ * You can override this default here by supplying your own NSNumberFormatter for each label. For example, you could supply an NSNumberFormatter that has a currency style, or a prefix or suffix.
  * If this property is nil, the default decimal format will be used. Note: If you want no labels at all, please use the hideLabels flag. */
-@property (nonatomic, strong) NSNumberFormatter *numberFormatterOverride;
+@property (nonatomic, strong) NSNumberFormatter *minLabelNumberFormatterOverride;
+@property (nonatomic, strong) NSNumberFormatter *maxLabelNumberFormatterOverride;
 
 /**
  * Hides the labels above the slider controls. YES = labels will be hidden. NO = labels will be shown. Default is NO.
