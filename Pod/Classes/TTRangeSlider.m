@@ -651,6 +651,21 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [self updateLabelPositions];
 }
 
+-(void)setEnableHandleShadow:(BOOL)enableHandleShadow {
+    _enableHandleShadow = enableHandleShadow;
+    if (enableHandleShadow) {
+        self.leftHandle.shadowRadius = 2;
+        self.leftHandle.shadowOffset = CGSizeMake(-1,1);
+        self.leftHandle.shadowColor = [UIColor grayColor].CGColor;
+        self.leftHandle.shadowOpacity = 0.8;
+        
+        self.rightHandle.shadowRadius = 2;
+        self.rightHandle.shadowOffset = CGSizeMake(1,1);
+        self.rightHandle.shadowColor = [UIColor grayColor].CGColor;
+        self.rightHandle.shadowOpacity = 0.8;
+    }
+}
+
 #pragma mark - UIAccessibility
 
 - (BOOL)isAccessibilityElement
