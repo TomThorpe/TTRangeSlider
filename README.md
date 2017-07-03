@@ -60,16 +60,16 @@ The preselected minumum value (note: This should be less than the selectedMaximu
 The preselected maximum value (note: This should be greater than the selectedMinimum)
 #### `numberFormatterOverride`
 Each handle in the slider has a label above it showing the current selected value. By default, this is displayed as a decimal format.
+
+You can override this default here by supplying your own NSNumberFormatter. For example, you could supply an NSNumberFormatter that has a currency style, or a prefix or suffix.
+
+If this property is nil, the default decimal format will be used. Note: If you want no labels at all, set this value to be `(NSNumberFormatter *)[NSNull null]` (as opposed to nil), to specifically mark that you want no labels
 #### `hideLabels`
 When set to `YES` the labels above the slider controls will be hidden. Default is NO.
 #### `minDistance`
 The minimum distance the two selected slider values must be apart. -1 for no minimum. Default is -1.
 #### `maxDistance`
 The maximum distance the two selected slider values must be apart. -1 for no maximum. Default is -1.
-
-You can override this default here by supplying your own NSNumberFormatter. For example, you could supply an NSNumberFormatter that has a currency style, or a prefix or suffix.
-
-If this property is nil, the default decimal format will be used. Note: If you want no labels at all, set this value to be `(NSNumberFormatter *)[NSNull null]` (as opposed to nil), to specifically mark that you want no labels
 #### `minLabelColour`
 The colour of the minimum value text label. If not set, the default is the tintColor.
 #### `maxLabelColour`
