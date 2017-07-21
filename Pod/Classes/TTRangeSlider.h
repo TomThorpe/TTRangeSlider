@@ -155,4 +155,17 @@ IB_DESIGNABLE
  */
 @property (nonatomic, assign) CGFloat lineHeight;
 
+/**
+ *Define the two possibilities of label positions (above or below the handles)
+ */
+typedef NS_ENUM(NSInteger, LabelPosition) {
+    LabelPositionAbove,
+    LabelPositionBelow,
+};
+
+/**
+ *Set the label positions (default LabelPositionAbove)
+ */
+@property (nonatomic, assign) LabelPosition labelPosition;
+
 @end

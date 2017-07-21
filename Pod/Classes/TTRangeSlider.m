@@ -72,7 +72,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _handleBorderColor = self.tintColor;
     
     _labelPadding = 8.0;
-    
+
+    _labelPosition = LabelPositionAbove;
+
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
@@ -280,15 +282,15 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)updateLabelPositions {
-    //the centre points for the labels are X = the same x position as the relevant handle. Y = the y position of the handle minus half the height of the text label, minus some padding.
+    //the centre points for the labels are X = the same x position as the relevant handle. Y = the y center of the handle plus or minus (depending on the label position) the handle size / 2 + padding + label size/2
     float padding = self.labelPadding;
     float minSpacingBetweenLabels = 8.0f;
 
     CGPoint leftHandleCentre = [self getCentreOfRect:self.leftHandle.frame];
-    CGPoint newMinLabelCenter = CGPointMake(leftHandleCentre.x, self.leftHandle.frame.origin.y - (self.minLabel.frame.size.height/2) - padding);
+    CGPoint newMinLabelCenter = CGPointMake(leftHandleCentre.x, (self.leftHandle.frame.origin.y + (self.leftHandle.frame.size.height/2)) + ((self.labelPosition == LabelPositionAbove ? -1 : 1) * ((self.minLabel.frame.size.height/2) + padding + (self.leftHandle.frame.size.height/2))));
 
     CGPoint rightHandleCentre = [self getCentreOfRect:self.rightHandle.frame];
-    CGPoint newMaxLabelCenter = CGPointMake(rightHandleCentre.x, self.rightHandle.frame.origin.y - (self.maxLabel.frame.size.height/2) - padding);
+    CGPoint newMaxLabelCenter = CGPointMake(rightHandleCentre.x, (self.rightHandle.frame.origin.y + (self.rightHandle.frame.size.height/2)) + ((self.labelPosition == LabelPositionAbove ? -1 : 1) * ((self.maxLabel.frame.size.height/2) + padding + (self.rightHandle.frame.size.height/2))));
 
     CGSize minLabelTextSize = self.minLabelTextSize;
     CGSize maxLabelTextSize = self.maxLabelTextSize;
