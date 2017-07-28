@@ -156,6 +156,16 @@ IB_DESIGNABLE
 @property (nonatomic, assign) CGFloat lineHeight;
 
 /**
+ *Slider line border color
+ */
+@property (nonatomic, strong) UIColor *lineBorderColor;
+
+/**
+ *Slider line border width (default 0.0)
+ */
+@property (nonatomic, assign) CGFloat lineBorderWidth;
+
+/**
  *Define the two possibilities of label positions (above or below the handles)
  */
 typedef NS_ENUM(NSInteger, LabelPosition) {
