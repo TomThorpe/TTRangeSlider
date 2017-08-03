@@ -1,3 +1,3 @@
 language: objective-c
 osx_image: xcode8.3
-script: xctool -workspace Example/RangeSliderDemo.xcworkspace -scheme RangeSliderDemo build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator
+script: xcodebuild clean build -workspace Example/RangeSliderDemo.xcworkspace -scheme RangeSliderDemo -destination “platform=iOS Simulator,name=iPhone 7”
