@@ -153,17 +153,17 @@ IB_DESIGNABLE
 /**
  *Set the slider line height (default 1.0)
  */
-@property (nonatomic, assign) CGFloat lineHeight;
+@property (nonatomic, assign) IBInspectable CGFloat lineHeight;
 
 /**
  *Slider line border color
  */
-@property (nonatomic, strong) UIColor *lineBorderColor;
+@property (nonatomic, strong) IBInspectable UIColor *lineBorderColor;
 
 /**
  *Slider line border width (default 0.0)
  */
-@property (nonatomic, assign) CGFloat lineBorderWidth;
+@property (nonatomic, assign) IBInspectable CGFloat lineBorderWidth;
 
 /**
  *Define the two possibilities of label positions (above or below the handles)

@@ -53,7 +53,8 @@
     self.rangeSliderCustom.handleImage = [UIImage imageNamed:@"custom-handle"];
     self.rangeSliderCustom.selectedHandleDiameterMultiplier = 1;
     self.rangeSliderCustom.tintColorBetweenHandles = [UIColor redColor];
-    self.rangeSliderCustom.lineHeight = 10;
+    self.rangeSliderCustom.lineBorderWidth = 1;
+    self.rangeSliderCustom.lineBorderColor = [UIColor darkGrayColor];
     NSNumberFormatter *customFormatter = [[NSNumberFormatter alloc] init];
     customFormatter.positiveSuffix = @"B";
     self.rangeSliderCustom.numberFormatterOverride = customFormatter;
