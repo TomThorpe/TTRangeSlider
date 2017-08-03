@@ -199,6 +199,12 @@ static const CGFloat kLabelsFontSize = 12.0f;
     return CGSizeMake(UIViewNoIntrinsicMetric, 65);
 }
 
+-(void)prepareForInterfaceBuilder{
+    if (self.tintColorBetweenHandles == nil){
+        self.sliderLineBetweenHandles.backgroundColor = self.tintColor.CGColor;
+    }
+}
+
 
 - (void)tintColorDidChange {
     CGColorRef color = self.tintColor.CGColor;
