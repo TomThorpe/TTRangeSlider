@@ -78,6 +78,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
+    self.sliderLine.borderColor = self.lineBorderColor.CGColor;
+    self.sliderLine.borderWidth = self.lineBorderWidth;
     [self.layer addSublayer:self.sliderLine];
     
     //draw the track distline
@@ -646,6 +648,16 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(void)setLineHeight:(CGFloat)lineHeight{
     _lineHeight = lineHeight;
     [self setNeedsLayout];
+}
+
+-(void)setLineBorderColor:(UIColor *)lineBorderColor{
+    _lineBorderColor = lineBorderColor;
+    self.sliderLine.borderColor = [lineBorderColor CGColor];
+}
+
+-(void)setLineBorderWidth:(CGFloat)lineBorderWidth{
+    _lineBorderWidth = lineBorderWidth;
+    self.sliderLine.borderWidth = lineBorderWidth;
 }
 
 -(void)setLabelPadding:(CGFloat)labelPadding {
