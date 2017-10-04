@@ -126,6 +126,14 @@ IB_DESIGNABLE
 @property (nonatomic, strong) UIColor *handleColor;
 
 /**
+ *Handle independent colors for each handle.
+ *If set to nil, they will default to self.handleColor
+ */
+@property (nonatomic, strong) IBInspectable UIColor *leftHandleColor;
+@property (nonatomic, strong) IBInspectable UIColor *rightHandleColor;
+
+
+/**
  *Handle slider with custom border color, you can set custom border color for your handle
  */
 @property (nonatomic, strong) UIColor *handleBorderColor;
