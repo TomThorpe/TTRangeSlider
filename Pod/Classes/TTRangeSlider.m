@@ -29,18 +29,7 @@ const float TEXT_HEIGHT = 14;
 // strong reference needed for UIAccessibilityContainer
 // see http://stackoverflow.com/questions/13462046/custom-uiview-not-showing-accessibility-on-voice-over
 @property (nonatomic, strong) NSMutableArray *accessibleElements;
-@end
 
-/**
- An accessibility element that increments and decrements the left slider
- */
-@interface TTRangeSliderLeftElement : UIAccessibilityElement
-@end
-
-/**
- An accessibility element that increments and decrements the right slider
- */
-@interface TTRangeSliderRightElement : UIAccessibilityElement
 @end
 
 static const CGFloat kLabelsFontSize = 12.0f;
@@ -72,14 +61,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _handleBorderColor = self.tintColor;
     
     _labelPadding = 8.0;
-
-    _labelPosition = LabelPositionAbove;
-
+    
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
-    self.sliderLine.borderColor = self.lineBorderColor.CGColor;
-    self.sliderLine.borderWidth = self.lineBorderWidth;
     [self.layer addSublayer:self.sliderLine];
     
     //draw the track distline
@@ -195,14 +180,15 @@ static const CGFloat kLabelsFontSize = 12.0f;
     return self;
 }
 
-- (CGSize)intrinsicContentSize{
-    return CGSizeMake(UIViewNoIntrinsicMetric, 65);
+- (id)initWithFrame:(CGRect)frame date:(NSDate*)date {
+  if (self = [self initWithFrame:frame]) {
+    self.currentDate = date;
+  }
+  return self;
 }
 
--(void)prepareForInterfaceBuilder{
-    if (self.tintColorBetweenHandles == nil){
-        self.sliderLineBetweenHandles.backgroundColor = self.tintColor.CGColor;
-    }
+- (CGSize)intrinsicContentSize{
+    return CGSizeMake(UIViewNoIntrinsicMetric, 65);
 }
 
 
@@ -261,9 +247,30 @@ static const CGFloat kLabelsFontSize = 12.0f;
         self.maxLabel.string = @"";
         return;
     }
+  
+  if (self.currentDate != nil) {
+    //date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd HH:mm:ss"];
+    
+    NSDate *min_newDate = [[NSDate alloc] initWithTimeInterval:self.selectedMinimum sinceDate:self.currentDate];
+    
+    NSDate *max_newDate = [[NSDate alloc] initWithTimeInterval:self.selectedMaximum sinceDate:self.currentDate];
+    
+    NSString *min_newString = [dateFormatter stringFromDate:min_newDate];
+    NSString *max_newString = [dateFormatter stringFromDate:max_newDate];
+    
+    self.minLabel.string = min_newString;
+    self.maxLabel.string = max_newString;
+
+    self.minLabelTextSize = [self.minLabel.string sizeWithAttributes:@{NSFontAttributeName:self.maxLabelFont}];
+    self.maxLabelTextSize = [self.maxLabel.string sizeWithAttributes:@{NSFontAttributeName:self.maxLabelFont}];
+    return ;
+  }
 
     NSNumberFormatter *formatter = (self.numberFormatterOverride != nil) ? self.numberFormatterOverride : self.decimalNumberFormatter;
 
+  
     self.minLabel.string = [formatter stringFromNumber:@(self.selectedMinimum)];
     self.maxLabel.string = [formatter stringFromNumber:@(self.selectedMaximum)];
     
@@ -290,15 +297,15 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)updateLabelPositions {
-    //the centre points for the labels are X = the same x position as the relevant handle. Y = the y center of the handle plus or minus (depending on the label position) the handle size / 2 + padding + label size/2
+    //the centre points for the labels are X = the same x position as the relevant handle. Y = the y position of the handle minus half the height of the text label, minus some padding.
     float padding = self.labelPadding;
     float minSpacingBetweenLabels = 8.0f;
 
     CGPoint leftHandleCentre = [self getCentreOfRect:self.leftHandle.frame];
-    CGPoint newMinLabelCenter = CGPointMake(leftHandleCentre.x, (self.leftHandle.frame.origin.y + (self.leftHandle.frame.size.height/2)) + ((self.labelPosition == LabelPositionAbove ? -1 : 1) * ((self.minLabel.frame.size.height/2) + padding + (self.leftHandle.frame.size.height/2))));
+    CGPoint newMinLabelCenter = CGPointMake(leftHandleCentre.x, self.leftHandle.frame.origin.y - (self.minLabel.frame.size.height/2) - padding);
 
     CGPoint rightHandleCentre = [self getCentreOfRect:self.rightHandle.frame];
-    CGPoint newMaxLabelCenter = CGPointMake(rightHandleCentre.x, (self.rightHandle.frame.origin.y + (self.rightHandle.frame.size.height/2)) + ((self.labelPosition == LabelPositionAbove ? -1 : 1) * ((self.maxLabel.frame.size.height/2) + padding + (self.rightHandle.frame.size.height/2))));
+    CGPoint newMaxLabelCenter = CGPointMake(rightHandleCentre.x, self.rightHandle.frame.origin.y - (self.maxLabel.frame.size.height/2) - padding);
 
     CGSize minLabelTextSize = self.minLabelTextSize;
     CGSize maxLabelTextSize = self.maxLabelTextSize;
@@ -408,13 +415,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [self updateAccessibilityElements];
 
     //update the delegate
-    if ([self.delegate respondsToSelector:@selector(rangeSlider:didChangeSelectedMinimumValue:andMaximumValue:)] &&
-        (self.leftHandleSelected || self.rightHandleSelected)){
-
+    if (self.delegate && (self.leftHandleSelected || self.rightHandleSelected)){
         [self.delegate rangeSlider:self didChangeSelectedMinimumValue:self.selectedMinimum andMaximumValue:self.selectedMaximum];
     }
-
-    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 - (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -534,7 +537,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
         self.minLabel.hidden = YES;
     } else {
         self.leftHandle.hidden = NO;
-        self.minLabel.hidden = NO;
     }
 }
 
@@ -656,16 +658,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [self setNeedsLayout];
 }
 
--(void)setLineBorderColor:(UIColor *)lineBorderColor{
-    _lineBorderColor = lineBorderColor;
-    self.sliderLine.borderColor = [lineBorderColor CGColor];
-}
-
--(void)setLineBorderWidth:(CGFloat)lineBorderWidth{
-    _lineBorderWidth = lineBorderWidth;
-    self.sliderLine.borderWidth = lineBorderWidth;
-}
-
 -(void)setLabelPadding:(CGFloat)labelPadding {
     _labelPadding = labelPadding;
     [self updateLabelPositions];
@@ -710,7 +702,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (UIAccessibilityElement *)leftHandleAccessibilityElement
 {
-  TTRangeSliderLeftElement *element = [[TTRangeSliderLeftElement alloc] initWithAccessibilityContainer:self];
+  UIAccessibilityElement *element = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self];
   element.isAccessibilityElement = YES;
   element.accessibilityLabel = self.minLabelAccessibilityLabel;
   element.accessibilityHint = self.minLabelAccessibilityHint;
@@ -722,7 +714,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (UIAccessibilityElement *)rightHandleAccessbilityElement
 {
-  TTRangeSliderRightElement *element = [[TTRangeSliderRightElement alloc] initWithAccessibilityContainer:self];
+  UIAccessibilityElement *element = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self];
   element.isAccessibilityElement = YES;
   element.accessibilityLabel = self.maxLabelAccessibilityLabel;
   element.accessibilityHint = self.maxLabelAccessibilityHint;
@@ -733,36 +725,3 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 @end
-
-@implementation TTRangeSliderLeftElement
-
-- (void)accessibilityIncrement {
-  TTRangeSlider* slider = (TTRangeSlider*)self.accessibilityContainer;
-  slider.selectedMinimum += slider.step;
-  self.accessibilityValue = slider.minLabel.string;
-}
-
-- (void)accessibilityDecrement {
-  TTRangeSlider* slider = (TTRangeSlider*)self.accessibilityContainer;
-  slider.selectedMinimum -= slider.step;
-  self.accessibilityValue = slider.minLabel.string;
-}
-
-@end
-
-@implementation TTRangeSliderRightElement
-
-- (void)accessibilityIncrement {
-  TTRangeSlider* slider = (TTRangeSlider*)self.accessibilityContainer;
-  slider.selectedMaximum += slider.step;
-  self.accessibilityValue = slider.maxLabel.string;
-}
-
-- (void)accessibilityDecrement {
-  TTRangeSlider* slider = (TTRangeSlider*)self.accessibilityContainer;
-  slider.selectedMaximum -= slider.step;
-  self.accessibilityValue = slider.maxLabel.string;
-}
-
-@end
-
