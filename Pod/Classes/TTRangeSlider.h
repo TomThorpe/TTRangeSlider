@@ -10,10 +10,12 @@
 IB_DESIGNABLE
 @interface TTRangeSlider : UIControl <UIGestureRecognizerDelegate>
 
-/**
- * Optional delegate.
- */
 @property (nonatomic, weak) IBOutlet id<TTRangeSliderDelegate> delegate;
+
+/// slide label timestring support
+- (id)initWithFrame:(CGRect)frame date:(NSDate*)date;
+/// slide label timestring support
+@property (nonatomic, strong) NSDate *currentDate;
 
 /**
  * The minimum possible value to select in the range
@@ -148,34 +150,11 @@ IB_DESIGNABLE
 /**
  *Set slider line tint color between handles
  */
-@property (nonatomic, strong) IBInspectable UIColor *tintColorBetweenHandles;
+@property (nonatomic, strong) UIColor *tintColorBetweenHandles;
 
 /**
  *Set the slider line height (default 1.0)
  */
-@property (nonatomic, assign) IBInspectable CGFloat lineHeight;
-
-/**
- *Slider line border color
- */
-@property (nonatomic, strong) IBInspectable UIColor *lineBorderColor;
-
-/**
- *Slider line border width (default 0.0)
- */
-@property (nonatomic, assign) IBInspectable CGFloat lineBorderWidth;
-
-/**
- *Define the two possibilities of label positions (above or below the handles)
- */
-typedef NS_ENUM(NSInteger, LabelPosition) {
-    LabelPositionAbove,
-    LabelPositionBelow,
-};
-
-/**
- *Set the label positions (default LabelPositionAbove)
- */
-@property (nonatomic, assign) LabelPosition labelPosition;
+@property (nonatomic, assign) CGFloat lineHeight;
 
 @end
