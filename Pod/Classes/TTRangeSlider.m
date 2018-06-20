@@ -71,6 +71,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _handleBorderWidth = 0.0;
     _handleBorderColor = self.tintColor;
     
+    
     _labelPadding = 8.0;
 
     _labelPosition = LabelPositionAbove;
@@ -213,8 +214,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [CATransaction setAnimationDuration:0.5];
     [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
     self.sliderLine.backgroundColor = color;
-    if (self.handleColor == nil) {
+    if (_minHandleColor == nil) {
         self.leftHandle.backgroundColor = color;
+    }
+    if (_maxHandleColor == nil) {
         self.rightHandle.backgroundColor = color;
     }
 
@@ -585,6 +588,16 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.maxLabel.foregroundColor = _maxLabelColour.CGColor;
 }
 
+-(void)setMinHandleColor:(UIColor *)minHandleColor{
+    _minHandleColor = minHandleColor;
+    self.leftHandle.backgroundColor = _minHandleColor.CGColor;
+}
+
+-(void)setMaxHandleColor:(UIColor *)maxHandleColor{
+    _maxHandleColor = maxHandleColor;
+    self.rightHandle.backgroundColor = _maxHandleColor.CGColor;
+}
+
 -(void)setMinLabelFont:(UIFont *)minLabelFont{
     _minLabelFont = minLabelFont;
     self.minLabel.font = (__bridge CFTypeRef)_minLabelFont.fontName;
@@ -618,7 +631,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 -(void)setHandleColor:(UIColor *)handleColor{
-    _handleColor = handleColor;
+    _minHandleColor = handleColor;
+    _maxHandleColor = handleColor;
     self.leftHandle.backgroundColor = [handleColor CGColor];
     self.rightHandle.backgroundColor = [handleColor CGColor];
 }

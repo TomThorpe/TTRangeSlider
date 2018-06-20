@@ -58,6 +58,15 @@ IB_DESIGNABLE
  */
 @property (nonatomic, strong) IBInspectable UIColor *maxLabelColour;
 
+/**
+ * The color of the left handle. If not set, the default is the tintColor.
+ */
+@property (nonatomic, strong) IBInspectable UIColor *minHandleColor;
+
+/**
+ * The color of the right handle. If not set, the default is the tintColor.
+ */
+@property (nonatomic, strong) IBInspectable UIColor *maxHandleColor;
 
 /**
  * The font of the minimum value text label. If not set, the default is system font size 12.
@@ -120,10 +129,6 @@ IB_DESIGNABLE
  */
 @property (nonatomic, strong) UIImage *handleImage;
 
-/**
- *Handle slider with custom color, you can set custom color for your handle
- */
-@property (nonatomic, strong) UIColor *handleColor;
 
 /**
  *Handle slider with custom border color, you can set custom border color for your handle
