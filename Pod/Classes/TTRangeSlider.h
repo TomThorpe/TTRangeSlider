@@ -59,6 +59,11 @@ IB_DESIGNABLE
 @property (nonatomic, strong) IBInspectable UIColor *maxLabelColour;
 
 /**
+ * The color of both handles. If not set, the default is the tintColor.
+ */
+@property (nonatomic, strong) IBInspectable UIColor *handleColor;
+
+/**
  * The color of the left handle. If not set, the default is the tintColor.
  */
 @property (nonatomic, strong) IBInspectable UIColor *minHandleColor;
