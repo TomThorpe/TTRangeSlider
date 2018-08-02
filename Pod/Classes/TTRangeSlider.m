@@ -73,6 +73,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     
     
     _labelPadding = 8.0;
+    _barSidePadding = 16.0;
 
     _labelPosition = LabelPositionAbove;
 
@@ -159,7 +160,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [super layoutSubviews];
 
     //positioning for the slider line
-    float barSidePadding = 16.0f;
+    float barSidePadding = self.barSidePadding;
     CGRect currentFrame = self.frame;
     float yMiddle = currentFrame.size.height/2.0;
     CGPoint lineLeftSide = CGPointMake(barSidePadding, yMiddle);
@@ -682,6 +683,11 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 -(void)setLabelPadding:(CGFloat)labelPadding {
     _labelPadding = labelPadding;
+    [self updateLabelPositions];
+}
+
+-(void)setBarSidePadding:(CGFloat)barSidePadding {
+    _barSidePadding = barSidePadding;
     [self updateLabelPositions];
 }
 
