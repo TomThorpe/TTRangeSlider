@@ -130,6 +130,11 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable CGFloat labelPadding;
 
 /**
+ *Set padding on left and right side of slider line (default 16.0)
+ */
+@property (nonatomic, assign) IBInspectable CGFloat barSidePadding;
+
+/**
  *Handle slider with custom image, you can set custom image for your handle
  */
 @property (nonatomic, strong) UIImage *handleImage;
