@@ -130,7 +130,7 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable CGFloat labelPadding;
 
 /**
- *Set padding on left and right side of slider line (default 8.0)
+ *Set padding on left and right side of slider line (default 16.0)
  */
 @property (nonatomic, assign) IBInspectable CGFloat barSidePadding;
 
