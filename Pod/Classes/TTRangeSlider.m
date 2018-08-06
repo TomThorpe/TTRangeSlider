@@ -360,8 +360,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
             }
         }
 
-        if ([self.delegate respondsToSelector:@selector(didStartTouchesInRangeSlider:)]){
-            [self.delegate didStartTouchesInRangeSlider:self];
+        if ([self.delegate respondsToSelector:@selector(rangeSlider:didStartTouchesInLeftHandle:orRightHandle:)]){
+            [self.delegate rangeSlider:self didStartTouchesInLeftHandle:self.leftHandleSelected orRightHandle:self.rightHandleSelected];
         }
 
         return YES;
@@ -457,15 +457,17 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    
+    if ([self.delegate respondsToSelector:@selector(rangeSlider:didEndTouchesInLeftHandle:orRightHandle:)]){
+        [self.delegate rangeSlider:self didEndTouchesInLeftHandle:self.leftHandleSelected orRightHandle:self.rightHandleSelected];
+    }
+    
     if (self.leftHandleSelected){
         self.leftHandleSelected = NO;
         [self animateHandle:self.leftHandle withSelection:NO];
     } else {
         self.rightHandleSelected = NO;
         [self animateHandle:self.rightHandle withSelection:NO];
-    }
-    if ([self.delegate respondsToSelector:@selector(didEndTouchesInRangeSlider:)]) {
-        [self.delegate didEndTouchesInRangeSlider:self];
     }
 }
 
