@@ -21,11 +21,11 @@
 /**
  * Called when the user has finished interacting with the RangeSlider
  */
-- (void)didEndTouchesInRangeSlider:(TTRangeSlider *)sender;
+- (void)rangeSlider:(TTRangeSlider *)sender didEndTouchesInLeftHandle:(BOOL)leftSelected orRightHandle:(BOOL)rightSelected;
 
 /**
  * Called when the user has started interacting with the RangeSlider
  */
-- (void)didStartTouchesInRangeSlider:(TTRangeSlider *)sender;
+- (void)rangeSlider:(TTRangeSlider *)sender didStartTouchesInLeftHandle:(BOOL)leftSelected orRightHandle:(BOOL)rightSelected;
 
 @end
