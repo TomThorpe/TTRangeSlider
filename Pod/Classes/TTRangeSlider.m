@@ -168,7 +168,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, self.lineHeight);
     
     self.sliderLine.cornerRadius = self.lineHeight / 2.0;
-
+    self.sliderLineBetweenHandles.cornerRadius = self.lineHeight / 2.0;
+    
     [self updateLabelValues];
     [self updateHandlePositions];
     [self updateLabelPositions];
