@@ -692,6 +692,43 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [self updateLabelPositions];
 }
 
+- (void)setShadowRadius:(CGFloat)shadowRadius {
+    _shadowRadius = shadowRadius;
+    _shadowOpacity = 1.0;
+
+    [self.leftHandle removeFromSuperlayer];
+    
+    self.leftHandle.shadowOffset = CGSizeMake(0.0, self.shadowRadius);
+    self.leftHandle.shadowRadius = self.shadowRadius;
+    self.leftHandle.shadowColor = self.tintColor.CGColor;
+    
+    [self.layer addSublayer:self.rightHandle];
+    
+    self.rightHandle.shadowOffset = CGSizeMake(0.0, _shadowRadius);
+    self.rightHandle.shadowRadius = _shadowRadius;
+    self.rightHandle.shadowColor = self.tintColor.CGColor;
+    
+    [self.layer addSublayer:self.rightHandle];
+}
+
+- (void)setShadowOpacity:(float)shadowOpacity {
+    _shadowOpacity = shadowOpacity;
+    
+    [self.leftHandle removeFromSuperlayer];
+    
+    self.leftHandle.shadowOffset = CGSizeMake(0.0, self.shadowRadius);
+    self.leftHandle.shadowOpacity = self.shadowOpacity;
+    self.leftHandle.shadowColor = self.tintColor.CGColor;
+    
+    [self.layer addSublayer:self.rightHandle];
+    
+    self.rightHandle.shadowOffset = CGSizeMake(0.0, _shadowRadius);
+    self.rightHandle.shadowOpacity = _shadowOpacity;
+    self.rightHandle.shadowColor = self.tintColor.CGColor;
+    
+    [self.layer addSublayer:self.rightHandle];
+}
+
 #pragma mark - UIAccessibility
 
 - (BOOL)isAccessibilityElement
