@@ -702,7 +702,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.leftHandle.shadowRadius = self.shadowRadius;
     self.leftHandle.shadowColor = self.tintColor.CGColor;
     
-    [self.layer addSublayer:self.rightHandle];
+    [self.layer addSublayer:self.leftHandle];
     
     self.rightHandle.shadowOffset = CGSizeMake(0.0, _shadowRadius);
     self.rightHandle.shadowRadius = _shadowRadius;
@@ -720,7 +720,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.leftHandle.shadowOpacity = self.shadowOpacity;
     self.leftHandle.shadowColor = self.tintColor.CGColor;
     
-    [self.layer addSublayer:self.rightHandle];
+    [self.layer addSublayer:self.leftHandle];
     
     self.rightHandle.shadowOffset = CGSizeMake(0.0, _shadowRadius);
     self.rightHandle.shadowOpacity = _shadowOpacity;
