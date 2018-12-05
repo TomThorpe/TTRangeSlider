@@ -700,13 +700,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.leftHandle.shadowRadius = self.shadowRadius;
     self.leftHandle.shadowColor = self.tintColor.CGColor;
     
-    [self.layer addSublayer:self.leftHandle];
-    
     self.rightHandle.shadowOffset = CGSizeMake(0.0, _shadowRadius);
     self.rightHandle.shadowRadius = _shadowRadius;
     self.rightHandle.shadowColor = self.tintColor.CGColor;
-    
-    [self.layer addSublayer:self.rightHandle];
 }
 
 - (void)setShadowOpacity:(float)shadowOpacity {
@@ -716,13 +712,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.leftHandle.shadowOpacity = self.shadowOpacity;
     self.leftHandle.shadowColor = self.tintColor.CGColor;
     
-    [self.layer addSublayer:self.leftHandle];
-    
     self.rightHandle.shadowOffset = CGSizeMake(0.0, _shadowRadius);
     self.rightHandle.shadowOpacity = _shadowOpacity;
     self.rightHandle.shadowColor = self.tintColor.CGColor;
-    
-    [self.layer addSublayer:self.rightHandle];
 }
 
 #pragma mark - UIAccessibility
