@@ -29,6 +29,10 @@
     self.rangeSlider.maxValue = 200;
     self.rangeSlider.selectedMinimum = 50;
     self.rangeSlider.selectedMaximum = 150;
+    
+    self.rangeSlider.shadowRadius = 2;
+    self.rangeSlider.shadowOpacity = 0.75;
+    
     [self.rangeSlider addTarget:self action:@selector(logControlEvent:) forControlEvents:UIControlEventValueChanged];
     
     //currency range slider
@@ -58,6 +62,10 @@
     NSNumberFormatter *customFormatter = [[NSNumberFormatter alloc] init];
     customFormatter.positiveSuffix = @"B";
     self.rangeSliderCustom.numberFormatterOverride = customFormatter;
+    
+    self.rangeSliderCustom.shadowRadius = 3;
+    self.rangeSliderCustom.shadowOpacity = 0.5;
+    
 }
 
 - (void)didReceiveMemoryWarning {

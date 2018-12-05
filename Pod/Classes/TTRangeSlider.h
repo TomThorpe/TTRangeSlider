@@ -193,4 +193,15 @@ typedef NS_ENUM(NSInteger, LabelPosition) {
  */
 @property (nonatomic, assign) LabelPosition labelPosition;
 
+/**
+ *Set radius of the shadow for handle. Also used for setting shadow offset value
+ */
+
+@property (nonatomic, assign) IBInspectable CGFloat shadowRadius;
+
+/**
+ *Set the opacity of the shadow for handle
+ */
+@property (nonatomic, assign) IBInspectable float shadowOpacity;
+
 @end
