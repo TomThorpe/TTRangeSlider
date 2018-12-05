@@ -696,8 +696,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _shadowRadius = shadowRadius;
     _shadowOpacity = 1.0;
 
-    [self.leftHandle removeFromSuperlayer];
-    
     self.leftHandle.shadowOffset = CGSizeMake(0.0, self.shadowRadius);
     self.leftHandle.shadowRadius = self.shadowRadius;
     self.leftHandle.shadowColor = self.tintColor.CGColor;
@@ -713,8 +711,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (void)setShadowOpacity:(float)shadowOpacity {
     _shadowOpacity = shadowOpacity;
-    
-    [self.leftHandle removeFromSuperlayer];
     
     self.leftHandle.shadowOffset = CGSizeMake(0.0, self.shadowRadius);
     self.leftHandle.shadowOpacity = self.shadowOpacity;
