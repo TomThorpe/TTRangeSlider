@@ -372,37 +372,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)refresh {
-
-    if (self.enableStep && self.step>=0.0f){
-        _selectedMinimum = roundf(self.selectedMinimum/self.step)*self.step;
-        _selectedMaximum = roundf(self.selectedMaximum/self.step)*self.step;
-    }
-
-    float diff = self.selectedMaximum - self.selectedMinimum;
-
-    if (self.minDistance != -1 && diff < self.minDistance) {
-        if(self.leftHandleSelected){
-            _selectedMinimum = self.selectedMaximum - self.minDistance;
-        }else{
-            _selectedMaximum = self.selectedMinimum + self.minDistance;
-        }
-    }else if(self.maxDistance != -1 && diff > self.maxDistance){
-
-        if(self.leftHandleSelected){
-            _selectedMinimum = self.selectedMaximum - self.maxDistance;
-        }else if(self.rightHandleSelected){
-            _selectedMaximum = self.selectedMinimum + self.maxDistance;
-        }
-    }
-
-    //ensure the minimum and maximum selected values are within range. Access the values directly so we don't cause this refresh method to be called again (otherwise changing the properties causes a refresh)
-    if (self.selectedMinimum < self.minValue){
-        _selectedMinimum = self.minValue;
-    }
-    if (self.selectedMaximum > self.maxValue){
-        _selectedMaximum = self.maxValue;
-    }
-
     //update the frames in a transaction so that the tracking doesn't continue until the frame has moved.
     [CATransaction begin];
     [CATransaction setDisableActions:YES] ;
@@ -566,18 +535,77 @@ static const CGFloat kLabelsFontSize = 12.0f;
     if (selectedMinimum < self.minValue){
         selectedMinimum = self.minValue;
     }
+    
+    if([self updateSelectedMinValueIfNeeded:selectedMinimum]) {
+        [self refresh];
+    }
+}
 
-    _selectedMinimum = selectedMinimum;
-    [self refresh];
+- (BOOL)updateSelectedMaxValueIfNeeded:(float)selectedMaxValue {
+    float old_value = self.selectedMaximum;
+    
+    if (self.enableStep && self.step>=0.0f) {
+        _selectedMaximum = roundf(selectedMaxValue/self.step)*self.step;
+    } else {
+        _selectedMaximum = selectedMaxValue;
+    }
+    
+    float diff = self.selectedMaximum - self.selectedMinimum;
+    
+    if (self.minDistance != -1 && diff < self.minDistance) {
+        if(!self.leftHandleSelected){
+            _selectedMaximum = self.selectedMinimum + self.minDistance;
+        }
+    } else if(self.maxDistance != -1 && diff > self.maxDistance){
+        
+        if(!self.leftHandleSelected){
+            _selectedMaximum = self.selectedMinimum + self.maxDistance;
+        }
+    }
+    
+    //ensure the minimum and maximum selected values are within range. Access the values directly so we don't cause this refresh method to be called again (otherwise changing the properties causes a refresh)
+    if (self.selectedMaximum > self.maxValue){
+        _selectedMaximum = self.maxValue;
+    }
+    return old_value != _selectedMaximum;
 }
 
 - (void)setSelectedMaximum:(float)selectedMaximum {
     if (selectedMaximum > self.maxValue){
         selectedMaximum = self.maxValue;
     }
+    
+    if([self updateSelectedMaxValueIfNeeded:selectedMaximum]) {
+        [self refresh];
+    }
+}
 
-    _selectedMaximum = selectedMaximum;
-    [self refresh];
+- (BOOL)updateSelectedMinValueIfNeeded:(float)selectedMinValue {
+    float old_value = self.selectedMinimum;
+    
+    if (self.enableStep && self.step>=0.0f){
+        _selectedMinimum = roundf(selectedMinValue/self.step)*self.step;
+    } else {
+        _selectedMinimum = selectedMinValue;
+    }
+    
+    float diff = self.selectedMaximum - self.selectedMinimum;
+    
+    if (self.minDistance != -1 && diff < self.minDistance) {
+        if(self.leftHandleSelected){
+            _selectedMinimum = self.selectedMaximum - self.minDistance;
+        }
+    } else if(self.maxDistance != -1 && diff > self.maxDistance) {
+        if(self.leftHandleSelected){
+            _selectedMinimum = self.selectedMaximum - self.maxDistance;
+        }
+    }
+    
+    //ensure the minimum and maximum selected values are within range. Access the values directly so we don't cause this refresh method to be called again (otherwise changing the properties causes a refresh)
+    if (self.selectedMinimum < self.minValue){
+        _selectedMinimum = self.minValue;
+    }
+    return old_value != _selectedMinimum;
 }
 
 -(void)setMinLabelColour:(UIColor *)minLabelColour{
