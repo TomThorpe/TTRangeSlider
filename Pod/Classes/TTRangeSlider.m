@@ -373,7 +373,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (void)refresh {
 
-    if (self.enableStep && self.step>=0.0f){
+    if (self.enableStep && self.step>0.0f){
         _selectedMinimum = roundf(self.selectedMinimum/self.step)*self.step;
         _selectedMaximum = roundf(self.selectedMaximum/self.step)*self.step;
     }
@@ -715,6 +715,18 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.rightHandle.shadowOffset = CGSizeMake(0.0, _shadowRadius);
     self.rightHandle.shadowOpacity = _shadowOpacity;
     self.rightHandle.shadowColor = self.tintColor.CGColor;
+}
+
+- (void)setEnableStep:(BOOL)enableStep {
+    _enableStep = enableStep;
+    
+    [self refresh];
+}
+
+- (void)setStep:(float)step {
+    _step = step;
+    
+    [self refresh];
 }
 
 #pragma mark - UIAccessibility
