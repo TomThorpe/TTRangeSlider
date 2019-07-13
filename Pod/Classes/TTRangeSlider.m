@@ -336,7 +336,11 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 #pragma mark - Touch Tracking
-
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    //kill any gestures when we're tracking a touch that started on one of the handles. This ensures the correct behaviour when
+    //the superview is something like a scrollview that can accepts touches in the same area as the slider thats placed on that view.
+    return !self.isTracking;
+}
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint gesturePressLocation = [touch locationInView:self];
@@ -457,7 +461,17 @@ static const CGFloat kLabelsFontSize = 12.0f;
     return YES;
 }
 
+- (void)cancelTrackingWithEvent:(UIEvent *)event {
+    [super cancelTrackingWithEvent:event];
+    [self cleanupTouch];
+}
+
 - (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    [super endTrackingWithTouch:touch withEvent:event];
+    [self cleanupTouch];
+}
+
+- (void)cleanupTouch {
     if (self.leftHandleSelected){
         self.leftHandleSelected = NO;
         [self animateHandle:self.leftHandle withSelection:NO];
