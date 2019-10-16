@@ -76,6 +76,11 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _barSidePadding = 16.0;
 
     _labelPosition = LabelPositionAbove;
+    
+    
+    _leftHandleColor = nil;
+    _rightHandleColor = nil;
+    
 
     //draw the slider line
     self.sliderLine = [CALayer layer];
@@ -92,7 +97,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     //draw the minimum slider handle
     self.leftHandle = [CALayer layer];
     self.leftHandle.cornerRadius = self.handleDiameter / 2;
-    self.leftHandle.backgroundColor = self.tintColor.CGColor;
+    self.leftHandle.backgroundColor = self.leftHandleColor.CGColor;
     self.leftHandle.borderWidth = self.handleBorderWidth;
     self.leftHandle.borderColor = self.handleBorderColor.CGColor;
     [self.layer addSublayer:self.leftHandle];
@@ -100,7 +105,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     //draw the maximum slider handle
     self.rightHandle = [CALayer layer];
     self.rightHandle.cornerRadius = self.handleDiameter / 2;
-    self.rightHandle.backgroundColor = self.tintColor.CGColor;
+    self.rightHandle.backgroundColor = self.rightHandleColor.CGColor;
     self.rightHandle.borderWidth = self.handleBorderWidth;
     self.rightHandle.borderColor = self.handleBorderColor.CGColor;
     [self.layer addSublayer:self.rightHandle];
@@ -651,6 +656,16 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _maxHandleColor = handleColor;
     self.leftHandle.backgroundColor = [handleColor CGColor];
     self.rightHandle.backgroundColor = [handleColor CGColor];
+}
+
+- (void)setLeftHandleColor:(UIColor *)leftHandleColor {
+    _leftHandleColor = leftHandleColor ?: self.handleColor;
+    self.leftHandle.backgroundColor = [leftHandleColor CGColor];
+}
+
+- (void)setRightHandleColor:(UIColor *)rightHandleColor {
+    _rightHandleColor = rightHandleColor ?: self.handleColor;
+    self.rightHandle.backgroundColor = [rightHandleColor CGColor];
 }
 
 -(void)setHandleBorderColor:(UIColor *)handleBorderColor{
