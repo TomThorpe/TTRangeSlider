@@ -616,13 +616,13 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 -(void)setMinLabelFont:(UIFont *)minLabelFont{
     _minLabelFont = minLabelFont;
-    self.minLabel.font = (__bridge CFTypeRef)_minLabelFont.fontName;
+    self.minLabel.font = (__bridge CFTypeRef)_minLabelFont;
     self.minLabel.fontSize = _minLabelFont.pointSize;
 }
 
 -(void)setMaxLabelFont:(UIFont *)maxLabelFont{
     _maxLabelFont = maxLabelFont;
-    self.maxLabel.font = (__bridge CFTypeRef)_maxLabelFont.fontName;
+    self.maxLabel.font = (__bridge CFTypeRef)_maxLabelFont;
     self.maxLabel.fontSize = _maxLabelFont.pointSize;
 }
 
