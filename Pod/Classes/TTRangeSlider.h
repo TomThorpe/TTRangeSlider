@@ -204,4 +204,22 @@ typedef NS_ENUM(NSInteger, LabelPosition) {
  */
 @property (nonatomic, assign) IBInspectable float shadowOpacity;
 
+/**
+ *Define the two possibilities of HandleType (round or rectangle)
+ */
+typedef NS_ENUM(NSInteger, HandleType) {
+    HandleTypeRound,
+    HandleTypeRectangle,
+};
+
+/**
+ *Set the  HandleType (default HandleType)
+ */
+@property (nonatomic, assign) HandleType handleType;
+
+/**
+ *Set the  Handle Size (default (16.0, 16.0))
+ */
+@property (nonatomic, assign) CGSize handleSize;
+
 @end

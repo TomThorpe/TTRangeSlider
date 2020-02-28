@@ -76,7 +76,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _barSidePadding = 16.0;
 
     _labelPosition = LabelPositionAbove;
-
+    
+    _handleType =   HandleTypeRound;
+    _handleSize = CGSizeMake(_handleDiameter, _handleDiameter);
+    
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
@@ -333,6 +336,15 @@ static const CGFloat kLabelsFontSize = 12.0f;
             self.maxLabel.position = CGPointMake(leftHandleCentre.x + self.minLabel.frame.size.width/2 + minSpacingBetweenLabels + self.maxLabel.frame.size.width/2, self.maxLabel.position.y);
         }
     }
+}
+
+- (void)updateHandleTypeAndSize {
+    self.leftHandle.cornerRadius = self.handleType == HandleTypeRound ? self.handleDiameter / 2 : 0;
+    self.rightHandle.cornerRadius = self.handleType == HandleTypeRound ? self.handleDiameter / 2 : 0;
+
+    CGRect handleRect = self.handleType == HandleTypeRound ? CGRectMake(0, 0, self.handleDiameter, self.handleDiameter) : CGRectMake(0, 0, self.handleSize.width, self.handleSize.height);
+    self.leftHandle.frame = handleRect;
+    self.rightHandle.frame = handleRect;
 }
 
 #pragma mark - Touch Tracking
@@ -741,6 +753,16 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _step = step;
     
     [self refresh];
+}
+
+-(void)setHandleType:(HandleType)handleType {
+    _handleType = handleType;
+    [self updateHandleTypeAndSize];
+}
+
+-(void)setHandleSize:(CGSize)handleSize {
+    _handleSize = handleSize;
+    [self updateHandleTypeAndSize];
 }
 
 #pragma mark - UIAccessibility
