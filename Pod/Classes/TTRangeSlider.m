@@ -117,7 +117,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.minLabel.fontSize = kLabelsFontSize;
     self.minLabel.frame = CGRectMake(0, 0, 75, TEXT_HEIGHT);
     self.minLabel.contentsScale = [UIScreen mainScreen].scale;
-    self.minLabel.contentsScale = [UIScreen mainScreen].scale;
     if (self.minLabelColour == nil){
         self.minLabel.foregroundColor = self.tintColor.CGColor;
     } else {
@@ -302,10 +301,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
     float padding = self.labelPadding;
     float minSpacingBetweenLabels = 8.0f;
 
-    CGPoint leftHandleCentre = [self getCentreOfRect:self.leftHandle.frame];
+    CGPoint leftHandleCentre = [self getCenterOfRect:self.leftHandle.frame];
     CGPoint newMinLabelCenter = CGPointMake(leftHandleCentre.x, (self.leftHandle.frame.origin.y + (self.leftHandle.frame.size.height/2)) + ((self.labelPosition == LabelPositionAbove ? -1 : 1) * ((self.minLabel.frame.size.height/2) + padding + (self.leftHandle.frame.size.height/2))));
 
-    CGPoint rightHandleCentre = [self getCentreOfRect:self.rightHandle.frame];
+    CGPoint rightHandleCentre = [self getCenterOfRect:self.rightHandle.frame];
     CGPoint newMaxLabelCenter = CGPointMake(rightHandleCentre.x, (self.rightHandle.frame.origin.y + (self.rightHandle.frame.size.height/2)) + ((self.labelPosition == LabelPositionAbove ? -1 : 1) * ((self.maxLabel.frame.size.height/2) + padding + (self.rightHandle.frame.size.height/2))));
 
     CGSize minLabelTextSize = self.minLabelTextSize;
@@ -360,14 +359,14 @@ static const CGFloat kLabelsFontSize = 12.0f;
     if (CGRectContainsPoint(CGRectInset(self.leftHandle.frame, HANDLE_TOUCH_AREA_EXPANSION, HANDLE_TOUCH_AREA_EXPANSION), gesturePressLocation) || CGRectContainsPoint(CGRectInset(self.rightHandle.frame, HANDLE_TOUCH_AREA_EXPANSION, HANDLE_TOUCH_AREA_EXPANSION), gesturePressLocation))
     {
         //the touch was inside one of the handles so we're definitely going to start movign one of them. But the handles might be quite close to each other, so now we need to find out which handle the touch was closest too, and activate that one.
-        float distanceFromLeftHandle = [self distanceBetweenPoint:gesturePressLocation andPoint:[self getCentreOfRect:self.leftHandle.frame]];
-        float distanceFromRightHandle =[self distanceBetweenPoint:gesturePressLocation andPoint:[self getCentreOfRect:self.rightHandle.frame]];
+        float distanceFromLeftHandle = [self distanceBetweenPoint:gesturePressLocation andPoint:[self getCenterOfRect:self.leftHandle.frame]];
+        float distanceFromRightHandle =[self distanceBetweenPoint:gesturePressLocation andPoint:[self getCenterOfRect:self.rightHandle.frame]];
 
         if (distanceFromLeftHandle < distanceFromRightHandle && self.disableRange == NO){
             self.leftHandleSelected = YES;
             [self animateHandle:self.leftHandle withSelection:YES];
         } else {
-            if (self.selectedMaximum == self.maxValue && [self getCentreOfRect:self.leftHandle.frame].x == [self getCentreOfRect:self.rightHandle.frame].x) {
+            if (self.selectedMaximum == self.maxValue && [self getCenterOfRect:self.leftHandle.frame].x == [self getCenterOfRect:self.rightHandle.frame].x) {
                 self.leftHandleSelected = YES;
                 [self animateHandle:self.leftHandle withSelection:YES];
             }
@@ -532,7 +531,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     return sqrt((xDist * xDist) + (yDist * yDist));
 }
 
-- (CGPoint)getCentreOfRect:(CGRect)rect
+- (CGPoint)getCenterOfRect:(CGRect)rect
 {
     return CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
 }
