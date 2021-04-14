@@ -658,20 +658,28 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.rightHandle.backgroundColor = [[UIColor clearColor] CGColor];
 }
 
--(void)setSeperateHandleImages:(UIImage *)rightHandleImage andHandle: (UIImage *)leftHandleImage{
-    _leftHandleImage = leftHandleImage;
-    _rightHandleImage = rightHandleImage;
+-(void)setRightHandleImage:(UIImage *)handleImage{
+    _rightHandleImage = handleImage;
     
     CGRect startFrame = CGRectMake(0.0, 0.0, 31, 32);
-    self.leftHandle.contents = (id)rightHandleImage.CGImage;
-    self.leftHandle.frame = startFrame;
     
-    self.rightHandle.contents = (id)leftHandleImage.CGImage;
+    self.rightHandle.contents = (id)handleImage.CGImage;
     self.rightHandle.frame = startFrame;
     
     //Force layer background to transparant
-    self.leftHandle.backgroundColor = [[UIColor clearColor] CGColor];
     self.rightHandle.backgroundColor = [[UIColor clearColor] CGColor];
+}
+
+-(void)setLeftHandleImage:(UIImage *)handleImage{
+    _leftHandleImage = handleImage;
+    
+    CGRect startFrame = CGRectMake(0.0, 0.0, 31, 32);
+    
+    self.leftHandle.contents = (id)handleImage.CGImage;
+    self.leftHandle.frame = startFrame;
+    
+    //Force layer background to transparant
+    self.leftHandle.backgroundColor = [[UIColor clearColor] CGColor];
 }
 
 -(void)setHandleColor:(UIColor *)handleColor{

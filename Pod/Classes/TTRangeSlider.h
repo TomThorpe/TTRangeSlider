@@ -142,8 +142,8 @@ IB_DESIGNABLE
 /**
  * Handle slider with a custom image for both the right and left handles
  */
-@property (nonatomic, strong) UIImage *rightHandleImage;
-@property (nonatomic, strong) UIImage *leftHandleImage;
+@property (nonatomic, strong) IBInspectable UIImage *rightHandleImage;
+@property (nonatomic, strong) IBInspectable UIImage *leftHandleImage;
 
 /**
  *Handle slider with custom border color, you can set custom border color for your handle
