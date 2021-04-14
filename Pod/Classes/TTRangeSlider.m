@@ -658,9 +658,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.rightHandle.backgroundColor = [[UIColor clearColor] CGColor];
 }
 
--(void)setSeperateHandleImages:(*UIImage *)rightHandleImage andHandle: (UIImage *)leftHandleImage{
-    _leftHandleImage = leftHandleImage
-    _rightHandleImage = rightHandleImage
+-(void)setSeperateHandleImages:(UIImage *)rightHandleImage andHandle: (UIImage *)leftHandleImage{
+    _leftHandleImage = leftHandleImage;
+    _rightHandleImage = rightHandleImage;
     
     CGRect startFrame = CGRectMake(0.0, 0.0, 31, 32);
     self.leftHandle.contents = (id)rightHandleImage.CGImage;
