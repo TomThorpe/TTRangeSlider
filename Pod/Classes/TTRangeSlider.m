@@ -24,6 +24,8 @@ const float TEXT_HEIGHT = 14;
 @property (nonatomic, assign) CGSize minLabelTextSize;
 @property (nonatomic, assign) CGSize maxLabelTextSize;
 
+@property (nonatomic, assign) CGFloat adjustDistance;
+
 @property (nonatomic, strong) NSNumberFormatter *decimalNumberFormatter; // Used to format values if formatType is YLRangeSliderFormatTypeDecimal
 
 // strong reference needed for UIAccessibilityContainer
@@ -365,14 +367,17 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
         if (distanceFromLeftHandle < distanceFromRightHandle && self.disableRange == NO){
             self.leftHandleSelected = YES;
+            self.adjustDistance = gesturePressLocation.x - CGRectGetMidX(self.leftHandle.frame);
             [self animateHandle:self.leftHandle withSelection:YES];
         } else {
             if (self.selectedMaximum == self.maxValue && [self getCentreOfRect:self.leftHandle.frame].x == [self getCentreOfRect:self.rightHandle.frame].x) {
                 self.leftHandleSelected = YES;
+                self.adjustDistance = gesturePressLocation.x - CGRectGetMidX(self.leftHandle.frame);
                 [self animateHandle:self.leftHandle withSelection:YES];
             }
             else {
                 self.rightHandleSelected = YES;
+                self.adjustDistance = gesturePressLocation.x - CGRectGetMidX(self.rightHandle.frame);
                 [self animateHandle:self.rightHandle withSelection:YES];
             }
         }
@@ -443,7 +448,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     CGPoint location = [touch locationInView:self];
 
     //find out the percentage along the line we are in x coordinate terms (subtracting half the frames width to account for moving the middle of the handle, not the left hand side)
-    float percentage = ((location.x-CGRectGetMinX(self.sliderLine.frame)) - self.handleDiameter/2) / (CGRectGetMaxX(self.sliderLine.frame) - CGRectGetMinX(self.sliderLine.frame));
+    float percentage = ((location.x - _adjustDistance -CGRectGetMinX(self.sliderLine.frame))) / (CGRectGetMaxX(self.sliderLine.frame) - CGRectGetMinX(self.sliderLine.frame));
 
     //multiply that percentage by self.maxValue to get the new selected minimum value
     float selectedValue = percentage * (self.maxValue - self.minValue) + self.minValue;
