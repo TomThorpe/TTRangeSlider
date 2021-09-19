@@ -43,6 +43,10 @@ To be notified when the slider’s value changes, register your action method wi
 
 Alternatively you can implement the `TTRangeSliderDelegate` protocol and respond to changes in the `rangeSlider:didChangeSelectedMinimumValue:andMaximumValue:` method.
 
+## Overriding the selected minimum/maximum labels
+
+To override the selected min/max labels, implement the `TTRangeSliderDelegate` protocol and respond to changes in the `overrideLabelForRangeSlider:minMaxValue:` method.
+
 Other customisation of the control is done using the following properties:
 #### `tintColor`
 The tintColor property (which you can also set in Interface Builder) sets the overall colour of the control, including the colour of the line, the two handles, and the labels.
