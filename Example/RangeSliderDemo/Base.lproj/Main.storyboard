@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zoN-NS-23h">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zoN-NS-23h">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DwD-4K-U87" customClass="TTRangeSlider">
-                                <rect key="frame" x="20" y="160" width="560" height="65"/>
+                                <rect key="frame" x="20" y="95" width="560" height="65"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.95926036010000004" green="0.14687572130000001" blue="0.021226121880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -36,7 +33,7 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Standard Range:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uv3-Bw-dbz">
-                                <rect key="frame" x="20" y="114" width="128" height="21"/>
+                                <rect key="frame" x="20" y="59" width="127" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -48,13 +45,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency Range:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auG-6C-UUJ">
-                                <rect key="frame" x="20" y="250" width="128" height="21"/>
+                                <rect key="frame" x="20" y="175" width="128" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RTp-xv-6Dx" customClass="TTRangeSlider">
-                                <rect key="frame" x="20" y="296" width="560" height="65"/>
+                                <rect key="frame" x="20" y="211" width="560" height="65"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="EYa-1H-cea"/>
@@ -68,13 +65,13 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Range and Image Handle:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WF3-K2-d12">
-                                <rect key="frame" x="20" y="386" width="260" height="21"/>
+                                <rect key="frame" x="20" y="291" width="258.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4yD-aN-v9q" customClass="TTRangeSlider">
-                                <rect key="frame" x="20" y="432" width="560" height="65"/>
+                                <rect key="frame" x="20" y="327" width="560" height="65"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.94117647059999998" green="0.3411764706" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -105,13 +102,13 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency Range with Step:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8O-3X-6fq">
-                                <rect key="frame" x="20" y="522" width="205" height="21"/>
+                                <rect key="frame" x="20" y="407" width="203" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9Y-9Z-GaJ" customClass="TTRangeSlider">
-                                <rect key="frame" x="20" y="568" width="560" height="65"/>
+                                <rect key="frame" x="20" y="443" width="560" height="65"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="NL8-2S-9jM"/>
@@ -142,8 +139,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hidden Labels:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1k3-K5-JnB">
-                                <rect key="frame" x="20" y="641" width="207" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overridden Labels:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1k3-K5-JnB">
+                                <rect key="frame" x="15" y="528" width="207" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="207" id="aQ7-h6-YjY"/>
                                     <constraint firstAttribute="height" constant="21" id="nGV-LV-Pzx"/>
@@ -153,7 +150,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AVE-c7-h8z" customClass="TTRangeSlider">
-                                <rect key="frame" x="20" y="675" width="560" height="65"/>
+                                <rect key="frame" x="20" y="564" width="560" height="65"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="59D-FQ-d3c"/>
@@ -177,7 +174,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="step">
                                         <real key="value" value="500"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hideLabels" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hideLabels" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -193,29 +190,29 @@
                             <constraint firstItem="DwD-4K-U87" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="39D-6N-RK3"/>
                             <constraint firstItem="uv3-Bw-dbz" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="7Ab-px-Ai2"/>
                             <constraint firstItem="l4E-DD-9aC" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="9IQ-AF-edf"/>
-                            <constraint firstItem="DwD-4K-U87" firstAttribute="top" secondItem="uv3-Bw-dbz" secondAttribute="bottom" constant="25" id="CT6-wz-VZc"/>
-                            <constraint firstItem="uv3-Bw-dbz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="E0R-vS-9GI"/>
+                            <constraint firstItem="DwD-4K-U87" firstAttribute="top" secondItem="uv3-Bw-dbz" secondAttribute="bottom" constant="15" id="CT6-wz-VZc"/>
+                            <constraint firstItem="uv3-Bw-dbz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="15" id="E0R-vS-9GI"/>
                             <constraint firstItem="auG-6C-UUJ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="FtY-yK-Wsq"/>
                             <constraint firstItem="4yD-aN-v9q" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="HaE-kV-J8i"/>
-                            <constraint firstItem="1k3-K5-JnB" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="MQA-1i-yKa"/>
-                            <constraint firstItem="AVE-c7-h8z" firstAttribute="top" secondItem="1k3-K5-JnB" secondAttribute="bottom" constant="13" id="OGM-nv-IuO"/>
+                            <constraint firstItem="1k3-K5-JnB" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="15" id="MQA-1i-yKa"/>
+                            <constraint firstItem="AVE-c7-h8z" firstAttribute="top" secondItem="1k3-K5-JnB" secondAttribute="bottom" constant="15" id="OGM-nv-IuO"/>
                             <constraint firstItem="x8O-3X-6fq" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="P0S-Pd-Wgn"/>
                             <constraint firstItem="AVE-c7-h8z" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Rrt-bv-huL"/>
-                            <constraint firstItem="RTp-xv-6Dx" firstAttribute="top" secondItem="auG-6C-UUJ" secondAttribute="bottom" constant="25" id="T2o-O2-VyS"/>
+                            <constraint firstItem="RTp-xv-6Dx" firstAttribute="top" secondItem="auG-6C-UUJ" secondAttribute="bottom" constant="15" id="T2o-O2-VyS"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="l4E-DD-9aC" secondAttribute="bottom" constant="20" id="T6D-l2-N9s"/>
-                            <constraint firstItem="1k3-K5-JnB" firstAttribute="top" secondItem="o9Y-9Z-GaJ" secondAttribute="bottom" constant="8" id="UUN-o8-8cX"/>
+                            <constraint firstItem="1k3-K5-JnB" firstAttribute="top" secondItem="o9Y-9Z-GaJ" secondAttribute="bottom" constant="20" id="UUN-o8-8cX"/>
                             <constraint firstItem="WF3-K2-d12" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Us4-1G-Bgh"/>
                             <constraint firstItem="4yD-aN-v9q" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Ynf-IV-HRi"/>
                             <constraint firstItem="DwD-4K-U87" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Yqm-gV-gyy"/>
-                            <constraint firstItem="auG-6C-UUJ" firstAttribute="top" secondItem="DwD-4K-U87" secondAttribute="bottom" constant="25" id="caL-iA-Pnx"/>
-                            <constraint firstItem="x8O-3X-6fq" firstAttribute="top" secondItem="4yD-aN-v9q" secondAttribute="bottom" constant="25" id="cjA-eS-RyF"/>
+                            <constraint firstItem="auG-6C-UUJ" firstAttribute="top" secondItem="DwD-4K-U87" secondAttribute="bottom" constant="15" id="caL-iA-Pnx"/>
+                            <constraint firstItem="x8O-3X-6fq" firstAttribute="top" secondItem="4yD-aN-v9q" secondAttribute="bottom" constant="15" id="cjA-eS-RyF"/>
                             <constraint firstItem="RTp-xv-6Dx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="fLy-Gk-xeG"/>
                             <constraint firstItem="o9Y-9Z-GaJ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="gQR-BV-Qqs"/>
                             <constraint firstItem="AVE-c7-h8z" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="i9k-4g-XFT"/>
-                            <constraint firstItem="o9Y-9Z-GaJ" firstAttribute="top" secondItem="x8O-3X-6fq" secondAttribute="bottom" constant="25" id="iY3-oP-mel"/>
+                            <constraint firstItem="o9Y-9Z-GaJ" firstAttribute="top" secondItem="x8O-3X-6fq" secondAttribute="bottom" constant="15" id="iY3-oP-mel"/>
                             <constraint firstItem="o9Y-9Z-GaJ" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="nL0-3y-8H9"/>
-                            <constraint firstItem="4yD-aN-v9q" firstAttribute="top" secondItem="WF3-K2-d12" secondAttribute="bottom" constant="25" id="ppA-xW-hcL"/>
-                            <constraint firstItem="WF3-K2-d12" firstAttribute="top" secondItem="RTp-xv-6Dx" secondAttribute="bottom" constant="25" id="qFC-4i-tun"/>
+                            <constraint firstItem="4yD-aN-v9q" firstAttribute="top" secondItem="WF3-K2-d12" secondAttribute="bottom" constant="15" id="ppA-xW-hcL"/>
+                            <constraint firstItem="WF3-K2-d12" firstAttribute="top" secondItem="RTp-xv-6Dx" secondAttribute="bottom" constant="15" id="qFC-4i-tun"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TTRangeSlider" id="iHr-ZZ-EbV"/>
@@ -225,6 +222,7 @@
                         <outlet property="rangeSlider" destination="DwD-4K-U87" id="TTd-zV-CUe"/>
                         <outlet property="rangeSliderCurrency" destination="RTp-xv-6Dx" id="04q-Is-YTC"/>
                         <outlet property="rangeSliderCustom" destination="4yD-aN-v9q" id="Tnk-TR-bMj"/>
+                        <outlet property="rangeSliderOverridenLabels" destination="AVE-c7-h8z" id="b45-EL-9Td"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -237,7 +235,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zoN-NS-23h" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="V8q-AG-fax">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -250,4 +248,21 @@
             <point key="canvasLocation" x="14" y="1050"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="4yD-aN-v9q">
+            <size key="intrinsicContentSize" width="-1" height="65"/>
+        </designable>
+        <designable name="AVE-c7-h8z">
+            <size key="intrinsicContentSize" width="-1" height="65"/>
+        </designable>
+        <designable name="DwD-4K-U87">
+            <size key="intrinsicContentSize" width="-1" height="65"/>
+        </designable>
+        <designable name="RTp-xv-6Dx">
+            <size key="intrinsicContentSize" width="-1" height="65"/>
+        </designable>
+        <designable name="o9Y-9Z-GaJ">
+            <size key="intrinsicContentSize" width="-1" height="65"/>
+        </designable>
+    </designables>
 </document>

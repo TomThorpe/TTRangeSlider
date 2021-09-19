@@ -270,10 +270,19 @@ static const CGFloat kLabelsFontSize = 12.0f;
         return;
     }
 
-    NSNumberFormatter *formatter = (self.numberFormatterOverride != nil) ? self.numberFormatterOverride : self.decimalNumberFormatter;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(overrideLabelForRangeSlider:minMaxValue:)]) {
 
-    self.minLabel.string = [formatter stringFromNumber:@(self.selectedMinimum)];
-    self.maxLabel.string = [formatter stringFromNumber:@(self.selectedMaximum)];
+        self.minLabel.string = [self.delegate overrideLabelForRangeSlider:self minMaxValue:self.selectedMinimum];
+        self.maxLabel.string = [self.delegate overrideLabelForRangeSlider:self minMaxValue:self.selectedMaximum];
+
+    }
+    else
+    {
+        NSNumberFormatter *formatter = (self.numberFormatterOverride != nil) ? self.numberFormatterOverride : self.decimalNumberFormatter;
+
+        self.minLabel.string = [formatter stringFromNumber:@(self.selectedMinimum)];
+        self.maxLabel.string = [formatter stringFromNumber:@(self.selectedMaximum)];
+    }
     
     self.minLabelTextSize = [self.minLabel.string sizeWithAttributes:@{NSFontAttributeName:self.minLabelFont}];
     self.maxLabelTextSize = [self.maxLabel.string sizeWithAttributes:@{NSFontAttributeName:self.maxLabelFont}];

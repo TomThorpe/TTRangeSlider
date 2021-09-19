@@ -12,6 +12,8 @@
 @property (weak, nonatomic) IBOutlet TTRangeSlider *rangeSlider;
 @property (weak, nonatomic) IBOutlet TTRangeSlider *rangeSliderCurrency;
 @property (weak, nonatomic) IBOutlet TTRangeSlider *rangeSliderCustom;
+@property (weak, nonatomic) IBOutlet TTRangeSlider *rangeSliderOverridenLabels;
+
 @end
 
 @implementation ViewController
@@ -66,6 +68,8 @@
     self.rangeSliderCustom.shadowRadius = 3;
     self.rangeSliderCustom.shadowOpacity = 0.5;
     
+    //override label range slider
+    self.rangeSliderOverridenLabels.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,5 +86,26 @@
         NSLog(@"Custom slider updated. Min Value: %.0f Max Value: %.0f", selectedMinimum, selectedMaximum);
     }
 }
+
+#pragma mark Optional override
+- (NSString *)overrideLabelForRangeSlider:(TTRangeSlider *_Nullable)sender minMaxValue:(float)selectedVal{
+    NSString *returnValue = nil;
+    if (sender == self.rangeSliderOverridenLabels) {
+
+        NSString *str = [NSString stringWithFormat:@"%f", selectedVal];
+        NSString *hexStr = [NSString stringWithFormat:@"%lX",
+                         (unsigned long)[str integerValue]];
+        if (sender.selectedMinimum == selectedVal)
+        {
+            returnValue = [NSString stringWithFormat:@"min:%@",hexStr];
+        }
+        else
+        {
+            returnValue = [NSString stringWithFormat:@"max:%@",hexStr];
+        }
+    }
+    return returnValue;
+}
+
 
 @end

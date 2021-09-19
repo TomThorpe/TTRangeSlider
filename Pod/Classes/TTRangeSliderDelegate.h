@@ -28,4 +28,10 @@
  */
 - (void)didStartTouchesInRangeSlider:(TTRangeSlider *)sender;
 
+/**
+ * Called when the user wants to override the selected min/max labels based upon their passed in float values.
+ */
+
+- (nullable NSString *)overrideLabelForRangeSlider:(TTRangeSlider *_Nullable)sender minMaxValue:(float)selectedVal;
+
 @end
